@@ -1,57 +1,11 @@
-<div align="right">
-  <a href="https://github.com/cotes2020/jekyll-theme-chirpy#readme">EN</a> |
-  <a href="https://github.com/cotes2020/jekyll-theme-chirpy/blob/master/docs/README.zh-CN.md">中文 (简体)</a>
-</div>
-
-<div align="center">
-  <h1>Chirpy Jekyll Theme</h1>
-  <p>
-    <a href="https://rubygems.org/gems/jekyll-theme-chirpy">
-    <img alt="Gem Version" src="https://img.shields.io/gem/v/jekyll-theme-chirpy?color=brightgreen"></img>
-  </a>
-    <a href="https://github.com/cotes2020/jekyll-theme-chirpy/actions?query=branch%3Amaster+event%3Apush">
-    <img alt="Build Status" src="https://github.com/cotes2020/jekyll-theme-chirpy/workflows/build/badge.svg?branch=master&event=push"></img>
-  </a>
-    <a href="https://app.codacy.com/manual/cotes2020/jekyll-theme-chirpy?utm_source=github.com&utm_medium=referral&utm_content=cotes2020/jekyll-theme-chirpy&utm_campaign=Badge_Grade_Dashboard">
-    <img alt="Codacy Badge" src="https://api.codacy.com/project/badge/Grade/8220b926db514f13afc3f02b7f884f4b"></img>
-  </a>
-    <a href="https://github.com/cotes2020/jekyll-theme-chirpy/blob/master/LICENSE">
-    <img alt="GitHub license" src="https://img.shields.io/github/license/cotes2020/jekyll-theme-chirpy.svg"></img>
-  </a>
-    <a href="https://996.icu">
-    <img alt="996.icu" src="https://img.shields.io/badge/link-996.icu-%23FF4D5B.svg"></img>
-  </a>
-  </p>
-</div>
-
-A minimal, sidebar, responsive web design Jekyll theme that focuses on text presentation. Designed to help you easily record and share your knowledge.
-
-[Live Demo »](https://chirpy.cotes.info)
-
-<p align="center">
-  <a href="https://chirpy.cotes.info">
-    <img alt="Devices Mockup" src="https://cdn.jsdelivr.net/gh/cotes2020/chirpy-images/commons/devices-mockup.png"></img>
-  </a>
-</p>
-
-## Features
-
-- Localized Layout
-- Configurable Theme Mode
-- Pinned Posts
-- Hierarchical Categories
-- Last Modified Date for Posts
-- Table of Contents
-- Automatically Recommend Related Posts
-- Syntax Highlighting
-- Mathematical Expressions
-- Mermaid Diagram & Flowchart
-- Search
-- Atom Feeds
-- Disqus Comments
-- Google Analytics
-- GA Pageviews Reporting (Advanced)
-- SEO & Performance Optimization
+---
+title: Getting Started
+author: Cotes Chung
+date: 2019-08-09 20:55:00 +0800
+categories: [Blogging, Tutorial]
+tags: [getting started]
+pin: true
+---
 
 ## Prerequisites
 
@@ -186,7 +140,7 @@ Now publish your Jekyll site by:
 
 2. Browse to your repo's landing page on GitHub and select the branch `gh-pages` as the [publishing source](https://docs.github.com/en/github/working-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site) through _Settings_ → _Options_ → _GitHub Pages_:
 
-    ![gh-pages-sources](https://cdn.jsdelivr.net/gh/cotes2020/chirpy-images/posts/20190809/gh-pages-sources.png)
+    ![gh-pages-sources](https://cdn.jsdelivr.net/gh/cotes2020/chirpy-images/posts/20190809/gh-pages-sources.png){: width="850" height="153" }
 
 3. Visit your website at the address indicated by GitHub.
 
@@ -212,39 +166,6 @@ $ docker run -it --rm \
 
 Unless you specified the output path, the generated site files will be placed in folder `_site` of the project's root directory. Now you should upload those files to your web server.
 
-## Documentation
-
-For more details and a better reading experience, please check out the [tutorials on the demo site](https://chirpy.cotes.info/categories/tutorial/). In the meanwhile, a copy of the tutorial is also available on the [Wiki](https://github.com/cotes2020/jekyll-theme-chirpy/wiki). Please note that the tutorials on the demo website or Wiki are based on the latest release, and the features of `master` branch usually ahead of the documentation.
-
-## Contributing
-
-The old saying, "Two heads are better than one." Consequently, welcome to report bugs, improve code quality or submit a new feature. For more information, see [contributing guidelines](.github/CONTRIBUTING.md).
-
-## Credits
-
-This theme is mainly built with [Jekyll](https://jekyllrb.com/) ecosystem, [Bootstrap](https://getbootstrap.com/), [Font Awesome](https://fontawesome.com/) and some other wonderful tools (their copyright information can be found in the relevant files). The avatar and favicon design comes from [Clipart Max](https://www.clipartmax.com/middle/m2i8b1m2K9Z5m2K9_ant-clipart-childrens-ant-cute/).
-
-:tada: Thanks to all the volunteers who contributed to this project, their GitHub IDs are on [this list](https://github.com/cotes2020/jekyll-theme-chirpy/graphs/contributors). Also, I won't forget those guys who submitted the issues or unmerged PR because they reported bugs, shared ideas, or inspired me to write more readable documentation.
-
-Last but not least, thank [JetBrains][jb] for providing the open source license.
-
-## Sponsoring
-
-If you like this theme or find it helpful, please consider sponsoring me, because it will encourage and help me better maintain the project, I will be very grateful!
-
-[![Buy Me a Coffee](https://img.shields.io/badge/-Buy%20Me%20a%20Coffee-ff813f?logo=buy-me-a-coffee&logoColor=white)](https://www.buymeacoffee.com/coteschung)
-[![Wechat Pay](https://img.shields.io/badge/-Tip%20Me%20on%20WeChat-brightgreen?logo=wechat&logoColor=white)][cn-donation]
-[![Alipay](https://img.shields.io/badge/-Tip%20Me%20on%20Alipay-blue?logo=alipay&logoColor=white)][cn-donation]
-
-## License
-
-This work is published under [MIT](https://github.com/cotes2020/jekyll-theme-chirpy/blob/master/LICENSE) License.
-
 [starter]: https://github.com/cotes2020/chirpy-starter
 [use-starter]: https://github.com/cotes2020/chirpy-starter/generate
 [workflow]: https://github.com/cotes2020/jekyll-theme-chirpy/blob/master/.github/workflows/pages-deploy.yml.hook
-
-<!-- ReadMe links -->
-
-[jb]: https://www.jetbrains.com/?from=jekyll-theme-chirpy
-[cn-donation]: https://cotes.gitee.io/alipay-wechat-donation/
