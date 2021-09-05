@@ -16,11 +16,10 @@ tabs:
   archives: Archives
   about: About
 
-# the text displayed in the search bar & search results
+# text displayed in the search bar
 search:
   hint: search
   cancel: Cancel
-  no_results: Oops! No result founds.
 
 panel:
   lastmod: Recent Update
