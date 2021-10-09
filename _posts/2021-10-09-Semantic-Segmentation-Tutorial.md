@@ -1,12 +1,12 @@
 # Semantic segmentation tutorial [Part 1 Image Segmentaion]
 
-[Computer vision task](https://nanonets.com/blog/content/images/size/w1000/2020/08/59b6d0529299e.png)
+![Computer vision task](https://nanonets.com/blog/content/images/size/w1000/2020/08/59b6d0529299e.png)
 
 ## Semantic segmentation: what is it?
 
 Semantic segmentation is the task of partitioning an image to coherent parts, and assigning a class label at each part. That is, per pixel classification of an image. This is an example of an image with it's corresponding segmentation mask (i.e. the pixel labels). In this, green stands for trees, blue for buildings, yellow for cars and so on.
 
-[Example](https://media-exp1.licdn.com/dms/image/C5612AQFuq4YcVz9z_g/article-inline_image-shrink_1000_1488/0/1554180153732?e=1639008000&v=beta&t=xohdnOUi4fTeZeBKICk4zGMMO_J7ONDurXaeCrI91-A)
+![Example](https://media-exp1.licdn.com/dms/image/C5612AQFuq4YcVz9z_g/article-inline_image-shrink_1000_1488/0/1554180153732?e=1639008000&v=beta&t=xohdnOUi4fTeZeBKICk4zGMMO_J7ONDurXaeCrI91-A)
 
 In this type of problems your training data will have sets of images and annotated masks, i.e. for each image, the mask will have exactly the same height and width as the image. Each pixel of the mask will contain some “class value”. The “class value” of the segmentation mask is usually represented with an integer, corresponding to a class, or an RGB (color) triplet. 
 
@@ -24,7 +24,7 @@ Before the advent of deep learning, classical machine learning techniques like S
 
 The general architecture of a CNN consists of few convolutional and pooling layers followed by few fully connected layers at the end. The paper of Fully Convolutional Network released in 2014 argues that the final fully connected layer can be thought of as doing a 1x1 convolution that cover the entire region.
 
-[Fig.1](https://nanonets.com/blog/content/images/2020/08/FCN.jpg)
+![Fig.1](https://nanonets.com/blog/content/images/2020/08/FCN.jpg)
 
 Hence the final dense layers can be replaced by a convolution layer achieving the same result. But now the advantage of doing this is the size of input need not be fixed anymore. When involving dense layers the size of input is constrained and hence when a different sized input has to be provided it has to be resized. But by replacing a dense layer with convolution, this constraint doesn't exist.
 
@@ -34,7 +34,7 @@ Since the feature map obtained at the output layer is a down sampled due to the 
 
 The down sampling part of the network is called an encoder and the up sampling part is called a decoder. This is a pattern we will see in many architectures i.e reducing the size with encoder and then up sampling with decoder. In an ideal world we would not want to down sample using pooling and keep the same size throughout but that would lead to a huge amount of parameters and would be computationally infeasible.
 
-[Fig.2.](https://nanonets.com/blog/content/images/2020/08/Visualization-of-FCN-32s-FCN-16s-and-FCN-8s-architectures-20.png)
+![Fig.2.](https://nanonets.com/blog/content/images/2020/08/Visualization-of-FCN-32s-FCN-16s-and-FCN-8s-architectures-20.png)
 
 Although the output results obtained have been decent the output observed is rough and not smooth. The reason for this is loss of information at the final feature layer due to downsampling by 32 times using convolution layers. Now it becomes very difficult for the network to do 32x upsampling by using this little information. This architecture is called FCN-32
 
@@ -44,7 +44,7 @@ To address this issue, the paper proposed 2 other architectures FCN-16, FCN-8. I
 
 U-net builds on top of the fully convolutional network from above. It was built for medical purposes to find tumours in lungs or the brain. It also consists of an encoder which down-samples the input image to a feature map and the decoder which up samples the feature map to input image size using learned deconvolution layers.
 
-[Fig.3](https://nanonets.com/blog/content/images/size/w1000/2020/08/1_f7YOaE4TWubwaFF7Z1fzNw.png)
+![Fig.3](https://nanonets.com/blog/content/images/size/w1000/2020/08/1_f7YOaE4TWubwaFF7Z1fzNw.png)
 
 The main contribution of the U-Net architecture is the shortcut connections. We saw above in FCN that since we down-sample an image as part of the encoder we lost a lot of information which can't be easily recovered in the encoder part. FCN tries to address this by taking information from pooling layers before the final feature layer.
 
@@ -65,7 +65,7 @@ One of the major problems with FCN approach is the excessive downsizing due to c
 
 The paper proposes the usage of Atrous convolution or the hole convolution or dilated convolution which helps in getting an understanding of large context using the same number of parameters.
 
-[Fig.4.](https://nanonets.com/blog/content/images/2020/08/main-qimg-d9025e88d7d792e26f4040b767b25819.png)
+![Fig.4.](https://nanonets.com/blog/content/images/2020/08/main-qimg-d9025e88d7d792e26f4040b767b25819.png)
 
 Dilated convolution works by increasing the size of the filter by appending zeros(called holes) to fill the gap between parameters. The number of holes/zeroes filled in between the filter parameters is called by a term dilation rate. When the rate is equal to 1 it is nothing but the normal convolution. When rate is equal to 2 one zero is inserted between every other parameter making the filter look like a 5x5 convolution. Now it has the capacity to get the context of 5x5 convolution while having 3x3 convolution parameters. Similarly for rate 3 the receptive field goes to 7x7.
 
@@ -75,13 +75,13 @@ In Deeplab last pooling layers are replaced to have stride 1 instead of 2 thereb
 
 Spatial Pyramidal Pooling is a concept introduced in SPPNet to capture multi-scale information from a feature map. Before the introduction of SPP input images at different resolutions are supplied and the computed feature maps are used together to get the multi-scale information but this takes more computation and time. With Spatial Pyramidal Pooling multi-scale information can be captured with a single input image.
 
-[Fig.5.](https://nanonets.com/blog/content/images/2020/08/sppnet.jpg)
+![Fig.5.](https://nanonets.com/blog/content/images/2020/08/sppnet.jpg)
 
 With the SPP module the network produces 3 outputs of dimensions 1x1(i.e GAP), 2x2 and 4x4. These values are concatenated by converting to a 1d vector thus capturing information at multiple scales. Another advantage of using SPP is input images of any size can be provided.
 
 ASPP takes the concept of fusing information from different scales and applies it to Atrous convolutions. The input is convolved with different dilation rates and the outputs of these are fused together.
 
-[Fig.6.](https://nanonets.com/blog/content/images/size/w1000/2020/08/deeplab_aspp.jpg)
+![Fig.6.](https://nanonets.com/blog/content/images/size/w1000/2020/08/deeplab_aspp.jpg)
 
 As can be seen the input is convolved with 3x3 filters of dilation rates 6, 12, 18 and 24 and the outputs are concatenated together since they are of same size. A 1x1 convolution output is also added to the fused output. To also provide the global information, the GAP output is also added to above after up sampling. The fused output of 3x3 varied dilated outputs, 1x1 and GAP output is passed through 1x1 convolution to get to the required number of channels.
 
@@ -91,19 +91,19 @@ Since the required image to be segmented can be of any size in the input the mul
 
 Pooling is an operation which helps in reducing the number of parameters in a neural network but it also brings a property of invariance along with it. Invariance is the quality of a neural network being unaffected by slight translations in input. Due to this property obtained with pooling the segmentation output obtained by a neural network is coarse and the boundaries are not concretely defined.
 
-[Fig.7.](https://nanonets.com/blog/content/images/2020/08/1_MVLmei6xOqScKjwffk4ZXg.png)
+![Fig.7.](https://nanonets.com/blog/content/images/2020/08/1_MVLmei6xOqScKjwffk4ZXg.png)
 
 To deal with this the paper proposes use of graphical model CRF. Conditional Random Field operates a post-processing step and tries to improve the results produced to define shaper boundaries. It works by classifying a pixel based not only on it's label but also based on other pixel labels. As can be seen from the above figure the coarse boundary produced by the neural network gets more refined after passing through CRF.
 
 Deeplab-v3 introduced batch normalization and suggested dilation rate multiplied by (1,2,4) inside each layer in a Resnet block.  Also adding image level features to ASPP module which was discussed in the above discussion on ASPP was proposed as part of this paper
 
-[Fig.8.](https://nanonets.com/blog/content/images/size/w1000/2020/08/1_Llh9dQ1ZMBqPMOJSf7WaBQ.png)
+![Fig.8.](https://nanonets.com/blog/content/images/size/w1000/2020/08/1_Llh9dQ1ZMBqPMOJSf7WaBQ.png)
 
 Deeplab-v3+ suggested to have a decoder instead of plain bilinear up sampling 16x. The decoder takes a hint from the decoder used by architectures like U-Net which take information from encoder layers to improve the results. The encoder output is up sampled 4x using bilinear up sampling and concatenated with the features from encoder which is again up sampled 4x after performing a 3x3 convolution. This approach yields better results than a direct 16x up sampling. Also modified Xception architecture is proposed to be used instead of Resnet as part of encoder and depthwise separable convolutions are now used on top of Atrous convolutions to reduce the number of computations.
 
 ### Global Convolution Network
 
-[Fig.9.](https://nanonets.com/blog/content/images/2020/08/1_vFS4AUYvxNI2pyNc-AWbUg.png)
+![Fig.9.](https://nanonets.com/blog/content/images/2020/08/1_vFS4AUYvxNI2pyNc-AWbUg.png)
 
 Semantic segmentation involves performing two tasks concurrently
 
@@ -112,7 +112,7 @@ ii) Localization
 
 The classification networks are created to be invariant to translation and rotation thus giving no importance to location information whereas the localization involves getting accurate details w.r.t the location. Thus inherently these two tasks are contradictory. Most segmentation algorithms give more importance to localization i.e the second in the above figure and thus lose sight of global context. In this work the author proposes a way to give importance to classification task too while at the same time not losing the localization information
 
-[Fig.10.](https://nanonets.com/blog/content/images/size/w1000/2020/08/1_4VRH-f6OaHxqyjUviJtpfg.png)
+![Fig.10.](https://nanonets.com/blog/content/images/size/w1000/2020/08/1_4VRH-f6OaHxqyjUviJtpfg.png)
 
 The author proposes to achieve this by using large kernels as part of the network thus enabling dense connections and hence more information. This is achieved with the help of a GCN block as can be seen in the above figure. GCN block can be thought of as a k x k convolution filter where k can be a number bigger than 3. To reduce the number of parameters a k x k filter is further split into 1 x k and k x 1, kx1 and 1xk blocks which are then summed up. Thus by increasing value k, larger context is captured.
 
@@ -124,7 +124,7 @@ Results showed that GCN block improved the classification accuracy of pixels clo
 
 Deeplab family uses ASPP to have multiple receptive fields capture information using different atrous convolution rates. Although ASPP has been significantly useful in improving the segmentation of results there are some inherent problems caused due to the architecture. There is no information shared across the different parallel layers in ASPP thus affecting the generalization power of the kernels in each layer. Also since each layer caters to different sets of training samples(smaller objects to smaller atrous rate and bigger objects to bigger atrous rates), the amount of data for each parallel layer would be less thus affecting the overall generalizability.  Also the number of parameters in the network increases linearly with the number of parameters and thus can lead to overfitting.
 
-[Fig.11.](https://nanonets.com/blog/content/images/size/w1000/2020/08/ksac.PNG)
+![Fig.11.](https://nanonets.com/blog/content/images/size/w1000/2020/08/ksac.PNG)
 
 To handle all these issues the author proposes a novel network structure called Kernel-Sharing Atrous Convolution (KSAC). As can be seen in the above figure, instead of having a different kernel for each parallel layer is ASPP a single kernel is shared across thus improving the generalization capability of the network. By using KSAC instead of ASPP 62% of the parameters are saved when dilation rates of 6,12 and 18 are used.
 
