@@ -5,7 +5,7 @@ Jekyll Theme
 
 [Google C++](https://google.github.io/styleguide/cppguide.html)
 
-[Function Pointer](https://cpp.daynhauhoc.com/8/9-con-tr-ham/)
+[Smart Pointers](https://www.geeksforgeeks.org/smart-pointers-cpp/)
 
-[Lambda C++](https://en.cppreference.com/w/cpp/language/lambda)
+
 
