@@ -7,5 +7,6 @@ Jekyll Theme
 
 [Smart Pointers](https://www.geeksforgeeks.org/smart-pointers-cpp/)
 
+[PImpl](https://en.cppreference.com/w/cpp/language/pimpl)
 
 
