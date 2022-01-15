@@ -6,7 +6,7 @@ Pointers are used for accessing the resources which are external to the program 
 
 Take a look at the code below.
 
-'''
+```
 #include <iostream>
 using namespace std;
 
@@ -31,7 +31,7 @@ int main()
 		fun();
 	}
 }
-'''
+```
 
 In function *fun*, it creates a pointer that is pointing to the *Rectangle* object. The object *Rectangle* contains two integers, *length* and *breadth*. When the function *fun* ends, p will be destroyed as it is a local variable. But, the memory it consumed won’t be deallocated because we forgot to use *delete p;* at the end of the function. That means the memory won’t be free to be used by other resources. But, we don’t need the variable anymore, but we need the memory.
 
@@ -45,7 +45,7 @@ A Smart Pointer is a wrapper class over a pointer with an operator like * and ->
 
 The idea is to take a class with a pointer, destructor and overloaded operators like * and ->. Since the destructor is automatically called when an object goes out of scope, the dynamically allocated memory would automatically be deleted (or reference count can be decremented). Consider the following simple SmartPtr class.
 
-'''
+```
 #include <iostream>
 using namespace std;
 
@@ -75,16 +75,17 @@ int main()
 
 	return 0;
 }
-'''
+```
 
 Output:
-'''
+
+```
 20
-'''
+```
 
 This only works for int. So, we’ll have to create Smart Pointer for every object? No, there’s a solution, Template. In the code below as you can see T can be of any type. 
 
-'''
+```
 #include <iostream>
 using namespace std;
 
@@ -117,12 +118,12 @@ int main()
 	return 0;
 }
 
-'''
+```
 
 Output:
-'''
+```
 20
-'''
+```
 
 Note: Smart pointers are also useful in the management of resources, such as file handles or network sockets.
 
@@ -134,7 +135,7 @@ unique_ptr stores one pointer only. We can assign a different object by removing
 
 ![Fig.1](https://media.geeksforgeeks.org/wp-content/uploads/20191202223147/uniquePtr.png)
 
-'''
+```
 #include <iostream>
 using namespace std;
 #include <memory>
@@ -170,14 +171,14 @@ int main(){
 	return 0;
 }
 
-'''
+```
 
 Output:
 
-'''
+```
 50
 50
-'''
+```
 
 ### 2. shared_ptr
 
@@ -185,7 +186,7 @@ By using shared_ptr more than one pointer can point to this one object at a time
 
 ![Fig.2](https://media.geeksforgeeks.org/wp-content/uploads/20191202231341/shared_ptr.png)
 
-'''
+```
 #include <iostream>
 using namespace std;
 #include <memory>
@@ -229,16 +230,16 @@ int main()
 	return 0;
 }
 
-'''
+```
 
 Output:
 
-'''
+```
 50
 50
 50
 2
-'''
+```
 
 ### 3. weak_ptr 
 
