@@ -25,5 +25,8 @@ repo sync
 ```
 export MACHINE=raspberrypi4
 source ./setup-environment.sh
+
+bitbake b2qt-embedded-qt5-image
+bitbake meta-toolchain-b2qt-embedded-qt5-sdk
 ```
 
