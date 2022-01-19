@@ -12,7 +12,7 @@ Templates are expanded at compiler time. This is like macros. The difference is,
 
 Function Templates We write a generic function that can be used for different data types. Examples of function templates are sort(), max(), min(), printArray(). 
 
-'''
+```
 #include <iostream>
 using namespace std;
 
@@ -32,19 +32,19 @@ cout << myMax<char>('g', 'e') << endl; // call myMax for char
 
 return 0;
 }
-'''
+```
 
 Output:
 
-'''
+```
 7
 7
 g
-'''
+```
 
 Below is the program to implement Bubble Sort using templates in C++: 
 
-'''
+```
 // CPP code for bubble sort
 // using template function
 #include <iostream>
@@ -76,18 +76,18 @@ int main() {
 
 return 0;
 }
-'''
+```
 
 Output:
 
-'''
+```
 Sorted array : 10 20 30 40 50
-'''
+```
 
 Class Templates Like function templates, class templates are useful when a class defines something that is independent of the data type. Can be useful for classes like LinkedList, BinaryTree, Stack, Queue, Array, etc. 
 Following is a simple example of template Array class.
 
-'''
+```
 #include <iostream>
 using namespace std;
 
@@ -122,19 +122,19 @@ int main() {
 	a.print();
 	return 0;
 }
-'''
+```
 
 Output:
 
-'''
+```
 1 2 3 4 5
-'''
+```
 
 ## Can there be more than one arguments to templates? 
 
 Yes, like normal parameters, we can pass more than one data types as arguments to templates. The following example demonstrates the same. 
 
-'''
+```
 #include<iostream>
 using namespace std;
 
@@ -151,20 +151,20 @@ int main() {
     A<int, double> b;
     return 0;
 }
-'''
+```
 
 Output:
 
-'''
+```
 Constructor Called
 Constructor Called
-'''
+```
 
 ## Can we specify default value for template arguments? 
 
 Yes, like normal parameters, we can specify default arguments to templates. The following example demonstrates the same. 
 
-'''
+```
 #include<iostream>
 using namespace std;
 
@@ -180,13 +180,13 @@ int main() {
     A<char> a; // This will call A<char, char>
     return 0;
 }
-'''
+```
 
 Output:
 
-'''
+```
 Constructor Called
-'''
+```
 
 ## What is the difference between function overloading and templates? 
 Both function overloading and templates are examples of polymorphism feature of OOP. Function overloading is used when multiple functions do similar operations, templates are used when multiple functions do identical operations.
@@ -201,7 +201,7 @@ Template specialization allows us to have different code for a particular data t
 We can pass non-type arguments to templates. Non-type parameters are mainly used for specifying max or min values or any other constant value for a particular instance of a template. The important thing to note about non-type parameters is, they must be const. The compiler must know the value of non-type parameters at compile time. Because the compiler needs to create functions/classes for a specified non-type value at compile time. In below program, if we replace 10000 or 25 with a variable, we get a compiler error. Please see this.
 Below is a C++ program. 
 
-'''
+```
 // A C++ program to demonstrate working of non-type
 // parameters to templates in C++.
 #include <iostream>
@@ -232,19 +232,19 @@ int main()
     return 0;
 }
 
-'''
+```
 
 output:
-'''
+```
 10
 1
-'''
+```
 
 ## Template Metaprogramming
 
 Predict the output of following C++ program.
 
-'''
+```
 #include <iostream>
 using namespace std;
 
@@ -264,13 +264,13 @@ int main()
 	return 0;
 }
 
-'''
+```
 
 Output:
 
-'''
+```
 256
-'''
+```
 
 The program calculates “2 raise to the power 8 (or 2^8)”. In fact, the structure funStruct can be used to calculate 2^n for any known n (or constant n). The special thing about above program is: calculation is done at compile time. So, it is compiler that calculates 2^8. To understand how compiler does this, let us consider the following facts about templates and enums:
 1) We can pass nontype parameters (parameters that are not data types) to class/function templates. 
