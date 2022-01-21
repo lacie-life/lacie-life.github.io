@@ -23,7 +23,7 @@ Crop yield prediction is an essential task for the decision-makers at national a
 
 4. What are challenges in the field of crop yield prediction using machine learning?
 
-### Which machine learning algorithm have been used in the literature for crop yield prediction?
+## Which machine learning algorithm have been used in the literature for crop yield prediction?
 
 - <b> Deep Neural Network (DNN) </b> : These DNN algorithms are very similar to the traditional Artificial Neural Networks (ANN) algorithms except the number of hidden layers. In DNN networks, there are many hidden layers that are mostly fully connected, as in the case of ANN algorithms. However, for other kinds of deep learning algorithms such as CNN, there are also different types of layers, such as the convolutional layer and the pooling layer.
 
@@ -43,7 +43,7 @@ Crop yield prediction is an essential task for the decision-makers at national a
 
 - <b> Deep Recurrent Q-Network (DQN) </b> :  In reinforcement learning, agents observe the environment and act based on some rules and the available data. Agents get rewards based on their actions (i.e., positive or negative reward) and try to maximize this reward. The environment and agents interact with each other continuously. DQN algorithm was developed in 2015 by the researchers of DeepMind acquired by Google in 2014. This DQN algorithm that combines the power of reinforcement learning and deep neural networks solved several Atari games in 2015. The classical Q-learning algorithm was enhanced with deep neural networks, and also, the experience replay technique was integrated (Mnih et al., 2015). Elavarasan and Vincent (2020) applied this algorithm for crop yield prediction.
  
-### Which features have been used in literature for crop yield prediction using machine learning?
+## Which features have been used in literature for crop yield prediction using machine learning?
 
 - <b> Soil information </b> : soil maps(soil type, pH value, cation exchange capacity) and area of production.
 
@@ -60,7 +60,7 @@ manganese, and phosphorus.
 
 - <b> Other </b> : wind speed, pressure, and images (used for calculated features MODIS Enhanced Vegetation Index, Normalized Vegetation Index, Enhanced Vegetation Index).
 
-### Which evaluation parameters and evaluation appoaches have been used in literature for crop yield prediction?
+## Which evaluation parameters and evaluation appoaches have been used in literature for crop yield prediction?
 
 - RMSE - Root mean square error 
 - R2 - R-squared 
@@ -74,11 +74,11 @@ manganese, and phosphorus.
 - rcv - Reference change values 
 - MCC - Matthew’s correlation coefficient 
 
-### What are challenges in the field of crop yield prediction using machine learning?
+## What are challenges in the field of crop yield prediction using machine learning?
 
 The publications were read to see if they stated any problems or improvements for future models. In several studies, insufficient availability of data (too few data) was mentioned as a problem. The studies stated that their systems worked for the limited data that they had at hand, and indicated data with more variety should be used for further testing. This means data with different climatic circumstances, different vegetation, and longer timeseries of yield data. Another suggested improvement is that more data sources should be integrated. Finally, the publication indicated that the use of machine learning in farm management systems should be explored. If the models work as requested, software applications must be created that allow the farmer to make decisions based on the models.
 
-### Discussion
+## Discussion
 
 -  Linear Regression is the second most used algorithms. Linear Regression is used as a benchmarking algorithm in most cases to check whether the proposed algorithm is better than Linear Regression or not. Therefore, although it is shown in many articles, it does not mean that it is the best performing algorithm. In fact, Deep Learning (DL), which is a sub-branch of Machine Learning, has been used for the crop yield prediction problem recently and is believed to be very promising. In this study, we also identified several deep learning-based studies. There are several additional promising aspects of DL methods, such as automatic feature extraction and superior performance. We expect that more research will be conducted on the use of DL approaches in crop yield prediction in the near future due to the superior performance of DL algorithms in other problem domains. 
 
