@@ -93,7 +93,7 @@ So, how would you write the program to estimate the value of a house like in our
 
 If you didn’t know anything about machine learning, you’d probably try to write out some basic rules for estimating the price of a house like this:
 
-'''
+```
 def estimate_house_sales_price(num_of_bedrooms, sqft, neighborhood):
   price = 0
   # In my area, the average house costs $200 per sqft
@@ -115,22 +115,22 @@ def estimate_house_sales_price(num_of_bedrooms, sqft, neighborhood):
     # more valuable
     price = price + (num_of_bedrooms * 1000)
  return price
-'''
+```
 
 If you fiddle with this for hours and hours, you might end up with something that sort of works. But your program will never be perfect and it will be hard to maintain as prices change.
 Wouldn’t it be better if the computer could just figure out how to implement this function for you? Who cares what exactly the function does as long is it returns the correct number:
 
-'''
+```
 def estimate_house_sales_price(num_of_bedrooms, sqft, neighborhood):
   price = <computer, plz do some math for me>
   return price
-'''
+```
 
 One way to think about this problem is that the price is a delicious stew and the ingredients are the number of bedrooms, the square footage and the neighborhood. If you could just figure out how much each ingredient impacts the final price, maybe there’s an exact ratio of ingredients to stir in to make the final price.
 
 That would reduce your original function (with all those crazy if’s and else’s) down to something really simple like this:
 
-'''
+```
 def estimate_house_sales_price(num_of_bedrooms, sqft, neighborhood):
  price = 0
  # a little pinch of this
@@ -142,7 +142,7 @@ def estimate_house_sales_price(num_of_bedrooms, sqft, neighborhood):
  # and finally, just a little extra salt for good measure
  price += 201.23432095
  return price
-'''
+```
 
 Notice the magic numbers in bold — .841231951398213, 1231.1231231, 2.3242341421, and 201.23432095. These are our weights. If we could just figure out the perfect weights to use that work for every house, our function could predict house prices!
 
@@ -152,7 +152,7 @@ A dumb way to figure out the best weights would be something like this:
 
 Start with each weight set to 1.0:
 
-'''
+```
 def estimate_house_sales_price(num_of_bedrooms, sqft, neighborhood):
   price = 0
   # a little pinch of this
@@ -164,7 +164,7 @@ def estimate_house_sales_price(num_of_bedrooms, sqft, neighborhood):
   # and finally, just a little extra salt for good measure
   price += 1.0
   return price
-'''
+```
 
 ### Step 2:
 
@@ -214,13 +214,13 @@ To avoid that, mathematicians have figured out lots of clever ways to quickly fi
 
 First, write a simple equation that represents Step #2 above:
 
-$ Cost = \dfrac{\sum_{i=1}^{500} (MyGuess(i) - RealAnswer(i))^2}{500 * 2} $
+Cost = \dfrac{\sum_{i=1}^{500} (MyGuess(i) - RealAnswer(i))^2}{500 * 2} $
 
 This is your cost function.
 
 Now let’s re-write exactly the same equation, but using a bunch of machine learning math jargon (that you can ignore for now):
 
-$ J(\theta) = \dfrac{1}{2m}\sum_{i=1}^{m}(h_\theta(x^{(i)}) - y^{(i)})^2 $
+ J(\theta) = \dfrac{1}{2m}\sum_{i=1}^{m}(h_\theta(x^{(i)}) - y^{(i)})^2 $
 
 This equation represents how wrong our price estimating function is for the weights we currently have set.
 
