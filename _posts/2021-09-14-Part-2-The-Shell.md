@@ -1,3 +1,14 @@
+---
+title: The Shell Theory
+author:
+  name: Life Zero
+  link: https://github.com/lacie-life
+date:  2021-09-14 11:11:11 +0700
+categories: [Linux]
+tags: [tutorial]
+render_with_liquid: false
+---
+
 ### The Shell Theory
 
 1. What is The Shell ?

@@ -1,3 +1,14 @@
+---
+title:Semantic segmentation tutorial (Part 1 Image Segmentaion)
+author:
+  name: Life Zero
+  link: https://github.com/lacie-life
+date:  2021-10-09 11:11:11 +0700
+categories: [Machine Learning, Image Segmentation]
+tags: [tutorial]
+render_with_liquid: false
+---
+
 # Semantic segmentation tutorial [Part 1 Image Segmentaion]
 
 ![Computer vision task](https://nanonets.com/blog/content/images/size/w1000/2020/08/59b6d0529299e.png)

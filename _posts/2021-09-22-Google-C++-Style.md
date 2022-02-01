@@ -1,3 +1,14 @@
+---
+title: Google C++ Style Note
+author:
+  name: Life Zero
+  link: https://github.com/lacie-life
+date:  2021-09-22 11:11:11 +0700
+categories: [C++]
+tags: [note]
+render_with_liquid: false
+---
+
 # Google C++ Style Note
 
 C++ is one of the main development languages used by many of Google's open-source projects. As every C++ programmer knows, the language has many powerful features, but this power brings with it complexity, which in turn can make code more bug-prone and harder to read and maintain.

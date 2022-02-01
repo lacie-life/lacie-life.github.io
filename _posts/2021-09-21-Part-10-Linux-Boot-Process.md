@@ -1,3 +1,14 @@
+---
+title: The Linux Booting Process
+author:
+  name: Life Zero
+  link: https://github.com/lacie-life
+date:  2021-09-21 11:11:11 +0700
+categories: [Linux]
+tags: [tutorial]
+render_with_liquid: false
+---
+
 ### The Linux Booting Process
 
 1. BIOS

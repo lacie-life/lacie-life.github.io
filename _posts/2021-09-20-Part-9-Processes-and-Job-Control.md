@@ -1,3 +1,14 @@
+---
+title: Process and Job Control
+author:
+  name: Life Zero
+  link: https://github.com/lacie-life
+date:  2021-09-20 11:11:11 +0700
+categories: [Linux]
+tags: [tutorial]
+render_with_liquid: false
+---
+
 ### Process and Job Control
 
 1. Most Important Commands:
