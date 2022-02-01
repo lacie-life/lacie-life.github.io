@@ -1,8 +1,8 @@
 ---
 title:  Machine Learning is Fun! - How to do Speech Recognition with Deep Learning
-author:
-  name: Life Zero
-  link: https://github.com/lacie-life
+# author:
+#   name: Life Zero
+#   link: https://github.com/lacie-life
 date:  2022-01-26 11:11:11 +0700
 categories: [Machine Learning]
 tags: [tutorial]

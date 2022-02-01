@@ -1,8 +1,8 @@
 ---
 title: Templates in C++
-author:
-  name: Life Zero
-  link: https://github.com/lacie-life
+# author:
+#   name: Life Zero
+#   link: https://github.com/lacie-life
 date:  2022-01-18 11:11:11 +0700
 categories: [C++]
 tags: [tutorial]

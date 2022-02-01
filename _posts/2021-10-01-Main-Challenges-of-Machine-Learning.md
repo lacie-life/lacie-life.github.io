@@ -1,8 +1,8 @@
 ---
 title: Main Challenges of Machine Learning
-author:
-  name: Life Zero
-  link: https://github.com/lacie-life
+# author:
+#   name: Life Zero
+#   link: https://github.com/lacie-life
 date:  2021-10-01 11:11:11 +0700
 categories: [Machine Learning]
 tags: [note]

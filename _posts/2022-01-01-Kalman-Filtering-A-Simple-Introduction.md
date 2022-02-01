@@ -1,8 +1,8 @@
 ---
 title: Kalman Filtering A Simple Introduction
-author:
-  name: Life Zero
-  link: https://github.com/lacie-life
+# author:
+#   name: Life Zero
+#   link: https://github.com/lacie-life
 date:  2022-01-01 11:11:11 +0700
 categories: [Kalman Filter]
 tags: [wrtting]
