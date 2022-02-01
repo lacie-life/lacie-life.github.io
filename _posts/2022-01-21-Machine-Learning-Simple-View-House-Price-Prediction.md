@@ -1,3 +1,14 @@
+---
+title: Machine Learning is Fun! - Predicting housing prices
+author:
+  name: Life Zero
+  link: https://github.com/lacie-life
+date:  2022-01-21 11:11:11 +0700
+categories: [Machine Learning]
+tags: [tutorial]
+render_with_liquid: false
+---
+
 # Machine Learning is Fun: Predicting housing prices
 
 [Source](https://medium.com/@ageitgey/machine-learning-is-fun-80ea3ec3c471)

@@ -1,3 +1,14 @@
+---
+title: Void pointers in CPP
+author:
+  name: Life Zero
+  link: https://github.com/lacie-life
+date:  2022-01-03 11:11:11 +0700
+categories: [C++]
+tags: [tutorial]
+render_with_liquid: false
+---
+
 ## Void pointers in CPP
 
 The void pointer, also known as the generic pointer, is a special type of pointer that can be pointed at objects of any data type! A void pointer is declared like a normal pointer, using the void keyword as the pointer’s type:

@@ -1,3 +1,14 @@
+---
+title: Lambda Functions in C++11
+author:
+  name: Life Zero
+  link: https://github.com/lacie-life
+date:  2021-12-24 11:11:11 +0700
+categories: [C++]
+tags: [tutorial]
+render_with_liquid: false
+---
+
 # Lambda Functions in C++11
 
 Lambda - One of the most exciting features of C++11 is ability to create lambda functions (sometimes referred to as closures). What does this mean? A lambda function is a function that you can write inline in your source code (usually to pass in to another function, similar to the idea of a functor or function pointer). With lambda, creating quick functions has become much easier, and this means that not only can you start using lambda when you'd previously have needed to write a separate named function, but you can start writing more code that relies on the ability to create quick-and-easy functions. In this article, I'll first explain why lambda is great--with some examples--and then I'll walk through all of the details of what you can do with lambda.

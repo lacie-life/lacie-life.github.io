@@ -1,3 +1,14 @@
+---
+title: Vision Transformers (ViT) in Image Recognition
+author:
+  name: Life Zero
+  link: https://github.com/lacie-life
+date:  2022-01-11 11:11:11 +0700
+categories: [Machine Learning, Image recognition]
+tags: [wrtting]
+render_with_liquid: false
+---
+
 # Vision Transformers (ViT) in Image Recognition
 
 While convolutional neural networks (CNNs) have been utilized in computer vision since the 1980s, AlexNet was the first to beat the performance of current state-of-the-art image recognition systems by a wide margin in 2012. This breakthrough was made possible by two factors: (i) the availability of training sets such as ImageNet, and (ii) the usage of commoditized GPU hardware, which allowed for substantially more training compute. As a result, CNNs have become the go-to model for vision tasks since 2012.

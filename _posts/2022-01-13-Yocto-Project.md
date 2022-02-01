@@ -1,3 +1,14 @@
+---
+title: Yocto Project
+author:
+  name: Life Zero
+  link: https://github.com/lacie-life
+date:  2022-01-12 11:11:11 +0700
+categories: [Linux, Yocto]
+tags: [wrtting]
+render_with_liquid: false
+---
+
 # Yocto Project
 
 Yocto Project is a cool open-source community project that allows you to build your own Linux system from scratch to booting into your embedded hardware, which makes embedded Linux simple and accessible. It helps developers create customized systems based on the Linux kernel by providing useful templates, tools, and methods, and wide hardware architectures support on ARM, PPC, MIPS, x86 (32 & 64 bit).

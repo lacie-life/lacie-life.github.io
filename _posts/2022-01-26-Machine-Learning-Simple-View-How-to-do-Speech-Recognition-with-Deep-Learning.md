@@ -1,3 +1,14 @@
+---
+title:  Machine Learning is Fun! - How to do Speech Recognition with Deep Learning
+author:
+  name: Life Zero
+  link: https://github.com/lacie-life
+date:  2022-01-26 11:11:11 +0700
+categories: [Machine Learning]
+tags: [tutorial]
+render_with_liquid: false
+---
+
 # Machine Learning is Fun!: How to do Speech Recognition with Deep Learning
 
 Speech recognition is invading our lives. It’s built into our phones, our game consoles and our smart watches. It’s even automating our homes. For just $50, you can get an Amazon Echo Dot — a magic box that allows you to order pizza, get a weather report or even buy trash bags — just by speaking out loud:

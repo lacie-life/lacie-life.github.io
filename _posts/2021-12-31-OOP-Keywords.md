@@ -1,3 +1,14 @@
+---
+title: Object Oriented Programming Keywords
+author:
+  name: Life Zero
+  link: https://github.com/lacie-life
+date:  2021-12-31 11:11:11 +0700
+categories: [C++, OOP]
+tags: [tutorial]
+render_with_liquid: false
+---
+
 # Object Oriented Programming Keywords
 
 *Object Oriented Programming languages are defined by the following key words: abstraction, encapsulation, inheritance, and polymorphism. An object is a container of data and functions that affect the data. In an OOP, a "child" object can "extend" another object (making it more specific) by inheriting from a "parent" object. Thus the child gets all the parents data and functionality "for free". The idea of an "interface" is also key to OOPs. An interface is the allowed interactions between the outside world (e.g., other programs) and the object itself.*

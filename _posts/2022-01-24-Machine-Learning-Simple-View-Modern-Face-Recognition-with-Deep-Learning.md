@@ -1,3 +1,14 @@
+---
+title:  Machine Learning is Fun! - Modern Face Recognition with Deep Learning
+author:
+  name: Life Zero
+  link: https://github.com/lacie-life
+date:  2022-01-24 11:11:11 +0700
+categories: [Machine Learning]
+tags: [tutorial]
+render_with_liquid: false
+---
+
 # Machine Learning is Fun!: Modern Face Recognition with Deep Learning
 
 Have you noticed that Facebook has developed an uncanny ability to recognize your friends in your photographs? In the old days, Facebook used to make you to tag your friends in photos by clicking on them and typing in their name. Now as soon as you upload a photo, Facebook tags everyone for you like magic:

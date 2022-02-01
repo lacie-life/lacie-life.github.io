@@ -1,3 +1,14 @@
+---
+title:  Machine Learning is Fun! - How to Intentionally Trick Neural Networks
+author:
+  name: Life Zero
+  link: https://github.com/lacie-life
+date:  2022-01-28 11:11:11 +0700
+categories: [Machine Learning]
+tags: [tutorial]
+render_with_liquid: false
+---
+
 # Machine Learning is Fun!: How to Intentionally Trick Neural Networks
 
 Almost as long as programmers have been writing computer programs, computer hackers have been figuring out ways to exploit those programs. Malicious hackers take advantage of the tiniest bugs in programs to break into systems, steal data and generally wreak havoc.

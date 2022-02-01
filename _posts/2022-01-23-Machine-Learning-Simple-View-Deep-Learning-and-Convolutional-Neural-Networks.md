@@ -1,3 +1,14 @@
+---
+title:  Machine Learning is Fun! - Deep Learning and Convolutional Neural Networks
+author:
+  name: Life Zero
+  link: https://github.com/lacie-life
+date:  2022-01-23 11:11:11 +0700
+categories: [Machine Learning]
+tags: [tutorial]
+render_with_liquid: false
+---
+
 # Machine Learning is Fun!: Deep Learning and Convolutional Neural Networks
 
 Are you tired of reading endless news stories about deep learning and not really knowing what that means? Let’s change that!

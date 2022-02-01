@@ -1,3 +1,14 @@
+---
+title: Function Pointers in C and C++
+author:
+  name: Life Zero
+  link: https://github.com/lacie-life
+date:  2021-12-26 11:11:11 +0700
+categories: [C++]
+tags: [tutorial]
+render_with_liquid: false
+---
+
 # Function Pointers in C and C++
 
 ## Define 
