@@ -1,5 +1,5 @@
 ---
-title:Semantic segmentation tutorial (Part 1 Image Segmentaion)
+title: Semantic segmentation tutorial Part 1 Image Segmentaion
 author:
   name: Life Zero
   link: https://github.com/lacie-life
