@@ -57,7 +57,9 @@ This is where all the preceding planning, analysis and research is put to use.
 The execution phase includes:
 
 ● Software development – actual coding.
+
 ● Holding regular meetings to assign tasks, check in on projects and debug.
+
 ● Communicating with clients and management.
 
 ![Fig.2](../assets/img/post_assest/PM-18.png)
@@ -69,6 +71,7 @@ The fourth phase of the project management life cycle is monitoring. Technically
 The monitoring phase consists of ensuring that quality is maintained. This stage consists of:
 
 ● Determining if a project is on schedule and on budget.
+
 ● Monitoring changes that occur with planning and the project – taking into account various issues that arise and how to handle them.
 
 Phases three and four end with the deployment and delivery of the finished product.
@@ -86,11 +89,17 @@ This final phase includes:
 ● Analyzing the performance of the project and determining whether or not the project’s goals were met. This could include questions like:
 
     ○ “Were all the tasks completed?”
+
     ○ “Was the project completed on time?”
+
     ○ “Did we stay on budget?”
+
 ● Reviewing the performance of the team and evaluating how each person performed. This includes determining who finished their assigned tasks and the level of quality produced by each member.
+
 ● Completing all documentation and wrapping up all loose ends.
+
 ● Holding retrospective (looking back on something) meetings to see what lessons were learned. The purpose of this is to implement this data in future projects.
+
 
 Basically, the project is finalized in this phase.
 

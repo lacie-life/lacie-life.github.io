@@ -25,8 +25,11 @@ Even though frameworks are usually considered to be less strict than methodologi
 All of the Agile terms and concepts covered in this book so far are used in Scrum, including:
 
 ● Sprints (fixed amount of times of work, such as 1 week, 2 weeks, etc.).
+
 ● Backlogs (list of work needing to be done).
+
 ● Standups (daily meetings of the development team)
+
 
 In Scrum, these terms are either used as listed above or sometimes referred to with the word “Scrum” added – like Scrum Sprints or Daily Scrum Meeting. Again, they mean the same thing as in Agile because Scrum is Agile.
 
@@ -47,8 +50,11 @@ The Product Owner is typically the person who meets regularly with the client.
 Some of their duties include:
 
 ● Clearly expressing backlog tasks
+
 ● Ensuring that the backlog is visible and clear to everyone
+
 ● Ensuring that everyone knows what the priorities are and what to work on next
+
 
 As these duties show, the Product Owner is ultimately responsible for the product backlog.
 
@@ -69,10 +75,15 @@ The Scrum Master typically oversees daily standups.
 Some of their duties include:
 
 ● Removing obstacles during development
+
 ● Ensuring the development environment is set up so that the project can be completed
+
 ● Training team members in Scrum and making sure it’s being accurately applied
+
 ● Maintaining a good relationship between the developers and Product Owner – as well as others outside of the team
+
 ● Protecting the development team from external interruptions and distractions
+
 
 ![Fig.3](../assets/img/post_assest/PM-29.png)
 
@@ -190,12 +201,19 @@ The meeting can be overseen by the Product Owner (person responsible for definin
 Here are some examples of great questions that can be asked during a sprint retrospective:
 
 ● What were our successful actions during this sprint?
+
 ● What did we learn from this sprint?
+
 ● In future sprints, what should we do the same?
+
 ● In future sprints, what could we do better?
+
 ● Are there any bugs?
+
 ● Does anyone have any questions?
+
 ● Does anyone have any confusion?
+
 
 The sprint retrospective usually includes the Product Owner, Scrum Master and the entire development team.
 
@@ -246,8 +264,11 @@ Samantha creates a product backlog based on Mark’s vision and breaks these up 
 Samantha gets a couple of her developer friends to help with coding the app. They conduct daily standups and start each week with a sprint planning meeting. Their daily standups take 15 minutes or less and each person is asked:
 
 ● What did you accomplish yesterday?
+
 ● What will you accomplish today?
+
 ● What obstacles are you facing?
+
 
 They keep each sprint to 7 days and conclude each week with a sprint retrospective. Each of the members of the dev team are assigned user stories as tasks to complete during sprints. As a note, not all dev teams operate this way - some don’t assign tasks at all; instead, they let developers choose what tasks to work on from the sprint backlog as the sprint proceeds.
 

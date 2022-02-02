@@ -31,8 +31,11 @@ A business case is a description of the reasons for starting a project or tasks.
 Business cases should include the specific business need behind the project and the benefits that it brings. They can be written or conveyed verbally. In addition to the reasons why and the benefits, business cases can include:
 
 ● The various options associated with the project.
+
 ● The cost of the project.
+
 ● The expected risks connected to the project.
+
 
 ![Fig.2](../assets/img/post_assest/PM-8.png)
 
@@ -83,9 +86,13 @@ Another form of testing is usability testing. This tests how easily software can
 Here are some of the points evaluated in usability testing:
 
 ● What is the level of skill required to learn and use the software?
+
 ● How long does it take to begin using the software?
+
 ● What is the user’s attitude toward the software?
+
 ● How does the user respond to the software under realistic conditions?
+
 
 Usability testing can be used for these reasons:
 

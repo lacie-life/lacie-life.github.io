@@ -48,11 +48,17 @@ CI and CD include continuous testing to ensure that the end product that is deli
 CI/CD are commonly used together to refer to the following:
 
 ● DevOps is being utilized
+
 ● Software is being developed by a team
+
 ● Each stage of the process is separated into different environments
+
 ● Only small changes are made
+
 ● Every change is checked in
+
 ● Every step is fully tested before moving forward
+
 
 There is another approach to software development that we will now cover to enhance your understanding of DevOps.
 
@@ -61,9 +67,13 @@ There is another approach to software development that we will now cover to enha
 Lean manufacturing is a methodology that focuses on minimizing waste while maximizing productivity. Some points that are monitored to prevent waste include:
 
 ● Overproduction (creating more than is necessary)
+
 ● Wasted time (such as waiting)
+
 ● Too much inventory (more in stock that what is needed)
+
 ● Errors and defects (imperfections; shortcomings)
+
 
 Lean manufacturing avoids wasted time, actions, motion, supplies, etc. It attempts to achieve as much production as possible through using as little as possible.
 
@@ -72,9 +82,13 @@ This applies to software development. In lean development, one attempts to devel
 Some of the principles of lean development include:
 
 a. Eliminating waste
+
 b. Enhancing and increasing learning
+
 c. Delivering as quickly as possible
+
 d. Empowering the team
+
 
 ![Fig.4](../assets/img/post_assest/PM-41.png)
 
@@ -113,9 +127,13 @@ An example of an environment is developing and executing a program on a single m
 In some companies, the following environments are used:
 
 ● Development environment – this is where all the coding occurs
+
 ● Quality Assurance environment – this is where the code is tested by other developers
+
 ● Staging environment – this is where review of the software is done before it is delivered to users
+
 ● Production environment – this is the live software that users can access
+
 
 As you may have guessed, the above environments are actually a sequence that the software moves through. Once a stage is complete, the code is passed along to the next stage. If rejected, it moves back for corrections – if accepted, it moves forward.
 
@@ -151,9 +169,13 @@ One of the most well-known and popular operating systems in the world is called 
 Other popular operating systems are:
 
 ● OS X (created by the technology company Apple – it is used on their desktop computers and laptops)
+
 ● Linux (a family of free and for-fee operating systems – it is used on desktop computers and laptops)
+
 ● Android (owned by the technology company Google – it is used on mobile devices like smartphones)
+
 ● iOS (created by Apple – it is used on their mobile devices like the iPhone and iPad)
+
 
 A staging environment (stage) is a nearly exact copy of a production environment (the actual code composing a product) for software testing. Staging environments are made to test code and to ensure quality before deploying software. Everything in a staging environment is as close of a replica to the production environment as possible to ensure the software works correctly.
 

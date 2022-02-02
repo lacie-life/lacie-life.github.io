@@ -98,14 +98,22 @@ The project management life cycle is the various phases that software developmen
 The project management life cycle includes:
 
 ● Keeping documentation.
+
 ● Working to meet deadlines.
+
 ● Obtaining compliance.
+
 ● Reducing overall production time.
+
 ● Maintaining support.
+
 ● Improving product quality and reliability.
+
 ● Avoiding expensive issues through improved forecasting (future
 prediction).
+
 ● Lessening production costs.
+
 
 ## PROJECT MANAGEMENT EXAMPLE: WATERFALL PROJECT MANAGEMENT
 

@@ -53,9 +53,13 @@ Iterative means performing repeatedly.
 Iterative development refers to developing software through repeated cycles (iterations). These cycles each accomplish some sort of a minimum viable product. For example:
 
 First iteration: Create a basic homepage.
+
 Second iteration: Add the ability for a user to create an account and log in.
+
 Third iteration: Add the ability to change your password.
+
 Fourth iteration: Add a page that displays account information.
+
 
 One of the actions included in Agile is a regular meeting called the daily standup. Let’s look at what this is.
 
