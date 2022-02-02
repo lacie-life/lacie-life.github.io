@@ -6,6 +6,7 @@ title: Project Management Handbook - Introductioin
 date:  2022-02-02 11:11:11 +0700
 categories: [Skill, Software]
 tags: [tutorial]
+img_path: assets\img\post_assest
 render_with_liquid: false
 ---
 
@@ -33,7 +34,7 @@ Project management includes formulating plans, assigning roles, acquiring approp
 
 In fact, the purpose of project management is to ensure that projects are accurately completed on or ahead of schedule.
 
-![Fig.1](../assets/img/post_assest/PM-1.png)
+![Fig.1](PM-1.png)
 
 Project management has existed for as long as humankind. It was used over 2,300 years ago in the building of the Great Wall of China, it is used today, and it will continue to be used. It is the science of utilizing people to execute plans.
 
@@ -54,7 +55,7 @@ Here are some of the other duties of the project manager:
 - Assigning tasks to other team members.
 - Providing regular updates to upper management.
 
-![Fig.2](../assets/img/post_assest/PM-2.png)
+![Fig.2](PM-2.png)
 
 ## PROJECT TEAMS
 
@@ -70,7 +71,7 @@ Project team members have a wide range of duties and responsibilities – again,
 - Working with users (the people that use the software) to determine their needs.
 - Documenting all work done.
 
-![Fig.3](../assets/img/post_assest/PM-3.png)
+![Fig.3](PM-3.png)
 
 ## PROJECT MANAGEMENT OFFICE
 
@@ -78,7 +79,7 @@ The project management office (abbreviated PMO) is a team or department inside a
 
 The project management office creates the needed documentation, provides guidance and determines how to measure success. They are the office responsible for a business’s project management policies.
 
-![Fig.4](../assets/img/post_assest/PM-4.png)
+![Fig.4](PM-4.png)
 
 ## PROJECT MANAGEMENT LIFE CYCLE
 
@@ -92,7 +93,7 @@ The project management life cycle is the various phases that software developmen
 4. Monitoring.
 5. Closure (completion).
 
-![Fig.5](../assets/img/post_assest/PM-5.png)
+![Fig.5](PM-5.png)
 
 The project management life cycle includes:
 
@@ -118,7 +119,7 @@ A release is deployable software. It is the distribution of a working version of
 
 In the waterfall picture below, each step would be completed before moving on to the next step:
 
-![Fig.6](../assets/img/post_assest/PM-6.png)
+![Fig.6](PM-6.png)
 
 
 
