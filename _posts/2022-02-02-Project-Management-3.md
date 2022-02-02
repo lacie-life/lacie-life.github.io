@@ -3,10 +3,10 @@ title: Project Management Handbook - Project Management Life Cycle
 # author:
 #   name: Life Zero
 #   link: https://github.com/lacie-life
-date:  2022-02-02 11:11:11 +0700
+date:  2022-01-31 11:11:11 +0700
 categories: [Skill, Software]
 tags: [tutorial]
-img_path: assets/img/post_assest/
+img_path: /assets/img/post_assest/
 render_with_liquid: false
 ---
 
