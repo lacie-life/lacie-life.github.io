@@ -18,7 +18,7 @@ The purpose of executive summaries is to provide brief overviews that allow read
 
 The origin of the term comes from the fact that teams were provided with summaries by executives for rapid decision making and project approvals. Executive summaries are still commonly used for this purpose.
 
-![Fig.1](PM-7.png)
+![Fig.1](../assets/img/post_assest/PM-7.png)
 
 Executive summaries are sometimes used in project management to provide snapshots of various projects and proposals.
 
@@ -34,11 +34,11 @@ Business cases should include the specific business need behind the project and 
 ● The cost of the project.
 ● The expected risks connected to the project.
 
-![Fig.2](PM-8.png)
+![Fig.2](../assets/img/post_assest/PM-8.png)
 
 Another element of business cases can be a “gap analysis”. A gap analysis is a comparison between current performance and the potential or desired performance.
 
-![Fig.3](PM-9.png)
+![Fig.3](../assets/img/post_assest/PM-9.png)
 
 To summarize, a thorough business case for a project includes: the reasons behind it, associated risks, benefits, various options or approaches, an executive summary, and a gap analysis.
 
@@ -52,7 +52,7 @@ Streamlining your code, cleaning it up, or making it more concise could all be c
 
 Let’s say you created a script (a program that automates something) that scanned websites for company phone numbers. Your program is made up of 250 lines of code. You go through your code and you’re able to decrease your total lines of code to 100, while still maintaining the initial purpose of your script, and possibly getting it to perform faster – that would be refactoring.
 
-![Fig.4](PM-10.png)
+![Fig.4](../assets/img/post_assest/PM-10.png)
 
 “Production code” refers to live code that users interact with. For example, the Facebook app you see on your phone is production code. This is as opposed to code that is being tested or hasn’t been deployed yet. Typically, refactoring occurs with production code. Meaning, the code is refactored and re-released in better form.
 
@@ -76,7 +76,7 @@ A unit test is a short program that checks the results of and tests various unit
 
 They are valuable because they can detect when refactoring code has resulted in the code not working as originally designed.
 
-![Fig.5](PM-11.png)
+![Fig.5](../assets/img/post_assest/PM-11.png)
 
 Another form of testing is usability testing. This tests how easily software can be utilized by users.
 
@@ -89,7 +89,7 @@ Here are some of the points evaluated in usability testing:
 
 Usability testing can be used for these reasons:
 
-![Fig.6](PM-12.png)
+![Fig.6](../assets/img/post_assest/PM-12.png)
 
 The purpose of QA and testing is to ensure that the project is a success. So, how do you gauge the potential success of a project?
 
@@ -106,7 +106,7 @@ The primary points that are reviewed in feasibility testing are:
 
 Feasibility studies can provide a historical background of the company or project, a description of the proposed project or service, financial information, details about various activities, market research, and legal requirements.
 
-![Fig.7](PM-13.png)
+![Fig.7](../assets/img/post_assest/PM-13.png)
 
 Feasibility tests are supposed to be unbiased and provide a realistic view of the potential of success.
 
@@ -118,7 +118,7 @@ The origin of the word is “a person involved in a bet”.
 
 In project management, a stakeholder is simply anyone interested in a project’s outcome. This can include members of the team, executives, users and clients.
 
-![Fig.8](PM-14.png)
+![Fig.8](../assets/img/post_assest/PM-14.png)
 
 Stakeholders are the people affected by the outcome of a project and those who can influence it.
 
@@ -132,7 +132,7 @@ It is not a completed project but can be used to show basic functions.
 
 For example, an MVP app may be able to produce some basic actions but might not look aesthetically pleasing yet.
 
-![Fig.9](PM-15.png)
+![Fig.9](../assets/img/post_assest/PM-15.png)
 
 ### PROJECT CHARTERS
 
@@ -154,7 +154,7 @@ Lead time is how much time has passed since the client initially ordered the pro
 
 Here’s how lead time could apply to ordering food at a restaurant:
 
-![Fig.10](PM-16.png)
+![Fig.10](../assets/img/post_assest/PM-16.png)
 
 Lead time is used in another related way in project management. It applies when you have two tasks that have a dependency – that is, one task requires some or all of the work involved in the other task to be completed before it can be started.
 

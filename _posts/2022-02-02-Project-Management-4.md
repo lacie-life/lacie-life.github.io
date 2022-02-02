@@ -34,7 +34,7 @@ We covered some of the primary data and terms related to project management. Now
 
 In summary, Agile is a method of project management that focuses on dividing tasks into short phases of work, with frequent reviews of the project and adaption of planning mid-execution as needed. An Agile approach is flexible and less rigid than some other methods of project management.
 
-![Fig.1](PM-21.png)
+![Fig.1](../assets/img/post_assest/PM-21.png)
 
 One of the characteristics of Agile is that it’s incremental.
 
@@ -44,7 +44,7 @@ An increment is a small step. Incremental refers to moving forward in stages.
 
 Incremental development is a practice where software is designed, deployed and tested incrementally (a little bit more added each time) until the project is completed. Each step builds on the previous with additional advancements.
 
-![Fig.2](PM-22.png)
+![Fig.2](../assets/img/post_assest/PM-22.png)
 
 ## ITERATIVE DEVELOPMENT
 
@@ -71,7 +71,7 @@ Each person tells the group the answers to these three questions:
 
 Daily standups help ensure that obstacles to getting your work done are identified and handled rapidly.
 
-![Fig.3](PM-23.png)
+![Fig.3](../assets/img/post_assest/PM-23.png)
 
 The whole purpose of project management is to complete tasks . Let’s go over how these are tracked in Agile.
 
@@ -83,7 +83,7 @@ In Agile, a backlog is slightly different. It simply means: work needing to be d
 
 For example, if you were making a software program that would allow you to manage the members, vehicles and schedules for a car club, you would break down what you had to do in order to implement those functions into many individual tasks. That list is your backlog. As you completed items, they would be removed from the backlog.
 
-![Fig.4](PM-24.png)
+![Fig.4](../assets/img/post_assest/PM-24.png)
 
 Now let’s cover how Agile manages time.
 
@@ -95,6 +95,6 @@ Sprints begin and end with meetings where tasks are assigned and reviews of past
 
 Agile breaks up projects into sprints. During each day of a sprint, daily standups occur where the progress of the project is covered.
 
-![Fig.5](PM-25.png)
+![Fig.5](../assets/img/post_assest/PM-25.png)
 
 The sprint goal is the key focus and overall product of a particular sprint. It is also referred to as the theme.

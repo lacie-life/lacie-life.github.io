@@ -46,7 +46,7 @@ In this phase, we finalize the plans that we began in the initiation phase. This
 
 After the plan is fully figured out, a project kickoff meeting is held where the project team is gathered and brought up to speed on everything.
 
-![Fig.1](PM-17.png)
+![Fig.1](../assets/img/post_assest/PM-17.png)
 
 ## EXECUTION
 
@@ -60,7 +60,7 @@ The execution phase includes:
 ● Holding regular meetings to assign tasks, check in on projects and debug.
 ● Communicating with clients and management.
 
-![Fig.2](PM-18.png)
+![Fig.2](../assets/img/post_assest/PM-18.png)
 
 ## MONITORING
 
@@ -71,11 +71,9 @@ The monitoring phase consists of ensuring that quality is maintained. This stage
 ● Determining if a project is on schedule and on budget.
 ● Monitoring changes that occur with planning and the project – taking into account various issues that arise and how to handle them.
 
-
-
 Phases three and four end with the deployment and delivery of the finished product.
 
-![Fig.3](PM-19.png)
+![Fig.3](../assets/img/post_assest/PM-19.png)
 
 ## CLOSURE
 
@@ -96,7 +94,7 @@ This final phase includes:
 
 Basically, the project is finalized in this phase.
 
-![Fig.4](PM-20.png)
+![Fig.4](../assets/img/post_assest/PM-20.png)
 
 ## ADAPTING
 
