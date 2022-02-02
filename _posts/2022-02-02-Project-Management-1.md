@@ -55,7 +55,7 @@ Here are some of the other duties of the project manager:
 - Assigning tasks to other team members.
 - Providing regular updates to upper management.
 
-![Fig.2](../assets/img/post_assest/PM-2.png)
+![Fig.2](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/PM-2.png?raw=true)
 
 ## PROJECT TEAMS
 
@@ -71,7 +71,7 @@ Project team members have a wide range of duties and responsibilities – again,
 - Working with users (the people that use the software) to determine their needs.
 - Documenting all work done.
 
-![Fig.3](../assets/img/post_assest/PM-3.png)
+![Fig.3](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/PM-3.png?raw=true)
 
 ## PROJECT MANAGEMENT OFFICE
 
@@ -79,7 +79,7 @@ The project management office (abbreviated PMO) is a team or department inside a
 
 The project management office creates the needed documentation, provides guidance and determines how to measure success. They are the office responsible for a business’s project management policies.
 
-![Fig.4](../assets/img/post_assest/PM-4.png)
+![Fig.4](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/PM-4.png?raw=true)
 
 ## PROJECT MANAGEMENT LIFE CYCLE
 
@@ -93,7 +93,7 @@ The project management life cycle is the various phases that software developmen
 4. Monitoring.
 5. Closure (completion).
 
-![Fig.5](../assets/img/post_assest/PM-5.png)
+![Fig.5](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/PM-5.png?raw=true)
 
 The project management life cycle includes:
 
@@ -127,7 +127,7 @@ A release is deployable software. It is the distribution of a working version of
 
 In the waterfall picture below, each step would be completed before moving on to the next step:
 
-![Fig.6](../assets/img/post_assest/PM-6.png)
+![Fig.6](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/PM-6.png?raw=true)
 
 
 

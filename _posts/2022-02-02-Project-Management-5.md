@@ -14,6 +14,8 @@ Scrum is one of the implementations of Agile.
 
 The term “scrum” comes from a rugby term that consists of teammates interlocking their arms and pushing forward into opponents. 
 
+![Fig.1](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/PM-26.png?raw=true)
+
 In the technology world, Scrum is a method of project management that consists of tightly coordinated teamwork, strong organization and completing projects according to client demands. Most software development projects use Scrum nowadays. There are a set of terms and techniques that are used in Scrum but it all centers around teamwork.
 
 Whereas Agile is a methodology, Scrum is a framework. This is only mentioned here so that you know there is technically a difference between the two terms.
@@ -35,7 +37,7 @@ In Scrum, these terms are either used as listed above or sometimes referred to w
 
 One way to look at Scrum’s relationship to Agile is this picture:
 
-![Fig.1](../assets/img/post_assest/PM-27.png)
+![Fig.1](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/PM-27.png?raw=true)
 
 Now that you know what Scrum is, let’s go over some more Scrum-related words and topics.
 
@@ -58,7 +60,7 @@ Some of their duties include:
 
 As these duties show, the Product Owner is ultimately responsible for the product backlog.
 
-![Fig.2](../assets/img/post_assest/PM-28.png)
+![Fig.2](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/PM-28.png?raw=true)
 
 The word “owner” refers to responsibility – the Product Owner owns that the product will be accurately developed.
 
@@ -85,7 +87,7 @@ Some of their duties include:
 ● Protecting the development team from external interruptions and distractions
 
 
-![Fig.3](../assets/img/post_assest/PM-29.png)
+![Fig.3](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/PM-29.png?raw=true)
 
 The term “master” isn’t used to denote someone who has others working for them. It’s used in the sense of “a specialist of a particular subject” in that the Scrum Master should have the best (or at least a very strong) grasp of Scrum compared to others involved in the project. They should be a master of the Scrum framework.
 
@@ -113,7 +115,7 @@ In Scrum, an impediment is anything that prevents the team from meeting their po
 
 A burndown chart shows how many hours of work are left on the project day by day during a sprint. The days are displayed left to right at the bottom of the graph and the hours are displayed bottom to top on the left side of the graph.
 
-![Fig.4](../assets/img/post_assest/PM-30.png)
+![Fig.4](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/PM-30.png?raw=true)
 
 A "product backlog" is the same thing as a backlog: products that need to be gotten; tasks that need to be completed.
 
@@ -123,13 +125,13 @@ For example, in creating a website composed of ten web pages, each web page coul
 
 A “sprint backlog” is the task or tasks that a team hopes to complete during a particular sprint.
 
-![Fig.5](../assets/img/post_assest/PM-31.png)
+![Fig.5](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/PM-31.png?raw=true)
 
 At the start of each sprint, a planning session occurs with the team.
 
 During sprint planning, the sprint backlog is planned out – i.e. the team decides which product backlog items (PBIs) will be completed within the next sprint. Some teams may choose to assign specific tasks to specific developers, but this is not required - many teams decide on the sprint backlog, and let team members choose what task to work on as the sprint proceeds.
 
-![Fig.6](../assets/img/post_assest/PM-32.png)
+![Fig.6](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/PM-32.png?raw=true)
 
 A major element of Agile and Scrum is the end users – the people who will actually be using the product when it’s done. Let’s discuss this.
 
@@ -151,7 +153,7 @@ In Agile and Scrum, epic refers to a larger body of work (big tasks) that can be
 
 Both epics and stories are examples of Product Backlog Items (PBIs).
 
-![Fig.7](../assets/img/post_assest/PM-33.png)
+![Fig.7](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/PM-33.png?raw=true)
 
 Criteria are the standards against which something is judged – they’re the requirements.
 
@@ -163,7 +165,7 @@ Acceptance criteria: All images expand 25% in size when hovered over by a mouse.
 
 A Scrum Board is a physical surface that can be used to visualize information and manage the sprint backlog. This is also referred to as the taskboard.
 
-![Fig.8](../assets/img/post_assest/PM-34.png)
+![Fig.8](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/PM-34.png?raw=true)
 
 In Agile and Scrum, there is a backlog meeting where tasks are
 gone over. Let’s go over this.
@@ -217,7 +219,7 @@ Here are some examples of great questions that can be asked during a sprint retr
 
 The sprint retrospective usually includes the Product Owner, Scrum Master and the entire development team.
 
-![Fig.9](../assets/img/post_assest/PM-35.png)
+![Fig.9](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/PM-35.png?raw=true)
 
 ## ROLES IN SCRUM
 
@@ -247,7 +249,7 @@ The development team includes architects, testers, developers, and designers.
 
 The team acts together to figure out how to achieve their goals. The specific features they work on are based on the priority laid out by the Product Owner.
 
-![Fig.10](../assets/img/post_assest/PM-36.png)
+![Fig.10](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/PM-36.png?raw=true)
 
 ## SAMPLE AGILE/SCRUM PROJECT
 
@@ -288,7 +290,7 @@ The Agile software development methodology assumes every project comes with its 
 
 In Agile, tasks are divided evenly into smaller pieces to deliver specific features for a release. The functional software is expounded upon (added to) in incremental iterations, each adding in new features, with the final product including all the features required by the client. The core principle of the Agile model is that it should be both flexible and adaptable.
 
-![Fig.11](../assets/img/post_assest/PM-37.png)
+![Fig.11](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/PM-37.png?raw=true)
 
 
 

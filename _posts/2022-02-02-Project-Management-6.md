@@ -21,7 +21,7 @@ Another element of DevOps is constant testing – referred to as Quality Assuran
 
 The purpose of DevOps is to speed up the development and improvement of high-quality software.
 
-![Fig.1](../assets/img/post_assest/PM-38.png)
+![Fig.1](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/PM-38.png?raw=true)
 
 “CI” stands for “Continuous Integration”.
 
@@ -35,13 +35,13 @@ This is as opposed to not checking in code often or not testing code after every
 
 CI is a component of DevOps.
 
-![Fig.2](../assets/img/post_assest/PM-39.png)
+![Fig.2](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/PM-39.png?raw=true)
 
 “CD” stands for “continuous delivery”. It is another element of DevOps.
 
 CD encourages that development teams produce software in short cycles. CD automates the delivery of applications to environments (a computer system where computer programs are executed and deployed). Since teams sometimes work with multiple environments (such as testing and development), CD ensures that there is an automated way to push code changes to the applicable environment.
 
-![Fig.3](../assets/img/post_assest/PM-40.png)
+![Fig.3](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/PM-40.png?raw=true)
 
 CI and CD include continuous testing to ensure that the end product that is delivered to users has no errors.
 
@@ -90,7 +90,7 @@ c. Delivering as quickly as possible
 d. Empowering the team
 
 
-![Fig.4](../assets/img/post_assest/PM-41.png)
+![Fig.4](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/PM-41.png?raw=true)
 
 Lean is commonly used in conjunction with Agile because the two subjects mesh well. In fact, sometimes the two terms are used together like Lean-Agile. This simply means that both methodologies are being utilized.
 
@@ -137,7 +137,7 @@ In some companies, the following environments are used:
 
 As you may have guessed, the above environments are actually a sequence that the software moves through. Once a stage is complete, the code is passed along to the next stage. If rejected, it moves back for corrections – if accepted, it moves forward.
 
-![Fig.5](../assets/img/post_assest/PM-42.png)
+![Fig.5](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/PM-42.png?raw=true)
 
 Now, there are a couple of terms in the above picture we need to define. Let’s start with runtime.
 
@@ -181,7 +181,7 @@ A staging environment (stage) is a nearly exact copy of a production environment
 
 Now that we know those terms, let’s look at the diagram again:
 
-![Fig.6](../assets/img/post_assest/PM-42.png)
+![Fig.6](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/PM-42.png?raw=true)
 
 Each of these upright rectangles represents an environment. These environments are kept separate and as chunks of software are completed, they are moved from left to right. Errors are sent back to earlier environments so that fixes can be made. The efficient management of this arrangement, so that viable software is delivered often to satisfied users, is a major aspect of DevOps, and many of the tools you’ll find for DevOps relate to how to do this.
 

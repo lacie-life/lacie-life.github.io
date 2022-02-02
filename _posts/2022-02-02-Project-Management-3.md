@@ -46,7 +46,7 @@ In this phase, we finalize the plans that we began in the initiation phase. This
 
 After the plan is fully figured out, a project kickoff meeting is held where the project team is gathered and brought up to speed on everything.
 
-![Fig.1](../assets/img/post_assest/PM-17.png)
+![Fig.1](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/PM-17.png?raw=true)
 
 ## EXECUTION
 
@@ -62,7 +62,7 @@ The execution phase includes:
 
 ● Communicating with clients and management.
 
-![Fig.2](../assets/img/post_assest/PM-18.png)
+![Fig.2](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/PM-18.png?raw=true)
 
 ## MONITORING
 
@@ -76,7 +76,7 @@ The monitoring phase consists of ensuring that quality is maintained. This stage
 
 Phases three and four end with the deployment and delivery of the finished product.
 
-![Fig.3](../assets/img/post_assest/PM-19.png)
+![Fig.3](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/PM-19.png?raw=true)
 
 ## CLOSURE
 
@@ -103,7 +103,7 @@ This final phase includes:
 
 Basically, the project is finalized in this phase.
 
-![Fig.4](../assets/img/post_assest/PM-20.png)
+![Fig.4](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/PM-20.png?raw=true)
 
 ## ADAPTING
 
