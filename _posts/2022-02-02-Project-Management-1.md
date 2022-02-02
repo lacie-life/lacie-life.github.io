@@ -34,7 +34,7 @@ Project management includes formulating plans, assigning roles, acquiring approp
 
 In fact, the purpose of project management is to ensure that projects are accurately completed on or ahead of schedule.
 
-![Fig.1](../assets/img/post_assest/PM-1.png)
+![Fig.1](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/PM-1.png?raw=true)
 
 Project management has existed for as long as humankind. It was used over 2,300 years ago in the building of the Great Wall of China, it is used today, and it will continue to be used. It is the science of utilizing people to execute plans.
 
