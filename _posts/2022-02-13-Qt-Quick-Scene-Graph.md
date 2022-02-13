@@ -33,6 +33,7 @@ The most important node for users is the <b> QSGGeometryNode </b>. It is used to
 A node can have any number of children and geometry nodes will be rendered so they appear in child-order with parents behind their children.
 
 The available nodes are:
+
 |Type|Description|
 |----|------------|
 |QSGClipNode |Implements the clipping functionality in the scene graph|
