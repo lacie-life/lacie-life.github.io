@@ -195,5 +195,126 @@ LATEX can not manage images by itself, so you will need to use a package. Packag
 
 The <b> \includegraphics{universe} </b> command is the one that actually included the image in the document. Here universe is the name of the file containing the image without the extension, then universe.PNG becomes universe. The file name of the image should not contain white spaces nor multiple dots.
 
+## Captions, labels and references
+
+Images can be captioned, labelled and referenced by means of the figure environment as shown below:
+
+```
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.25\textwidth]{mesh}
+    \caption{a nice plot}
+    \label{fig:mesh1}
+\end{figure}
+
+As you can see in the figure \ref{fig:mesh1}, the 
+function grows near 0. Also, in the page \pageref{fig:mesh1} 
+is the same example.
+```
+
+![Fig.7](https://sharelatex-wiki-cdn-671420.c.cdn77.org/learn-scripts/images/2/25/InsertingImages.PNG)
+
+There are three important commands in the example:
+
+- <b> \caption{a nice plot} </b>: As you may expect this command sets the caption for the figure. If you create a list of figures this caption will be used there. You can place it above or below the figure.
+- <b> \label{fig:mesh1} </b>: If you need to refer the image within your document, set a label with this command. The label will number the image, and combined with the next command will allow you to reference it.
+- <b> \ref{fig:mesh1} </b>: This code will be substituted by the number corresponding to the referenced figure.
+When placing images in a LATEX document, we should always put them inside a figure environment or similar so that LATEX will position the image in a way that fits in with the rest of your text.
+
+## Creating lists in LATEX
+
+Lists are very simple to create in LATEX. You can create lists using different list environments. Environments are sections of our document that you want to present in a different way to the rest of the document. They start with a <b> \begin{...} </b> command and end with an <b> \end{...} </b> command.
+
+There are two main different types of lists, ordered lists and unordered lists. Each will use a different environment.
+
+### Unordered lists
+
+Unordered lists are produced by the itemize environment. Each entry must be preceded by the control sequence \item as shown below.
+
+```
+\begin{itemize}
+  \item The individual entries are indicated with a black dot, a so-called bullet.
+  \item The text in the entries may be of any length.
+\end{itemize}
+```
+
+![Fig.8](https://sharelatex-wiki-cdn-671420.c.cdn77.org/learn-scripts/images/e/ea/Itemize.png)
+
+By default the individual entries are indicated with a black dot, so-called bullet. The text in the entries may be of any length.
+
+### Ordered lists
+
+Ordered list have the same syntax inside a different environment. We make ordered lists using the enumerate environment:
+
+```
+\begin{enumerate}
+  \item This is the first entry in our list
+  \item The list numbers increase with each entry we add
+\end{enumerate}
+```
+
+![Fig.10](https://sharelatex-wiki-cdn-671420.c.cdn77.org/learn-scripts/images/3/3a/Enumerate.png)
+
+As with unordered lists, each entry must be preceded by the control sequence \item, which will automatically generate the number labelling the item. The enumerate labels consists of sequential numbers starting at one.
+
+## Adding math to LATEX
+
+One of the main advantages of LATEX is the ease at which mathematical expressions can be written. LATEX allows two writing modes for mathematical expressions: the inline mode and the display mode. The first one is used to write formulas that are part of a text. The second one is used to write expressions that are not part of a text or paragraph, and are therefore put on separate lines. Let's see an example of the inline mode:
+
+```
+In physics, the mass-energy equivalence is stated 
+by the equation $E=mc^2$, discovered in 1905 by Albert Einstein.
+```
+
+![Fig.11](https://sharelatex-wiki-cdn-671420.c.cdn77.org/learn-scripts/images/d/db/Einstein1.png)
+
+To put your equations in inline mode use one of these delimiters: \( ... \), $ ... $ or \begin{math} ... \end{math}. They all work and the choice is a matter of taste.
+
+The displayed mode has two versions: numbered and unnumbered.
+
+```
+The mass-energy equivalence is described by the famous equation
+\[ E=mc^2 \]
+discovered in 1905 by Albert Einstein. 
+In natural units ($c = 1$), the formula expresses the identity
+\begin{equation}
+E=m
+\end{equation}
+```
+
+![Fig.12](https://sharelatex-wiki-cdn-671420.c.cdn77.org/learn-scripts/images/3/3a/Einstein2.png)
+
+To print your equations in display mode use one of these delimiters: \[ ... \], \begin{displaymath} ... \end{displaymath} or \begin{equation} ... \end{equation}. $$ ... $$ is discouraged as it can give inconsistent spacing, and may not work well with some math packages.
+
+Many math mode commands require the amsmath package, so be sure to include it when writing math. An example is shown below of some basic math mode commands.
 
 
+```
+Subscripts in math mode are written as $a_b$ and superscripts are written as $a^b$. These can be combined an nested to write expressions such as
+
+\[ T^{i_1 i_2 \dots i_p}_{j_1 j_2 \dots j_q} = T(x^{i_1},\dots,x^{i_p},e_{j_1},\dots,e_{j_q}) \]
+ 
+We write integrals using $\int$ and fractions using $\frac{a}{b}$. Limits are placed on integrals using superscripts and subscripts:
+
+\[ \int_0^1 \frac{dx}{e^x} =  \frac{e-1}{e} \]
+
+Lower case Greek letters are written as $\omega$ $\delta$ etc. while upper case Greek letters are written as $\Omega$ $\Delta$.
+
+Mathematical operators are prefixed with a backslash as $\sin(\beta)$, $\cos(\alpha)$, $\log(x)$ etc.
+```
+
+![Fig.13](https://sharelatex-wiki-cdn-671420.c.cdn77.org/learn-scripts/images/2/22/Math.PNG)
+
+The possibilities with math in LATEX are endless and it is impossible to list them all here. Be sure to check out our other articles on
+
+- [Mathematical expressions](https://www.overleaf.com/learn/latex/Mathematical_expressions)
+- [Subscripts and superscripts](https://www.overleaf.com/learn/latex/Subscripts_and_superscripts)
+- [Brackets and Parentheses](https://www.overleaf.com/learn/latex/Brackets_and_Parentheses)
+- [Fractions and Binomials](https://www.overleaf.com/learn/latex/Fractions_and_Binomials)
+- [Aligning Equations](https://www.overleaf.com/learn/latex/Aligning_equations_with_amsmath)
+- [Operators](https://www.overleaf.com/learn/latex/Operators)
+- [Spacing in math mode](https://www.overleaf.com/learn/latex/Spacing_in_math_mode)
+- [Integrals, sums and limits](https://www.overleaf.com/learn/latex/Integrals%2C_sums_and_limits)
+- [Display style in math mode](https://www.overleaf.com/learn/latex/Display_style_in_math_mode)
+- [List of Greek letters and math symbols](https://www.overleaf.com/learn/latex/List_of_Greek_letters_and_math_symbols)
+- [Mathematical fonts](https://www.overleaf.com/learn/latex/Mathematical_fonts)
