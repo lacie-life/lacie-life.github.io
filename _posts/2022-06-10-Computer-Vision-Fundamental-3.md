@@ -23,7 +23,7 @@ To capture more light: use *lenses* which bundle light (by refraction at the mat
 
 **Crucial point**: All the light rays that leave a point $P$ are bundled by the lens to meet at a point $p$ again.
 
-![[thin-lens.png]]
+![Fig.1](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/thin-lens.png?raw=true)
 
 Assumption: $z$ axis is the optical axis. Observe the two *similar triangles* $A, B$ with side lengths $Y$ and $Z$ corresponding to side lengths $y$ and $f$.
 - $Y$ is the distance in y direction from the optical axis in the world
@@ -106,7 +106,8 @@ We have the same projection equation $\lambda \mathbf{x}' = K \Pi_0 g \mathbf{X}
 ### Radial Distortion
 With realistic lenses (no thin lens), there is radial distortion (distortion which is bigger the longer the "radius"/distance from the optical center axis is). Extreme example: *Fisheye lenses*.
 
-![[radial-distortion-bookshelves.png]]
+![Fig.2](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/radial-distortion-bookshelves.png?raw=true)
+
 
 Effective model for distortions ($x_d$, $y_d$ are the distorted coordinates):
 
@@ -139,7 +140,7 @@ The row vectors of $\widehat{\ell}$ span the space of vector orthogonal to $\ell
 
 If $x$ is the image of a point $p$, the coimage of $x$ is a plane that is orthogonal to $x$: So it is spanned by the rows of $\widehat{x}$.
 
-![Fig.1](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/preimage-coimage-summary.png?raw=true)
+![Fig.3](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/preimage-coimage-summary.png?raw=true)
 
 
 ### Projective Geometry
