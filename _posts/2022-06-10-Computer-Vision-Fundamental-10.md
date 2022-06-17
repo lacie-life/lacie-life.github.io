@@ -3,7 +3,7 @@ title: Computer Vision Fundamental - [Part 10]
 # author:
 #   name: Life Zero
 #   link: https://github.com/lacie-life
-date:  2022-06-17 11:11:11 +0700
+date:  2022-06-17 11:11:14 +0700
 categories: [Sill, Computer Vision]
 tags: [Theory]
 img_path: /assets/img/post_assest/
