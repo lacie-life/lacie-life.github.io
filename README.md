@@ -12,3 +12,5 @@ Jekyll Theme
 [Template](https://www.geeksforgeeks.org/templates-cpp/)
 
 [Qt Quick Sence Graph](https://doc.qt.io/qt-5/qtquick-visualcanvas-scenegraph.html)
+
+[Inference pipiline with TensorRT](https://learnopencv.com/building-industrial-embedded-deep-learning-inference-pipelines-with-tensorrt/)
