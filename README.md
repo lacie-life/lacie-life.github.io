@@ -1,6 +1,8 @@
 # README
 Jekyll Theme 
 
+[Improve with Jupyter Notebook](https://www.linode.com/docs/guides/jupyter-notebook-on-jekyll/)
+
 [Segmentaion](https://nanonets.com/blog/semantic-image-segmentation-2020/)
 
 [Google C++](https://google.github.io/styleguide/cppguide.html)

@@ -5,7 +5,7 @@ title: Computer Vision Fundamental - [Part 9]
 #   link: https://github.com/lacie-life
 
 date:  2022-06-17 11:11:12 +0700
-categories: [Sill, Computer Vision]
+categories: [Skill, Computer Vision]
 tags: [Theory]
 img_path: /assets/img/post_assest/
 render_with_liquid: false
