@@ -1,0 +1,33 @@
+image: assets/img/smile.png
+username: Christoph Jabs
+description: creator of the Grape-Academic-Theme! Grape-Academic-Theme is a modification of the Grape-Theme by naye0ng, making it more suitable as an academic portfolio.
+webpage: https://chrjabs.github.io
+experience: # Remove for hiding the experience section
+  - start: 2017-05-03
+    end: 2018-05-06
+    experience : company name, title
+interests: # Remove for hiding the interests section
+  - Interest 1
+  - Interest 2
+skills: # Remove for hiding the skills section
+  - skill: HTML5 & CSS
+    value: 85  # Percent value
+social:
+  email:  # Full email address, e.g. "sample@google.com"
+  orcid: 
+  scholar: 
+  publons: 
+  research_gate: 
+  dblp:  # Full URL
+  semantic_scholar:  # Full URL
+  linkedin:  # Full URL 
+  github: chrjabs
+  gitlab: 
+  bitbucket: chrjabs
+  google_plus:
+  twitter: chrjabs
+  youtube:
+  facebook:
+  instagram:
+awards: # Remove for hiding the awards section
+  - "This is an award I got"
