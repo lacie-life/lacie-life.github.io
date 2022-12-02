@@ -1,5 +1,5 @@
 ---
-title: Shapes - Alignment, Descriptors, Similarity
+title: [ML for 3D Geometry] Shapes - Alignment, Descriptors, Similarity
 # author:
 #   name: Life Zero
 #   link: https://github.com/lacie-life

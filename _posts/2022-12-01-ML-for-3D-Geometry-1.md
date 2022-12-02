@@ -1,5 +1,5 @@
 ---
-title: Geometric Foundations - Surface Representations
+title: [ML for 3D Geometry] Geometric Foundations - Surface Representations 
 # author:
 #   name: Life Zero
 #   link: https://github.com/lacie-life
