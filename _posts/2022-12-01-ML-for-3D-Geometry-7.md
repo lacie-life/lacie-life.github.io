@@ -1,5 +1,5 @@
 ---
-title: [ML for 3D Geometry] Object Detection and Instance Segmentation
+title: ML for 3D Geometry - Part 7  
 # author:
 #   name: Life Zero
 #   link: https://github.com/lacie-life
@@ -9,6 +9,8 @@ tags: [Machine Learning]
 img_path: /assets/img/post_assest/
 render_with_liquid: false
 ---
+
+# Object Detection and Instance Segmentation
 
 Idea now: Not only detect object classes, but learn to actually distinguish different objects (the chair on the left, the chair on the right, etc.). So high-level goal: "Understand object-ness".
 

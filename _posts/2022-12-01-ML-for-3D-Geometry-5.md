@@ -1,5 +1,5 @@
 ---
-title: [ML for 3D Geometry] Learning on Different 3D Representations
+title: ML for 3D Geometry - Part 5 
 # author:
 #   name: Life Zero
 #   link: https://github.com/lacie-life
@@ -9,6 +9,8 @@ tags: [Machine Learning]
 img_path: /assets/img/post_assest/
 render_with_liquid: false
 ---
+
+# Learning on Different 3D Representations
 
 ## Types of 3D Represenations
 1. Volumetric grids => 3D CNNs

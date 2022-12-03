@@ -1,5 +1,5 @@
 ---
-title: [ML for 3D Geometry] Shape Segmentation and Labeling
+title: ML for 3D Geometry Part 3  
 # author:
 #   name: Life Zero
 #   link: https://github.com/lacie-life
@@ -9,6 +9,8 @@ tags: [Machine Learning]
 img_path: /assets/img/post_assest/
 render_with_liquid: false
 ---
+
+# Shape Segmentation and Labeling
 
 ## 3D Classification tasks
 ### VoxNet [Maturana and Scherer ’15]

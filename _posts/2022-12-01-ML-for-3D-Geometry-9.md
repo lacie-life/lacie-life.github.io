@@ -1,5 +1,5 @@
 ---
-title: [ML for 3D Geometry] Functional Analysis of Scenes
+title: ML for 3D Geometry - Part 9 
 # author:
 #   name: Life Zero
 #   link: https://github.com/lacie-life
@@ -9,6 +9,8 @@ tags: [Machine Learning]
 img_path: /assets/img/post_assest/
 render_with_liquid: false
 ---
+
+# Functional Analysis of Scenes
 
 Understanding possible interactions with objects (i.e. their *function*)
 

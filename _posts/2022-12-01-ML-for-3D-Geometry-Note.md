@@ -1,5 +1,5 @@
 ---
-title: [ML for 3D Geometry] Note
+title: ML for 3D Geometry - Note
 # author:
 #   name: Life Zero
 #   link: https://github.com/lacie-life

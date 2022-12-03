@@ -1,5 +1,5 @@
 ---
-title: [ML for 3D Geometry] Weak Supervision, n-shot Learning, Data Efficiency
+title: ML for 3D Geometry - Part 10  
 # author:
 #   name: Life Zero
 #   link: https://github.com/lacie-life
@@ -9,6 +9,8 @@ tags: [Machine Learning]
 img_path: /assets/img/post_assest/
 render_with_liquid: false
 ---
+
+# Weak Supervision, n-shot Learning, Data Efficiency
 
 Broad motivation for this chapter: We want to use as little (annotated) data as possible, because data collection and data annotation are expensive.
 

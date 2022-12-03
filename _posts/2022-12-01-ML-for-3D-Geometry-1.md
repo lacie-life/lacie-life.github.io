@@ -1,5 +1,5 @@
 ---
-title: [ML for 3D Geometry] Geometric Foundations - Surface Representations 
+title: ML for 3D Geometry - Part 1 
 # author:
 #   name: Life Zero
 #   link: https://github.com/lacie-life
@@ -9,6 +9,8 @@ tags: [Machine Learning]
 img_path: /assets/img/post_assest/
 render_with_liquid: false
 ---
+
+# Geometric Foundations - Surface Representations 
 
 There are several ways to represent 3D shapes, each with their own advantages and disadvantages. Aspects to consider are the memory usage, how efficient operations are, and the constraints of the source data and target application.
 

@@ -1,5 +1,5 @@
 ---
-title: [ML for 3D Geometry] Reconstructing and Generating Scenes
+title: ML for 3D Geometry - Part 8 
 # author:
 #   name: Life Zero
 #   link: https://github.com/lacie-life
@@ -9,6 +9,8 @@ tags: [Machine Learning]
 img_path: /assets/img/post_assest/
 render_with_liquid: false
 ---
+
+# Reconstructing and Generating Scenes
 
 Motivation: make shape generation more accessible, require less expertise
 

@@ -1,5 +1,5 @@
 ---
-title: [ML for 3D Geometry] Semantic Scene Understanding - Semantic Segmentation
+title: ML for 3D Geometry - Part 6 
 # author:
 #   name: Life Zero
 #   link: https://github.com/lacie-life
@@ -9,6 +9,8 @@ tags: [Machine Learning]
 img_path: /assets/img/post_assest/
 render_with_liquid: false
 ---
+
+# Semantic Scene Understanding - Semantic Segmentation
 
 3D Semantic segmentation: segment scene (e.g. room) in semantic parts (e.g. for each part: to which furniture type it belongs)
 
