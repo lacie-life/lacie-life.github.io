@@ -36,7 +36,7 @@ From a framework we got an API that can build complete message from provided raw
 
 Now this API knows what header and footer to apply but don’t know about exact encryption logic, because that is not fixed to Framework, that can change from application to application. As, Encryption Logic is application dependent, therefore in this API provides a provision to pass encryption logic as a callback function pointer. This API will call back the code of application by calling this passed function pointer.
 
-[Fig. 1: Callback Mechanism](https://thispointer.com/wp-content/uploads/2015/07/callback.png)
+![Fig. 1: Callback Mechanism](https://thispointer.com/wp-content/uploads/2015/07/callback.png)
 
 Framework’s API that accepts the function pointer callback as an argument is as follows,
 
