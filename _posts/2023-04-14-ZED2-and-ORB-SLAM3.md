@@ -3,7 +3,7 @@ title: ZED2 with ORB-SLAM3 (Stereo-IMU mode) step-by-step
 # author:
 #   name: Life Zero
 #   link: https://github.com/lacie-life
-date:  2023-14-04 11:11:14 +0700
+date:  2023-04-14 11:11:14 +0700
 categories: [Computer Vision]
 tags: [Tutorial]
 img_path: /assets/img/post_assest/
