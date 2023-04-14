@@ -44,11 +44,11 @@ It is also a project requirement, and needs to use visual inertial navigation to
 - Install dependencies
 
 ```bash
-sudo apt-get install python-setuptools python rosinstall ipython libeigen3-dev libboost-all-dev doxygen libopencv-dev ros-noetic-vision-opencv ros-noetic-image-transport-plugins ros-noetic-cmake-modules software-properties-common libpoco-dev python-matplotlib python-scipy python-git python-pip libtbb-dev liblapack-dev python-catkin-tool libv4l-dev
+sudo apt-get install python-setuptools python3-rosinstall ipython3 libeigen3-dev libboost-all-dev doxygen libopencv-dev ros-noetic-vision-opencv ros-noetic-image-transport-plugins ros-noetic-cmake-modules software-properties-common libpoco-dev python3-matplotlib python3-scipy python3-git python3-pip libtbb-dev liblapack-dev python3-catkin-tools libv4l-dev
 
 sudo add-apt-repository ppa:igraph/ppa
 sudo apt-get update
-sudo apt-get install python-igraph
+sudo apt-get install python3-igraph
 
 ```
 
