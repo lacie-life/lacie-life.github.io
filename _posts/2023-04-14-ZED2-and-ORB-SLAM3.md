@@ -13,7 +13,7 @@ render_with_liquid: false
 
 ## Introduction
 
-It is also a project requirement, and needs to use visual inertial navigation to do some development, so the first step is to do some algorithm testing-simulation and physical testing. After passing the simulation test results, it is finally decided to useORB-SLAM3 to complete the task.
+It is also a project requirement, and needs to use visual inertial navigation to do some development, so the first step is to do some algorithm testing-simulation and physical testing. After passing the simulation test results, it is finally decided to use ORB-SLAM3 to complete the task.
 
 - System version:<b> Ubuntu 20.04, ROS Noetic </b>
 
