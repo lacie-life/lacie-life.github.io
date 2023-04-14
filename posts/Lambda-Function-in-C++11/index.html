@@ -1,0 +1,371 @@
+<!DOCTYPE html><html lang="en" ><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"> </script><meta name="day-prompt" content="days ago"><meta name="hour-prompt" content="hours ago"><meta name="minute-prompt" content="minutes ago"><meta name="justnow-prompt" content="just now"><meta name="generator" content="Jekyll v4.3.2" /><meta property="og:title" content="Lambda Functions in C++11" /><meta property="og:locale" content="en" /><meta name="description" content="Lambda Functions in C++11" /><meta property="og:description" content="Lambda Functions in C++11" /><link rel="canonical" href="https://lacie-life.github.io/posts/Lambda-Function-in-C++11/" /><meta property="og:url" content="https://lacie-life.github.io/posts/Lambda-Function-in-C++11/" /><meta property="og:site_name" content="Life Zero Blog" /><meta property="og:type" content="article" /><meta property="article:published_time" content="2021-12-24T11:11:11+07:00" /><meta name="twitter:card" content="summary" /><meta property="twitter:title" content="Lambda Functions in C++11" /><meta name="twitter:site" content="@twitter_username" /><meta name="google-site-verification" content="google_meta_tag_verification" /> <script type="application/ld+json"> {"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2022-02-01T19:13:35+07:00","datePublished":"2021-12-24T11:11:11+07:00","description":"Lambda Functions in C++11","headline":"Lambda Functions in C++11","mainEntityOfPage":{"@type":"WebPage","@id":"https://lacie-life.github.io/posts/Lambda-Function-in-C++11/"},"url":"https://lacie-life.github.io/posts/Lambda-Function-in-C++11/"}</script><title>Lambda Functions in C++11 | Life Zero Blog</title><link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicons/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicons/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicons/favicon-16x16.png"><link rel="manifest" href="/assets/img/favicons/site.webmanifest"><link rel="shortcut icon" href="/assets/img/favicons/favicon.ico"><meta name="apple-mobile-web-app-title" content="Life Zero Blog"><meta name="application-name" content="Life Zero Blog"><meta name="msapplication-TileColor" content="#da532c"><meta name="msapplication-config" content="/assets/img/favicons/browserconfig.xml"><meta name="theme-color" content="#ffffff"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"><link rel="dns-prefetch" href="https://fonts.gstatic.com"><link rel="preconnect" href="https://www.google-analytics.com" crossorigin="use-credentials"><link rel="dns-prefetch" href="https://www.google-analytics.com"><link rel="preconnect" href="https://www.googletagmanager.com" crossorigin="anonymous"><link rel="dns-prefetch" href="https://www.googletagmanager.com"><link rel="preconnect" href="https://cdn.jsdelivr.net"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.11.2/css/all.min.css"><link rel="stylesheet" href="/assets/css/style.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@1.0.1/dist/bootstrap-toc.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/magnific-popup@1.1.0/dist/magnific-popup.min.css"> <script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script><body data-spy="scroll" data-target="#toc"><div id="sidebar" class="d-flex flex-column align-items-end" lang=""><div class="profile-wrapper text-center"><div id="avatar"> <a href="/" alt="avatar" class="mx-auto"> <img src="https://live.staticflickr.com/7347/14119381583_6087a61c73_c_d.jpg" alt="avatar" onerror="this.style.display='none'"> </a></div><div class="site-title mt-3"> <a href="/">Life Zero Blog</a></div><div class="site-subtitle font-italic">Life is hard but it's fair</div></div><ul class="w-100"><li class="nav-item"> <a href="/" class="nav-link"> <i class="fa-fw fas fa-home ml-xl-3 mr-xl-3 unloaded"></i> <span>HOME</span> </a><li class="nav-item"> <a href="/categories/" class="nav-link"> <i class="fa-fw fas fa-stream ml-xl-3 mr-xl-3 unloaded"></i> <span>CATEGORIES</span> </a><li class="nav-item"> <a href="/tags/" class="nav-link"> <i class="fa-fw fas fa-tags ml-xl-3 mr-xl-3 unloaded"></i> <span>TAGS</span> </a><li class="nav-item"> <a href="/archives/" class="nav-link"> <i class="fa-fw fas fa-archive ml-xl-3 mr-xl-3 unloaded"></i> <span>ARCHIVES</span> </a><li class="nav-item"> <a href="/about/" class="nav-link"> <i class="fa-fw fas fa-info ml-xl-3 mr-xl-3 unloaded"></i> <span>ABOUT</span> </a></ul><div class="sidebar-bottom mt-auto d-flex flex-wrap justify-content-center"> <a href="https://github.com/lacie-life" aria-label="github" class="order-3" target="_blank" rel="noopener"> <i class="fab fa-github-alt"></i> </a> <a href="https://twitter.com/twitter_username" aria-label="twitter" class="order-4" target="_blank" rel="noopener"> <i class="fab fa-twitter"></i> </a> <a href=" javascript:location.href = 'mailto:' + ['00sao00ios00','gmail.com'].join('@')" aria-label="email" class="order-5" > <i class="fas fa-envelope"></i> </a> <a href="/feed.xml" aria-label="rss" class="order-6" > <i class="fas fa-rss"></i> </a> <span class="icon-border order-2"></span> <span id="mode-toggle-wrapper" class="order-1"> <i class="mode-toggle fas fa-adjust"></i> <script type="text/javascript"> class ModeToggle { static get MODE_KEY() { return "mode"; } static get DARK_MODE() { return "dark"; } static get LIGHT_MODE() { return "light"; } constructor() { if (this.hasMode) { if (this.isDarkMode) { if (!this.isSysDarkPrefer) { this.setDark(); } } else { if (this.isSysDarkPrefer) { this.setLight(); } } } var self = this; /* always follow the system prefers */ this.sysDarkPrefers.addListener(function() { if (self.hasMode) { if (self.isDarkMode) { if (!self.isSysDarkPrefer) { self.setDark(); } } else { if (self.isSysDarkPrefer) { self.setLight(); } } self.clearMode(); } self.updateMermaid(); }); } /* constructor() */ setDark() { $('html').attr(ModeToggle.MODE_KEY, ModeToggle.DARK_MODE); sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.DARK_MODE); } setLight() { $('html').attr(ModeToggle.MODE_KEY, ModeToggle.LIGHT_MODE); sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.LIGHT_MODE); } clearMode() { $('html').removeAttr(ModeToggle.MODE_KEY); sessionStorage.removeItem(ModeToggle.MODE_KEY); } get sysDarkPrefers() { return window.matchMedia("(prefers-color-scheme: dark)"); } get isSysDarkPrefer() { return this.sysDarkPrefers.matches; } get isDarkMode() { return this.mode == ModeToggle.DARK_MODE; } get isLightMode() { return this.mode == ModeToggle.LIGHT_MODE; } get hasMode() { return this.mode != null; } get mode() { return sessionStorage.getItem(ModeToggle.MODE_KEY); } /* get the current mode on screen */ get modeStatus() { if (this.isDarkMode || (!this.hasMode && this.isSysDarkPrefer) ) { return ModeToggle.DARK_MODE; } else { return ModeToggle.LIGHT_MODE; } } updateMermaid() { if (typeof mermaid !== "undefined") { let expectedTheme = (this.modeStatus === ModeToggle.DARK_MODE? "dark" : "default"); let config = { theme: expectedTheme }; /* re-render the SVG › <https://github.com/mermaid-js/mermaid/issues/311#issuecomment-332557344> */ $(".mermaid").each(function() { let svgCode = $(this).prev().children().html(); $(this).removeAttr("data-processed"); $(this).html(svgCode); }); mermaid.initialize(config); mermaid.init(undefined, ".mermaid"); } } flipMode() { if (this.hasMode) { if (this.isSysDarkPrefer) { if (this.isLightMode) { this.clearMode(); } else { this.setLight(); } } else { if (this.isDarkMode) { this.clearMode(); } else { this.setDark(); } } } else { if (this.isSysDarkPrefer) { this.setLight(); } else { this.setDark(); } } this.updateMermaid(); } /* flipMode() */ } /* ModeToggle */ let toggle = new ModeToggle(); $(".mode-toggle").click(function() { toggle.flipMode(); }); </script> </span></div></div><div id="topbar-wrapper" class="row justify-content-center topbar-down"><div id="topbar" class="col-11 d-flex h-100 align-items-center justify-content-between"> <span id="breadcrumb"> <span> <a href="/"> Home </a> </span> <span>Lambda Functions in C++11</span> </span> <i id="sidebar-trigger" class="fas fa-bars fa-fw"></i><div id="topbar-title"> Post</div><i id="search-trigger" class="fas fa-search fa-fw"></i> <span id="search-wrapper" class="align-items-center"> <i class="fas fa-search fa-fw"></i> <input class="form-control" id="search-input" type="search" aria-label="search" autocomplete="off" placeholder="Search..."> <i class="fa fa-times-circle fa-fw" id="search-cleaner"></i> </span> <span id="search-cancel" >Cancel</span></div></div><div id="main-wrapper"><div id="main"><div class="row"> <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML"> </script><div id="post-wrapper" class="col-12 col-lg-11 col-xl-8"><div class="post pl-1 pr-1 pl-sm-2 pr-sm-2 pl-md-4 pr-md-4"><h1 data-toc-skip>Lambda Functions in C++11</h1><div class="post-meta text-muted d-flex flex-column"><div> <span class="semi-bold"> Life Zero </span> on <span class="timeago " data-toggle="tooltip" data-placement="bottom" title="Fri, Dec 24, 2021, 11:11 AM +0700" >Dec 24, 2021<i class="unloaded">2021-12-24T11:11:11+07:00</i> </span></div><div> <span> Updated <span class="timeago lastmod" data-toggle="tooltip" data-placement="bottom" title="Tue, Feb 1, 2022, 7:13 PM +0700" >Feb 1, 2022<i class="unloaded">2022-02-01T19:13:35+07:00</i> </span> </span> <span class="readtime" data-toggle="tooltip" data-placement="bottom" title="3417 words">18 min read</span></div></div><div class="post-content"><h1 id="lambda-functions-in-c11">Lambda Functions in C++11</h1><p>Lambda - One of the most exciting features of C++11 is ability to create lambda functions (sometimes referred to as closures). What does this mean? A lambda function is a function that you can write inline in your source code (usually to pass in to another function, similar to the idea of a functor or function pointer). With lambda, creating quick functions has become much easier, and this means that not only can you start using lambda when you’d previously have needed to write a separate named function, but you can start writing more code that relies on the ability to create quick-and-easy functions. In this article, I’ll first explain why lambda is great–with some examples–and then I’ll walk through all of the details of what you can do with lambda.</p><h2 id="why-lambdas-rock">Why Lambdas Rock</h2><p>Imagine that you had an address book class, and you want to be able to provide a search function. You might provide a simple search function, taking a string and returning all addresses that match the string. Sometimes that’s what users of the class will want. But what if they want to search only in the domain name or, more likely, only in the username and ignore results in the domain name? Or maybe they want to search for all email addresses that also show up in another list. There are a lot of potentially interesting things to search for. Instead of building all of these options into the class, wouldn’t it be nice to provide a generic “find” method that takes a procedure for deciding if an email address is interesting? Let’s call the method findMatchingAddresses, and have it take a “function” or “function-like” object.</p><div lang="plaintext" class="language-plaintext highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+</pre><td class="rouge-code"><pre>#include &lt;string&gt;
+#include &lt;vector&gt;
+
+class AddressBook
+{
+    public:
+    // using a template allows us to ignore the differences between functors, function pointers 
+    // and lambda
+    template&lt;typename Func&gt;
+    std::vector&lt;std::string&gt; findMatchingAddresses (Func func)
+    { 
+        std::vector&lt;std::string&gt; results;
+        for ( auto itr = _addresses.begin(), end = _addresses.end(); itr != end; ++itr )
+        {
+            // call the function passed into findMatchingAddresses and see if it matches
+            if ( func( *itr ) )
+            {
+                results.push_back( *itr );
+            }
+        }
+        return results;
+    }
+
+    private:
+    std::vector&lt;std::string&gt; _addresses;
+};
+</pre></table></code></div></div><p>Anyone can pass a function into the findMatchingAddresses that contains logic for finding a particular function. If the function returns true, when given a particular address, the address will be returned. This kind of approach was OK in earlier version of C++, but it suffered from one fatal flaw: it wasn’t quite convenient enough to create functions. You had to go define it somewhere else, just to be able to pass it in for one simple use. That’s where lambdas come in.</p><h3 id="basic-lambda-syntax">Basic Lambda Syntax</h3><p>Before we write some code to solve this problem, let’s see the really basic syntax for lambda.</p><div lang="plaintext" class="language-plaintext highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre><td class="rouge-code"><pre>#include &lt;iostream&gt;
+
+using namespace std;
+
+int main()
+{
+    auto func = [] () { cout &lt;&lt; "Hello world"; };
+    func(); // now call the function
+}
+</pre></table></code></div></div><p>Okay, did you spot the lambda, starting with []? That identifier, called the capture specification, tells the compiler we’re creating a lambda function. You’ll see this (or a variant) at the start of every lambda function.</p><p>Next up, like any other function, we need an argument list: (). Where is the return value? Turns out that we don’t need to give one. In C++11, if the compiler can deduce the return value of the lambda function, it will do it rather than force you to include it. In this case, the compiler knows the function returns nothing. Next we have the body, printing out “Hello World”. This line of code doesn’t actually cause anything to print out though–we’re just creating the function here. It’s almost like defining a normal function–it just happens to be inline with the rest of the code.</p><p>It’s only on the next line that we call the lambda function: func() – it looks just like calling any other function. By the way, notice how easy this is to do with auto! You don’t need to sweat the ugly syntax of a function pointer.</p><h3 id="applying-lambda-in-our-example">Applying Lambda in our Example</h3><p>Let’s look at how we can apply this to our address book example, first creating a simple function that finds email addresses that contain “.org”.</p><div lang="plaintext" class="language-plaintext highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre><td class="rouge-code"><pre>AddressBook global_address_book;
+
+vector&lt;string&gt; findAddressesFromOrgs ()
+{
+    return global_address_book.findMatchingAddresses( 
+        // we're declaring a lambda here; the [] signals the start
+        [] (const string&amp; addr) { return addr.find( ".org" ) != string::npos; } 
+    );
+}
+</pre></table></code></div></div><p>Once again we start off with the capture specifier, [], but this time we have an argument–the address, and we check if it contains “.org”. Once again, nothing inside the body of this lambda function is executed here yet; it’s only inside findMatchingAddresses, when the variable func is used, that the code inside the lambda function executes.</p><p>In other words, each loop through findMatchingAddresses, it calls the lambda function and gives it the address as an argument, and the function checks if it contains “.org”.</p><h2 id="variable-capture-with-lambdas">Variable Capture with Lambdas</h2><p>Although these kinds of simple uses of lambd are nice, variable capture is the real secret sauce that makes a lambda function great. Let’s imagine that you want to create a small function that finds addresses that contain a specific name. Wouldn’t it be nice if you could write code something like this?</p><div lang="plaintext" class="language-plaintext highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre><td class="rouge-code"><pre>// read in the name from a user, which we want to search
+string name;
+cin&gt;&gt; name;
+return global_address_book.findMatchingAddresses( 
+    // notice that the lambda function uses the the variable 'name'
+    [&amp;] (const string&amp; addr) { return addr.find( name ) != string::npos; } 
+);
+</pre></table></code></div></div><p>It turns out that this example is completely legal–and it shows the real value of lambda. We’re able to take a variable declared outside of the lambda (name), and use it inside of the lambda. When findMatchingAddresses calls our lambda function, all the code inside of it executes–and when addr.find is called, it has access to the name that the user passed in. The only thing we needed to do to make it work is tell the compiler we wanted to have variable capture. I did that by putting [&amp;] for the capture specification, rather than []. The empty [] tells the compiler not to capture any variables, whereas the [&amp;] specification tells the compiler to perform variable capture.</p><p>Isn’t that marvelous? We can create a simple function to pass into the find method, capturing the variable name, and write it all in only a few lines of code. To get a similar behavior without C++11, we’d either need to create an entire functor class or we’d need a specialized method on AddressBook. In C++11, we can have a single simple interface to AddressBook that can support any kind of filtering really easily.</p><p>Just for fun, let’s say that we want to find only email addresses that are longer than a certain number of characters. Again, we can do this easily:</p><div lang="plaintext" class="language-plaintext highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre><td class="rouge-code"><pre>int min_len = 0;
+cin &gt;&gt; min_len;
+return global_address_book.findMatchingAddresses( [&amp;] (const string&amp; addr) { return addr.length() &gt;= min_len; } );
+</pre></table></code></div></div><p>By the way, to steal a line from Herb Sutter, you should get used to seeing “} );” This is the standard end-of-function-taking-lambda syntax, and the more you start seeing and using lambda in your own code, the more you’ll see little piece of syntax.</p><h2 id="lambda-and-the-stl">Lambda and the STL</h2><p>One of the biggest beneficiaries of lambda functions are, no doubt, power users of the standard template library algorithms package. Previously, using algorithms like for_each was an exercise in contortions. Now, though, you can use for_each and other STL algorithms almost as if you were writing a normal loop. Compare:</p><div lang="plaintext" class="language-plaintext highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre><td class="rouge-code"><pre>vector&lt;int&gt; v;
+v.push_back( 1 );
+v.push_back( 2 );
+//...
+for ( auto itr = v.begin(), end = v.end(); itr != end; itr++ )
+{
+    cout &lt;&lt; *itr;
+}
+</pre></table></code></div></div><p>with</p><div lang="plaintext" class="language-plaintext highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre><td class="rouge-code"><pre>vector&lt;int&gt; v;
+v.push_back( 1 );
+v.push_back( 2 );
+//...
+for_each( v.begin(), v.end(), [] (int val)
+{
+    cout &lt;&lt; val;
+} );
+</pre></table></code></div></div><p>That’s pretty good looking code if you ask me–it reads, and is structured, like a normal loop, but you’re suddenly able to take advantage of the goodness that for_each provides over a regular for loop–for example, guarantees that you have the right end condition. Now, you might wonder, won’t this kill performance? Well, here’s the kicker: it turns out that for_each has about the same performance, and is sometimes even faster than a regular for loop. (The reason: it can take advantage of loop unrolling.)</p><h2 id="more-on-the-new-lambda-syntax">More on the new Lambda Syntax</h2><p>By the way, the parameter list, like the return value is also optional if you want a function that takes zero arguments. Perhaps the shortest possible lambda expression is:</p><div lang="plaintext" class="language-plaintext highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre>[] {}
+</pre></table></code></div></div><p>Which is a function that takes no arguments and does nothing. An only slightly more compelling example:</p><div lang="plaintext" class="language-plaintext highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre><td class="rouge-code"><pre>using namespace std;
+#include &lt;iostream&gt;
+
+int main()
+{
+    [] { cout &lt;&lt; "Hello, my Greek friends"; }();
+}
+</pre></table></code></div></div><p>Personally, I’m not yet sold on omitting the argument list; I think the [] () structure tends to help lambda functions stand out a little more in the code, but time will tell what standards people come up with.</p><h3 id="return-values">Return Values</h3><p>By default, if your lambda does not have a return statement, it defaults to void. If you have a simple return expression, the compiler will deduce the type of the return value:</p><div lang="plaintext" class="language-plaintext highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre>[] () { return 1; } // compiler knows this returns an integer
+</pre></table></code></div></div><p>If you write a more complicated lambda function, with more than one return value, you should specify the return type. (Some compilers, like GCC, will let you get away without doing this, even if you have more than one return statement, but the standard doesn’t guarantee it.)</p><p>Lambdas take advantage of the optional new C++11 return value syntax of putting the return value after the function. In fact, you must do this if you want to specify the return type of a lambda. Here’s a more explicit version of the really simple example from above:</p><div lang="plaintext" class="language-plaintext highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre>[] () -&gt; int { return 1; } // now we're telling the compiler what we want
+</pre></table></code></div></div><h3 id="throw-specifications">Throw Specifications</h3><p>Although the C++ standards committee decided to deprecate throw specifications (except for a few cases I’ll cover in a later article), they didn’t remove them from the language, and there are tools that do static code analysis to check exception specifications, such as PC Lint. If you are using one of these tools to do compile time exception checking, you really want to be able to say which exceptions your lambda function throws. The main reason I can see for doing this is when you’re passing a lambda function into another function as an argument, and that function expects the lambda function to throw only a specific set of exceptions. By providing an exception spec for your lambda function, you could allow a tool like PC Lint to check that for you. If you want to do that, it turns out you can. Here’s a lambda that specifies that it takes no arguments and does not throw an exception:</p><div lang="plaintext" class="language-plaintext highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre>[] () throw () { /* code that you don't expect to throw an exception*/ }
+</pre></table></code></div></div><h2 id="how-are-lambda-closures-implemented">How are Lambda Closures Implemented?</h2><p>So how does the magic of variable capture really work? It turns out that the way lambdas are implemented is by creating a small class; this class overloads the operator(), so that it acts just like a function. A lambda function is an instance of this class; when the class is constructed, any variables in the surrounding enviroment are passed into the constructor of the lambda function class and saved as member variables. This is, in fact, quite a bit like the idea of a functor that is already possible. The benefit of C++11 is that doing this becomes almost trivially easy–so you can use it all the time, rather than only in very rare circumstances where writing a whole new class makes sense.</p><p>C++, being very performance sensitive, actually gives you a ton of flexibility about what variables are captured, and how–all controlled via the capture specification, []. You’ve already seen two cases–with nothing in it, no variables are captured, and with &amp;, variables are captured by reference. If you make a lambda with an empty capture group, [], rather than creating the class, C++ will create a regular function. Here’s the full list of options:</p><p>[] Capture nothing (or, a scorched earth strategy?) [&amp;] Capture any referenced variable by reference [=] Capture any referenced variable by making a copy [=, &amp;foo] Capture any referenced variable by making a copy, but capture variable foo by reference [bar] Capture bar by making a copy; don’t copy anything else [this] Capture the this pointer of the enclosing class</p><p>Notice the last capture option–you don’t need to include it if you’re already specifying a default capture (= or &amp;), but the fact that you can capture the this pointer of a function is super-important because it means that you don’t need to make a distinction between local variables and fields of a class when writing lambda functions. You can get access to both. The cool thing is that you don’t need to explicitly use the this pointer; it’s really like you are writing a function inline.</p><div lang="plaintext" class="language-plaintext highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+</pre><td class="rouge-code"><pre>class Foo
+{
+public:
+    Foo () : _x( 3 ) {}
+    void func ()
+    {
+        // a very silly, but illustrative way of printing out the value of _x
+        [this] () { cout &lt;&lt; _x; } ();
+    }
+
+private:
+        int _x;
+};
+
+int main()
+{
+    Foo f;
+    f.func();
+}
+</pre></table></code></div></div><h3 id="dangers-and-benefits-of-capture-by-reference">Dangers and Benefits of Capture by Reference</h3><p>When you capture by reference, the lambda function is capable of modifying the local variable outside the lambda function–it is, after all, a reference. But this also means that if you return a lamba function from a function, you shouldn’t use capture-by-reference because the reference will not be valid after the function returns.</p><h2 id="what-type-is-a-lambda">What type is a Lambda?</h2><p>The main reason that you’d want to create a lambda function is that someone has created a function that expects to receive a lambda function. We’ve already seen that we can use templates to take a lambda function as an argument, and auto to hold onto a lambda function as a local variable. But how do you name a specific lambda? Because each lambda function is implemented by creating a separate class, as you saw earlier, even single lambda function is really a different type–even if the two functions have the same arguments and the same return value! But C++11 does include a convenient wrapper for storing any kind of function–lambda function, functor, or function pointer:</p><p><b> std::function </b></p><p>The new std::function is a great way of passing around lambda functions both as parameters and as return values. It allows you to specify the exact types for the argument list and the return value in the template. Here’s out AddressBook example, this time using std::function instead of templates. Notice that we do need to use the ‘functional’ header file.</p><div lang="plaintext" class="language-plaintext highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+</pre><td class="rouge-code"><pre>#include &lt;functional&gt;
+#include &lt;vector&gt;
+
+class AddressBook
+{
+    public:
+    std::vector&lt;string&gt; findMatchingAddresses (std::function&lt;bool (const string&amp;)&gt; func)
+    { 
+        std::vector&lt;string&gt; results;
+        for ( auto itr = _addresses.begin(), end = _addresses.end(); itr != end; ++itr )
+        {
+            // call the function passed into findMatchingAddresses and see if it matches
+            if ( func( *itr ) )
+            {
+                results.push_back( *itr );
+            }
+        }
+        return results;
+    }
+
+    private:
+    std::vector&lt;string&gt; _addresses;
+};
+</pre></table></code></div></div><p>One big advantage of std::function over templates is that if you write a template, you need to put the whole function in the header file, whereas std::function does not. This can really help if you’re working on code that will change a lot and is included by many source files.</p><p>If you want to check if a variable of type std::function is currently holding a valid function, you can always treat it like a boolean:</p><div lang="plaintext" class="language-plaintext highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre><td class="rouge-code"><pre>std::function&lt;int ()&gt; func;
+// check if we have a function (we don't since we didn't provide one)
+if ( func ) 
+{
+    // if we did have a function, call it
+    func();
+}
+</pre></table></code></div></div><h3 id="a-note-about-function-pointers">A Note About Function Pointers</h3><p>Under the final C++11 spec, if you have a lambda with an empty capture specification, then it can be treated like a regular function and assigned to a function pointer. Here’s an example of using a function pointer with a capture-less lambda:</p><div lang="plaintext" class="language-plaintext highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre><td class="rouge-code"><pre>typedef int (*func)();
+func f = [] () -&gt; int { return 2; };
+f();
+</pre></table></code></div></div><p>This works because a lambda that doesn’t have a capture group doesn’t need its own class–it can be compiled to a regular old function, allowing it to be passed around just like a normal function. Unfortunately, support for this feature is not included in MSVC 10, as it was added to the standard too late.</p><h2 id="making-delegates-with-lambdas">Making Delegates with Lambdas</h2><p>Let’s look at one more example of a lambda function–this time to create a delegate. What’s a delgate, you ask? When you call a normal function, all you need is the function itself. When you call a method on an object, you need two things: the function and the object itself. It’s the difference between func() and obj.method(). To call a method, you need both. Just passing in the address of the method into a function isn’t enough; you need to have an object to call the method on.</p><p>Let’s look at an example, starting with some code that again expects a function as an argument, into which we’ll pass a delegate.</p><div lang="plaintext" class="language-plaintext highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+</pre><td class="rouge-code"><pre>#include &lt;functional&gt;
+#include &lt;string&gt;
+
+class EmailProcessor
+{
+public:
+    void receiveMessage (const std::string&amp; message)
+    {
+        if ( _handler_func ) 
+        {
+            _handler_func( message );
+        }
+        // other processing
+    }
+    void setHandlerFunc (std::function&lt;void (const std::string&amp;)&gt; handler_func)
+    {
+        _handler_func = handler_func;
+    }
+
+private:
+        std::function&lt;void (const std::string&amp;)&gt; _handler_func;
+};
+</pre></table></code></div></div><p>This is a pretty standard pattern of allowing a callback function to be registered with a class when something interesting happens.</p><p>But now let’s say we want another class that is responsible for keeping track of the longest message received so far (why do you want to do this? Maybe you are a bored sysadmin). Anyway, we might create a little class for this:</p><div lang="plaintext" class="language-plaintext highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+</pre><td class="rouge-code"><pre>#include &lt;string&gt;
+
+class MessageSizeStore
+{
+    public:
+    MessageSizeStore () : _max_size( 0 ) {}
+    void checkMessage (const std::string&amp; message ) 
+    {
+        const int size = message.length();
+        if ( size &gt; _max_size )
+        {
+            _max_size = size;
+        }
+    }
+    int getSize ()
+    {
+        return _max_size;
+    }
+
+private:
+    int _max_size;
+};
+</pre></table></code></div></div><p>What if we want to have the method checkMessage called whenever a message arrives? We can’t just pass in checkMessage itself–it’s a method, so it needs an object.</p><div lang="plaintext" class="language-plaintext highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre><td class="rouge-code"><pre>EmailProcessor processor;
+MessageSizeStore size_store;
+processor.setHandlerFunc( checkMessage ); // this won't work
+</pre></table></code></div></div><p>We need some way of binding the variable size_store into the function passed to setHandlerFunc. Hmm, sounds like a job for lambda!</p><div lang="plaintext" class="language-plaintext highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre><td class="rouge-code"><pre>EmailProcessor processor;
+MessageSizeStore size_store;
+processor.setHandlerFunc( 
+        [&amp;] (const std::string&amp; message) { size_store.checkMessage( message ); } 
+);
+</pre></table></code></div></div><p>Isn’t that cool? We are using the lambda function here as glue code, allowing us to pass a regular function into setHandlerFunc, while still making a call onto a method–creating a simple delegate in C++.</p><h2 id="summary">Summary</h2><p>So are lambda functions really going to start showing up all over the place in C++ code when the language has survived for decades without them? I think so–I’ve started using lambda functions in production code, and they are starting to show up all over the place–in some cases shortening code, in some cases improving unit tests, and in some cases replacing what could previously have only been accomplished with macros.</p></div><div class="post-tail-wrapper text-muted"><div class="post-meta mb-3"> <i class="far fa-folder-open fa-fw mr-1"></i> <a href='/categories/c/'>C++</a></div><div class="post-tags"> <i class="fa fa-tags fa-fw mr-1"></i> <a href="/tags/tutorial/" class="post-tag no-text-decoration" >tutorial</a></div><div class="post-tail-bottom d-flex justify-content-between align-items-center mt-3 pt-5 pb-2"><div class="license-wrapper"> This post is licensed under <a href="https://creativecommons.org/licenses/by/4.0/"> CC BY 4.0 </a> by the author.</div><div class="share-wrapper"> <span class="share-label text-muted mr-1">Share</span> <span class="share-icons"> <a href="https://twitter.com/intent/tweet?text=Lambda Functions in C++11 - Life Zero Blog&url=https://lacie-life.github.io/posts/Lambda-Function-in-C++11/" data-toggle="tooltip" data-placement="top" title="Twitter" target="_blank" rel="noopener" aria-label="Twitter"> <i class="fa-fw fab fa-twitter"></i> </a> <a href="https://www.facebook.com/sharer/sharer.php?title=Lambda Functions in C++11 - Life Zero Blog&u=https://lacie-life.github.io/posts/Lambda-Function-in-C++11/" data-toggle="tooltip" data-placement="top" title="Facebook" target="_blank" rel="noopener" aria-label="Facebook"> <i class="fa-fw fab fa-facebook-square"></i> </a> <a href="https://telegram.me/share?text=Lambda Functions in C++11 - Life Zero Blog&url=https://lacie-life.github.io/posts/Lambda-Function-in-C++11/" data-toggle="tooltip" data-placement="top" title="Telegram" target="_blank" rel="noopener" aria-label="Telegram"> <i class="fa-fw fab fa-telegram"></i> </a> <i class="fa-fw fas fa-link small" onclick="copyLink('', 'Link copied successfully!')" data-toggle="tooltip" data-placement="top" title="Copy link"> </i> </span></div></div></div></div></div><div id="panel-wrapper" class="col-xl-3 pl-2 text-muted topbar-down"><div class="access"><div id="access-lastmod" class="post"> <span>Recent Update</span><ul class="post-content pl-0 pb-1 ml-1 mt-2"><li><a href="/posts/ZED2-and-ORB-SLAM3/">ZED2 with ORB-SLAM3 (Stereo-IMU mode) step-by-step</a><li><a href="/posts/Callback-Function-in-C++/">Designing Callbacks in C++</a><li><a href="/posts/ML-for-3D-Geometry-4/">ML for 3D Geometry - Part 4</a><li><a href="/posts/ML-for-3D-Geometry-5/">ML for 3D Geometry - Part 5</a><li><a href="/posts/ML-for-3D-Geometry-10/">ML for 3D Geometry - Part 10</a></ul></div><div id="access-tags"> <span>Trending Tags</span><div class="d-flex flex-wrap mt-3 mb-1 mr-3"> <a class="post-tag" href="/tags/tutorial/">tutorial</a> <a class="post-tag" href="/tags/machine-learning/">Machine Learning</a> <a class="post-tag" href="/tags/theory/">Theory</a> <a class="post-tag" href="/tags/writting/">writting</a> <a class="post-tag" href="/tags/project/">Project</a> <a class="post-tag" href="/tags/note/">note</a> <a class="post-tag" href="/tags/collection/">collection</a> <a class="post-tag" href="/tags/cuda/">CUDA</a> <a class="post-tag" href="/tags/opencv/">openCV</a> <a class="post-tag" href="/tags/paper/">paper</a></div></div></div><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@1.0.1/dist/bootstrap-toc.min.js"></script><div id="toc-wrapper" class="pl-0 pr-4 mb-5"> <span class="pl-3 pt-2 mb-2">Contents</span><nav id="toc" data-toggle="toc"></nav></div></div></div><div class="row"><div class="col-12 col-lg-11 col-xl-8"><div id="post-extend-wrapper" class="pl-1 pr-1 pl-sm-2 pr-sm-2 pl-md-4 pr-md-4"><div id="related-posts" class="mt-5 mb-2 mb-sm-4"><h3 class="pt-2 mt-1 mb-4 ml-1" data-toc-skip>Further Reading</h3><div class="card-deck mb-4"><div class="card"> <a href="/posts/Part-1-Linux-Directory-Structure/"><div class="card-body"> <span class="timeago small" >Sep 13, 2021<i class="unloaded">2021-09-13T11:11:11+07:00</i> </span><h3 class="pt-0 mt-1 mb-3" data-toc-skip>Linux Directory Structure</h3><div class="text-muted small"><p> Linux Directory Structure / – root Every single file and directory starts from the root directory. Only root user has write privilege under this directory. Please note that /root is root us...</p></div></div></a></div><div class="card"> <a href="/posts/Part-2-The-Shell/"><div class="card-body"> <span class="timeago small" >Sep 14, 2021<i class="unloaded">2021-09-14T11:11:11+07:00</i> </span><h3 class="pt-0 mt-1 mb-3" data-toc-skip>The Shell Theory</h3><div class="text-muted small"><p> The Shell Theory What is The Shell ? A Shell provides you with an interface to the Unix system. It gathers input from you and executes programs based on that input. When a program finishes ex...</p></div></div></a></div><div class="card"> <a href="/posts/Part-3-Basic-Linux-Command/"><div class="card-body"> <span class="timeago small" >Sep 15, 2021<i class="unloaded">2021-09-15T11:11:11+07:00</i> </span><h3 class="pt-0 mt-1 mb-3" data-toc-skip>Basic Linux Command</h3><div class="text-muted small"><p> Basic Linux Command ls - List Directories Content (in windows we call these as a folders) cd - Changes the current directories pwd - Displays the present working direct...</p></div></div></a></div></div></div><div class="post-navigation d-flex justify-content-between"> <a href="/posts/Microservices-vs-API/" class="btn btn-outline-primary" prompt="Older"><p>Microservices A Microservice Is More Than Just an API</p></a> <a href="/posts/Function-Pointers-in-C-and-C++/" class="btn btn-outline-primary" prompt="Newer"><p>Function Pointers in C and C++</p></a></div></div></div></div><footer class="d-flex w-100 justify-content-center"><div class="d-flex justify-content-between align-items-center"><div class="footer-left"><p class="mb-0"> © 2023 <a href="https://twitter.com/username">Life Zero</a>. <span data-toggle="tooltip" data-placement="top" title="Except where otherwise noted, the blog posts on this site are licensed under the Creative Commons Attribution 4.0 International (CC BY 4.0) License by the author.">Some rights reserved.</span></p></div><div class="footer-right"><p class="mb-0"> Powered by <a href="https://jekyllrb.com" target="_blank" rel="noopener">Jekyll</a> with <a href="https://github.com/cotes2020/jekyll-theme-chirpy" target="_blank" rel="noopener">Chirpy</a> theme.</p></div></div></footer></div><div id="search-result-wrapper" class="d-flex justify-content-center unloaded"><div class="col-12 col-sm-11 post-content"><div id="search-hints"><h4 class="text-muted mb-4">Trending Tags</h4><a class="post-tag" href="/tags/tutorial/">tutorial</a> <a class="post-tag" href="/tags/machine-learning/">Machine Learning</a> <a class="post-tag" href="/tags/theory/">Theory</a> <a class="post-tag" href="/tags/writting/">writting</a> <a class="post-tag" href="/tags/project/">Project</a> <a class="post-tag" href="/tags/note/">note</a> <a class="post-tag" href="/tags/collection/">collection</a> <a class="post-tag" href="/tags/cuda/">CUDA</a> <a class="post-tag" href="/tags/opencv/">openCV</a> <a class="post-tag" href="/tags/paper/">paper</a></div><div id="search-results" class="d-flex flex-wrap justify-content-center text-muted mt-3"></div></div></div></div><div id="mask"></div><a id="back-to-top" href="#" aria-label="back-to-top" class="btn btn-lg btn-box-shadow" role="button"> <i class="fas fa-angle-up"></i> </a> <script src="https://cdn.jsdelivr.net/npm/simple-jekyll-search@1.7.3/dest/simple-jekyll-search.min.js"></script> <script> SimpleJekyllSearch({ searchInput: document.getElementById('search-input'), resultsContainer: document.getElementById('search-results'), json: '/assets/js/data/search.json', searchResultTemplate: '<div class="pl-1 pr-1 pl-sm-2 pr-sm-2 pl-lg-4 pr-lg-4 pl-xl-0 pr-xl-0"> <a href="https://lacie-life.github.io{url}">{title}</a><div class="post-meta d-flex flex-column flex-sm-row text-muted mt-1 mb-1"> {categories} {tags}</div><p>{snippet}</p></div>', noResultsText: '<p class="mt-5">Oops! No result founds.</p>', templateMiddleware: function(prop, value, template) { if (prop === 'categories') { if (value === '') { return `${value}`; } else { return `<div class="mr-sm-4"><i class="far fa-folder fa-fw"></i>${value}</div>`; } } if (prop === 'tags') { if (value === '') { return `${value}`; } else { return `<div><i class="fa fa-tag fa-fw"></i>${value}</div>`; } } } }); </script> <script src="https://cdn.jsdelivr.net/combine/npm/lozad/dist/lozad.min.js,npm/magnific-popup@1/dist/jquery.magnific-popup.min.js"></script> <script defer src="/assets/js/dist/post.min.js"></script> <script src="https://cdn.jsdelivr.net/combine/npm/popper.js@1.16.1,npm/bootstrap@4/dist/js/bootstrap.min.js"></script> <script defer src="/app.js"></script> <script defer src="https://www.googletagmanager.com/gtag/js?id="></script> <script> document.addEventListener("DOMContentLoaded", function(event) { window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', ''); }); </script>
