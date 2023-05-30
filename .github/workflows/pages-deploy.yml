@@ -40,7 +40,7 @@ jobs:
 
       - name: Test Site
         run: |
-          bash tools/test.sh
+          bash ./tools/test.sh
 
       - name: Deploy
         run: |
