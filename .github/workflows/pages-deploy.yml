@@ -39,7 +39,7 @@ jobs:
           bundle exec jekyll b -d "_site$BASE_URL"
 
       - name: Test Site
-        run: tools/test
+        run: ./tools/test
 
       - name: Deploy
         run: |
@@ -49,4 +49,4 @@ jobs:
             mv _site-rename _site
           fi
 
-          tools/deploy
+          ./tools/deploy
