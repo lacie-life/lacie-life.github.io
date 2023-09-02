@@ -6,7 +6,7 @@ title: Designing Callbacks in C++
 date:  2023-01-03 11:11:14 +0700
 categories: [Theory]
 tags: [Skill]
-img_path: /assets/img/post_assest/
+# img_path: /assets/img/post_assest/
 render_with_liquid: false
 ---
 

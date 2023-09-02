@@ -6,7 +6,7 @@ title: ZED2 with ORB-SLAM3 (Stereo-IMU mode) step-by-step
 date:  2023-04-14 11:11:14 +0700
 categories: [Computer Vision]
 tags: [Tutorial]
-img_path: /assets/img/post_assest/
+# img_path: /assets/img/post_assest/
 render_with_liquid: false
 ---
 

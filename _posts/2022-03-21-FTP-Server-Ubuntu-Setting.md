@@ -6,7 +6,7 @@ title: Setup FTP Server with VSFTPD on Ubuntu 20.04
 date:  2022-03-21 11:11:11 +0700
 categories: [Skill]
 tags: [tutorial]
-img_path: /assets/img/post_assest/
+# img_path: /assets/img/post_assest/
 render_with_liquid: false
 ---
 

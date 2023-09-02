@@ -6,7 +6,7 @@ title: ML for 3D Geometry - Part 2
 date:  2022-12-01 11:11:14 +0700
 categories: [Theory]
 tags: [Machine Learning]
-img_path: /assets/img/post_assest/
+# img_path: /assets/img/post_assest/
 render_with_liquid: false
 ---
 

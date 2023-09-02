@@ -6,7 +6,7 @@ title: Learning How to learn -summary
 date:  2022-05-31 11:11:11 +0700
 categories: [Skill]
 tags: [tutorial]
-img_path: /assets/img/post_assest/
+# img_path: /assets/img/post_assest/
 render_with_liquid: false
 ---
 

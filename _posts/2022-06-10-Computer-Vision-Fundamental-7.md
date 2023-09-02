@@ -6,7 +6,7 @@ title: Computer Vision Fundamental - [Part 7]
 date:  2022-06-16 11:11:11 +0700
 categories: [Skill, Computer Vision]
 tags: [Theory]
-img_path: /assets/img/post_assest/
+# img_path: /assets/img/post_assest/
 render_with_liquid: false
 ---
 

@@ -6,7 +6,7 @@ title: Project Management Handbook - Introductioin
 date:  2022-01-29 11:11:11 +0700
 categories: [Skill, Software]
 tags: [tutorial]
-img_path: /assets/img/post_assest/
+# img_path: /assets/img/post_assest/
 render_with_liquid: false
 ---
 

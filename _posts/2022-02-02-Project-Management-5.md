@@ -6,7 +6,7 @@ title: Project Management Handbook - SCRUM
 date:  2022-02-02 11:11:11 +0700
 categories: [Skill, Software]
 tags: [tutorial]
-img_path: /assets/img/post_assest/
+# img_path: /assets/img/post_assest/
 render_with_liquid: false
 ---
 

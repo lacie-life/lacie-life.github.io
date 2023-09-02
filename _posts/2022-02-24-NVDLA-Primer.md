@@ -6,7 +6,7 @@ title: NVDLA Primer
 date:  2022-02-24 11:11:11 +0700
 categories: [Skill, Software, NVIDIA]
 tags: [collection]
-img_path: /assets/img/post_assest/
+# img_path: /assets/img/post_assest/
 render_with_liquid: false
 ---
 
