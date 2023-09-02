@@ -117,7 +117,7 @@ There are 3 ways to pass C++ arguments to a function:
 - call-by-reference with pointer argument
 - call-by-reference with reference argument
 
-```
+```c++
 // C++ program to illustrate call-by-methods in C++
   
 #include <bits/stdc++.h>
