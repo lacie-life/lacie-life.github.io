@@ -5,7 +5,7 @@ title: Paper note 1 - Multi-Sensor Fusion and Cooperative Perception for Autonom
 #   link: https://github.com/lacie-life
 date:  2023-09-09 11:11:14 +0700
 categories: [Computer Vision]
-tags: [Tutorial]
+tags: [Paper]
 img_path: /assets/img/post_assest/pvo/
 render_with_liquid: false
 ---

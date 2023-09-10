@@ -5,7 +5,7 @@ title: Lambda Functions in C++11
 #   link: https://github.com/lacie-life
 date:  2021-12-24 11:11:11 +0700
 categories: [C++]
-tags: [tutorial]
+tags: [Tutorial]
 render_with_liquid: false
 ---
 
@@ -17,7 +17,7 @@ Lambda - One of the most exciting features of C++11 is ability to create lambda 
 
 Imagine that you had an address book class, and you want to be able to provide a search function. You might provide a simple search function, taking a string and returning all addresses that match the string. Sometimes that's what users of the class will want. But what if they want to search only in the domain name or, more likely, only in the username and ignore results in the domain name? Or maybe they want to search for all email addresses that also show up in another list. There are a lot of potentially interesting things to search for. Instead of building all of these options into the class, wouldn't it be nice to provide a generic "find" method that takes a procedure for deciding if an email address is interesting? Let's call the method findMatchingAddresses, and have it take a "function" or "function-like" object.
 
-```
+```c++
 #include <string>
 #include <vector>
 
@@ -52,7 +52,7 @@ Anyone can pass a function into the findMatchingAddresses that contains logic fo
 
 Before we write some code to solve this problem, let's see the really basic syntax for lambda.
 
-```
+```c++
 #include <iostream>
 
 using namespace std;
@@ -74,7 +74,7 @@ It's only on the next line that we call the lambda function: func() -- it looks 
 
 Let's look at how we can apply this to our address book example, first creating a simple function that finds email addresses that contain ".org".
 
-```
+```c++
 AddressBook global_address_book;
 
 vector<string> findAddressesFromOrgs ()
@@ -94,7 +94,7 @@ In other words, each loop through findMatchingAddresses, it calls the lambda fun
 
 Although these kinds of simple uses of lambd are nice, variable capture is the real secret sauce that makes a lambda function great. Let's imagine that you want to create a small function that finds addresses that contain a specific name. Wouldn't it be nice if you could write code something like this?
 
-```
+```c++
 // read in the name from a user, which we want to search
 string name;
 cin>> name;
@@ -110,7 +110,7 @@ Isn't that marvelous? We can create a simple function to pass into the find meth
 
 Just for fun, let's say that we want to find only email addresses that are longer than a certain number of characters. Again, we can do this easily:
 
-```
+```c++
 int min_len = 0;
 cin >> min_len;
 return global_address_book.findMatchingAddresses( [&] (const string& addr) { return addr.length() >= min_len; } );
@@ -122,7 +122,7 @@ By the way, to steal a line from Herb Sutter, you should get used to seeing "} )
 
 One of the biggest beneficiaries of lambda functions are, no doubt, power users of the standard template library algorithms package. Previously, using algorithms like for_each was an exercise in contortions. Now, though, you can use for_each and other STL algorithms almost as if you were writing a normal loop. Compare:
 
-```
+```c++
 vector<int> v;
 v.push_back( 1 );
 v.push_back( 2 );
@@ -135,7 +135,7 @@ for ( auto itr = v.begin(), end = v.end(); itr != end; itr++ )
 
 with
 
-```
+```c++
 vector<int> v;
 v.push_back( 1 );
 v.push_back( 2 );
@@ -158,7 +158,7 @@ By the way, the parameter list, like the return value is also optional if you wa
 
 Which is a function that takes no arguments and does nothing. An only slightly more compelling example:
 
-```
+```c++
 using namespace std;
 #include <iostream>
 
@@ -174,7 +174,7 @@ Personally, I'm not yet sold on omitting the argument list; I think the [] () st
 
 By default, if your lambda does not have a return statement, it defaults to void. If you have a simple return expression, the compiler will deduce the type of the return value:
 
-```
+```c++
 [] () { return 1; } // compiler knows this returns an integer
 ```
 
@@ -182,7 +182,7 @@ If you write a more complicated lambda function, with more than one return value
 
 Lambdas take advantage of the optional new C++11 return value syntax of putting the return value after the function. In fact, you must do this if you want to specify the return type of a lambda. Here's a more explicit version of the really simple example from above:
 
-```
+```c++
 [] () -> int { return 1; } // now we're telling the compiler what we want
 ```
 
@@ -190,7 +190,7 @@ Lambdas take advantage of the optional new C++11 return value syntax of putting 
 
 Although the C++ standards committee decided to deprecate throw specifications (except for a few cases I'll cover in a later article), they didn't remove them from the language, and there are tools that do static code analysis to check exception specifications, such as PC Lint. If you are using one of these tools to do compile time exception checking, you really want to be able to say which exceptions your lambda function throws. The main reason I can see for doing this is when you're passing a lambda function into another function as an argument, and that function expects the lambda function to throw only a specific set of exceptions. By providing an exception spec for your lambda function, you could allow a tool like PC Lint to check that for you. If you want to do that, it turns out you can. Here's a lambda that specifies that it takes no arguments and does not throw an exception:
 
-```
+```c++
 [] () throw () { /* code that you don't expect to throw an exception*/ }
 ```
 
@@ -208,7 +208,7 @@ C++, being very performance sensitive, actually gives you a ton of flexibility a
 
 Notice the last capture option--you don't need to include it if you're already specifying a default capture (= or &), but the fact that you can capture the this pointer of a function is super-important because it means that you don't need to make a distinction between local variables and fields of a class when writing lambda functions. You can get access to both. The cool thing is that you don't need to explicitly use the this pointer; it's really like you are writing a function inline.
 
-```
+```c++
 class Foo
 {
 public:
@@ -242,7 +242,7 @@ The main reason that you'd want to create a lambda function is that someone has 
 
 The new std::function is a great way of passing around lambda functions both as parameters and as return values. It allows you to specify the exact types for the argument list and the return value in the template. Here's out AddressBook example, this time using std::function instead of templates. Notice that we do need to use the 'functional' header file.
 
-```
+```c++
 #include <functional>
 #include <vector>
 
@@ -272,7 +272,7 @@ One big advantage of std::function over templates is that if you write a templat
 
 If you want to check if a variable of type std::function is currently holding a valid function, you can always treat it like a boolean:
 
-```
+```c++
 std::function<int ()> func;
 // check if we have a function (we don't since we didn't provide one)
 if ( func ) 
@@ -286,7 +286,7 @@ if ( func )
 
 Under the final C++11 spec, if you have a lambda with an empty capture specification, then it can be treated like a regular function and assigned to a function pointer. Here's an example of using a function pointer with a capture-less lambda:
 
-```
+```c++
 typedef int (*func)();
 func f = [] () -> int { return 2; };
 f();
@@ -300,7 +300,7 @@ Let's look at one more example of a lambda function--this time to create a deleg
 
 Let's look at an example, starting with some code that again expects a function as an argument, into which we'll pass a delegate.
 
-```
+```c++
 #include <functional>
 #include <string>
 
@@ -329,7 +329,7 @@ This is a pretty standard pattern of allowing a callback function to be register
 
 But now let's say we want another class that is responsible for keeping track of the longest message received so far (why do you want to do this? Maybe you are a bored sysadmin). Anyway, we might create a little class for this:
 
-```
+```c++
 #include <string>
 
 class MessageSizeStore
@@ -356,7 +356,7 @@ private:
 
 What if we want to have the method checkMessage called whenever a message arrives? We can't just pass in checkMessage itself--it's a method, so it needs an object.
 
-```
+```c++
 EmailProcessor processor;
 MessageSizeStore size_store;
 processor.setHandlerFunc( checkMessage ); // this won't work
@@ -364,7 +364,7 @@ processor.setHandlerFunc( checkMessage ); // this won't work
 
 We need some way of binding the variable size_store into the function passed to setHandlerFunc. Hmm, sounds like a job for lambda!
 
-```
+```c++
 EmailProcessor processor;
 MessageSizeStore size_store;
 processor.setHandlerFunc( 

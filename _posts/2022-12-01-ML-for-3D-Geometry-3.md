@@ -1,5 +1,5 @@
 ---
-title: ML for 3D Geometry Part 3  
+title: ML for 3D Geometry - Part 3  
 # author:
 #   name: Life Zero
 #   link: https://github.com/lacie-life

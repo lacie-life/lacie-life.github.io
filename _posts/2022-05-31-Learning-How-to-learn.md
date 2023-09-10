@@ -5,7 +5,7 @@ title: Learning How to learn -summary
 #   link: https://github.com/lacie-life
 date:  2022-05-31 11:11:11 +0700
 categories: [Skill]
-tags: [tutorial]
+tags: [Tutorial]
 # img_path: /assets/img/post_assest/
 render_with_liquid: false
 ---

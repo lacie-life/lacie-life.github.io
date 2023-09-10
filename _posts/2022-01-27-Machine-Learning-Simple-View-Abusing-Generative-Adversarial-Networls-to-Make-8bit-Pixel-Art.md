@@ -5,7 +5,7 @@ title:  Machine Learning is Fun! - Abusing Generative Adversarial Networks to Ma
 #   link: https://github.com/lacie-life
 date:  2022-01-27 11:11:11 +0700
 categories: [Machine Learning]
-tags: [tutorial]
+tags: [Tutorial]
 render_with_liquid: false
 ---
 

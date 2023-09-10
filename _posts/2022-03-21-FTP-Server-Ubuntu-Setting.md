@@ -5,7 +5,7 @@ title: Setup FTP Server with VSFTPD on Ubuntu 20.04
 #   link: https://github.com/lacie-life
 date:  2022-03-21 11:11:11 +0700
 categories: [Skill]
-tags: [tutorial]
+tags: [Tutorial]
 # img_path: /assets/img/post_assest/
 render_with_liquid: false
 ---

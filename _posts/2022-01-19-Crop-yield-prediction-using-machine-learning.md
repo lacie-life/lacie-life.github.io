@@ -5,7 +5,7 @@ title: Crop yield prediction using machine learning - A systematic literature re
 #   link: https://github.com/lacie-life
 date:  2022-01-19 11:11:11 +0700
 categories: [Machine Learning, Agriculture]
-tags: [paper]
+tags: [Paper]
 render_with_liquid: false
 ---
 

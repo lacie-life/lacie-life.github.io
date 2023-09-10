@@ -5,7 +5,7 @@ title: The way objects are created in C++
 #   link: https://github.com/lacie-life
 date:  2021-12-27 11:11:11 +0700
 categories: [C++]
-tags: [tutorial]
+tags: [Tutorial]
 render_with_liquid: false
 ---
 
@@ -35,7 +35,7 @@ It is a smart but nonowning pointer, holding a weak reference to an object manag
 
 If you are returning anything bigger than a word-sized value, there are several ways of returning something from a function. The first, and most obvious, is:
 
-```
+```c++
 Foo make_foo(int n)
 {
     return Foo{n};
@@ -44,7 +44,7 @@ Foo make_foo(int n)
 
 It may appear to you that, using the preceding, a full copy of Foo is being made, thereby wasting valuable resources. But it isn’t always so. Say you define Foo as:
 
-```
+```c++
 struct Foo
 {
     Foo(int n) {}
@@ -59,7 +59,7 @@ You will find that the copy constructor may be called anywhere from zero to two 
 
 Another approach is, of course, to simply return a smart pointer such as a unique_ptr:
 
-```
+```c++
 unique_ptr<Foo> make_foo(int n)
 {
     return make_unique<Foo>(n);
@@ -70,7 +70,7 @@ This is very safe, but also opinionated: you’ve chosen the smart pointer for t
 
 The third and final option is to use a raw pointer, perhaps in tandem with GSL’s owner<T>. This way, you are not enforcing the clean-up of the allocated object, but you are sending a very clear message that it is the caller’s responsibility:
 
-```
+```c++
 owner<Foo*> make_foo(int)
 {
     return new Foo(n);

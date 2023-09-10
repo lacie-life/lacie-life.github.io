@@ -5,7 +5,7 @@ title: Setting Up Environment for Building Boot to Qt (Raspberri Pi 4)
 #   link: https://github.com/lacie-life
 date:  2022-01-12 11:11:11 +0700
 categories: [Linux, Qt]
-tags: [tutorial]
+tags: [Tutorial]
 render_with_liquid: false
 ---
 

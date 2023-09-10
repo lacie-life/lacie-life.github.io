@@ -4,7 +4,7 @@ title: Designing Callbacks in C++
 #   name: Life Zero
 #   link: https://github.com/lacie-life
 date:  2023-01-03 11:11:14 +0700
-categories: [Theory]
+categories: [C++]
 tags: [Skill]
 # img_path: /assets/img/post_assest/
 render_with_liquid: false

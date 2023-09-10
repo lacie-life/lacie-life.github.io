@@ -5,7 +5,7 @@ title:  Machine Learning is Fun! - Language Translation with Deep Learning and t
 #   link: https://github.com/lacie-life
 date:  2022-01-25 11:11:11 +0700
 categories: [Machine Learning]
-tags: [tutorial]
+tags: [Tutorial]
 render_with_liquid: false
 ---
 

@@ -5,7 +5,7 @@ title:  Machine Learning is Fun! - Using Machine Learning to generate Super Mari
 #   link: https://github.com/lacie-life
 date:  2022-01-22 11:11:11 +0700
 categories: [Machine Learning]
-tags: [tutorial]
+tags: [Tutorial]
 render_with_liquid: false
 ---
 

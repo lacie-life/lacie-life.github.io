@@ -5,7 +5,7 @@ title: Project Management Handbook - SCRUM
 #   link: https://github.com/lacie-life
 date:  2022-02-02 11:11:11 +0700
 categories: [Skill, Software]
-tags: [tutorial]
+tags: [Tutorial]
 # img_path: /assets/img/post_assest/
 render_with_liquid: false
 ---
