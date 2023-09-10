@@ -487,20 +487,20 @@ taxonomy of fusion strategies proposed in this article.
 The perception processes of V2V and V2I achieve perception beyond the visual field by sharing reliable information
 of each traffic participant, which requires the realization
 of three steps: 
-
+<b>
 1. Single-vehicle perception. 
 
 2. Information transmission.
 
 3. Collaborative perception.
-
+</b>
 The communication capability determines the time consumption of
 information transmission, while the amount of transmitted data affects the overall time performance.
 
 Most existing works assume complete data and controlled temporal relationships under good communication
 conditions. However, practical communication faces many
 challenges: 
-
+<b>
 1. A large number of vehicles in the same scene
 makes it difficult to communicate perfectly with limited
 bandwidth. 
@@ -508,14 +508,16 @@ bandwidth.
 3. Environmental factors lead to communication
 interruptions and information loss. Future work needs to address these issues and achieve a more robust cooperative
 perceptual system based on various fusion strategies.
+</b>
+
 
 To reduce the overhead of data computing and save the
 total amount of data transmitted by communication, it is
 necessary to choose a reasonable collaborative approach
-as well as appropriate data processing. The synergistic
+as well as appropriate data processing. <b> The synergistic
 approach of prevalent feature fusion uses encoded features
 as shared data, which provides more impact than the raw
-data required for data-level fusion and has better representation capability and application flexibility than resultlevel fusion. In addition, effective key data selection and
+data required for data-level fusion and has better representation capability and application flexibility than resultlevel fusion </b>. In addition, effective key data selection and
 feature compression can further reduce the transmission
 overhead. Data selection, such as foreground and background separation, can remove redundant information as
 well as emphasize key information.
@@ -524,9 +526,9 @@ well as emphasize key information.
 
 Most works assume that sensor data are collected normally
 and with high quality, while data loss and low data quality
-exist in actual scenes. In practice, key information occlusion
+exist in actual scenes. In practice, <b> key information occlusion
 exists between vehicles and buildings, data quality decreases as distance increases and is greatly affected by extreme weather, and the high-speed movement of objects causes
-difficulties in spatiotemporal alignment of data. It is difficult to face the changing and harsh environment by using a
+difficulties in spatiotemporal alignment of data </b>. It is difficult to face the changing and harsh environment by using a
 single type of sensor, while the combination of multiple sensors can not only enrich the available environmental data
 but also improve the robustness of algorithmic strategies to
 the issues of weather, distance, and data quality.
@@ -549,10 +551,10 @@ of data acquisition and data labeling, the current collaborative data are small 
 With the development of 5G/V2X communication technology,
 extensive research and application of multi-sensor fusion in
 the field of V2X collaborative perception is enabled. However,
-there are security attacks and data privacy risks in the process of collaborative perception through shared data transmission. Through multi-sensor data sharing among
+there are <b> security attacks and data privacy risks in the process of collaborative perception through shared data transmission. Through multi-sensor data sharing among
 vehicles, V2V cooperative perception increases the acquisition of multiview surrounding environment information,
 expands its own perception field of view, improves its own
-environmental perception ability, and contributes to subsequent planning and decision making. However,
+environmental perception ability, and contributes to subsequent planning and decision making </b>. However,
 when vehicles share data collaboratively, there can be malicious attacks on the shared data or unreliable tampered information as well as the sending of malicious instructions
 to other vehicles, including sending a large amount of computing task information to occupy the computing resources
 and network bandwidth of the vehicle system. What is more,
