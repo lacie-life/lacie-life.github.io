@@ -3,7 +3,7 @@ title: ML for 3D Geometry - Part 7
 # author:
 #   name: Life Zero
 #   link: https://github.com/lacie-life
-date:  2022-12-02 11:11:14 +0700
+date:  2022-12-06 11:11:14 +0700
 categories: [Theory]
 tags: [Machine Learning]
 # img_path: /assets/img/post_assest/
