@@ -3,7 +3,7 @@ title: Common Model Evaluation Metrics for Machine Learning
 # author:
 #   name: Life Zero
 #   link: https://github.com/lacie-life
-date:  2023-09-13 11:11:14 +0700
+date:  2023-09-17 11:11:14 +0700
 categories: [Computer Vision]
 tags: [Paper]
 img_path: /assets/img/post_assest/pvo/
