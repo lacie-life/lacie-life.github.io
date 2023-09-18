@@ -417,7 +417,7 @@ To circumvent these issues, many methods have been working
 on leveraging other views for predicting 3D objects, e.g. the
 cylindrical view (CYV), a combination of the range-view, bird’s-eye view (BEV), and/or point-view (PV).
 
-<b> Note: potentials and challenges of the range-based methods </b> Range image is a dense and compact 2D representation, so
+<b> Note: Potentials and challenges of the range-based methods </b> Range image is a dense and compact 2D representation, so
 the conventional or specialized 2D convolutions can be seamlessly applied on range images, which makes the feature extraction process quite efficient. Nevertheless, compared to bird’s-eye
 view detection, detection from the range view is vulnerable to
 occlusion and scale variation. Hence, feature extraction from the
@@ -515,7 +515,7 @@ of the ground truth and predicted boxes, that is
 where $c^g_i$
 and $c^i$ are the $i$th corner of the ground truth and predicted cuboid respectively.
 
-<b> Note: potentials and challenges of the anchor-based approaches: </b> The anchor-based methods can benefit from the prior
+<b> Note: Potentials and challenges of the anchor-based approaches: </b> The anchor-based methods can benefit from the prior
 knowledge that 3D objects of the same category should have
 similar shapes, so they can generate accurate object predictions
 with the help of 3D anchors. However, since 3D objects are relatively small with respect to the detection range, a large number
@@ -570,7 +570,7 @@ where $M$ is a one-to-one mapping from each positive sample to
 a 3D object. The set-to-set assignments have also been explored
 in 3D object detection approaches and further introduces a novel cost function for the Hungarian matching.
 
-<b> Note: potentials and challenges of the anchor-free approaches: </b> The anchor-free detection methods abandon the complicated anchor design and exhibit stronger flexibility in terms of
+<b> Note: Potentials and challenges of the anchor-free approaches: </b> The anchor-free detection methods abandon the complicated anchor design and exhibit stronger flexibility in terms of
 the assignment strategies. With the anchor-free assignments, 3D
 objects can be predicted directly on various representations, including points, range pixels, voxels, pillars, and BEV grid cells.
 The learning process is also greatly simplified without introducing additional shape priors. Among those anchor-free methods,
@@ -632,7 +632,7 @@ signatures, and a probabilistic occupancy grid.
 <b> Object part estimation: </b> Identifying the part information inside
 objects is helpful in 3D object detection, as it reveals more finegrained 3D structure information of an object. Object part estimation has been explored in some works.
 
-<b> Note: future prospects of multitask learning for 3D object detection: </b> 3D object detection is innately correlated with
+<b> Note: Future prospects of multitask learning for 3D object detection: </b> 3D object detection is innately correlated with
 many other 3D perception and generation tasks. Multitask learning of 3D detection and segmentation is more beneficial compared to training 3D object detectors independently, and shape
 completion can also help 3D object detection. There are also
 other tasks that can help boost the performance of 3D object detectors. For instance, scene flow estimation could identify static
@@ -640,6 +640,412 @@ and moving objects, and tracking the same 3D object in a point
 cloud sequence yields a more accurate estimation of this object.
 Hence, it will be promising to integrate more perception tasks
 into the existing 3D object detection pipeline.
+
+# 3. Camera-based 3D Object Detection
+
+![img](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note-7-32.png?raw=true)
+
+## 3.1. Monocular 3D object detection
+
+<b> Problem and Challenge: </b> Detecting objects in the 3D space from
+monocular images is an ill-posed problem since a single image
+cannot provide sufficient depth information. Accurately predicting the 3D locations of objects is the major challenge in monocular 3D object detection. Many endeavors have been made to
+tackle the object localization problem, e.g. inferring depth from
+images, leveraging geometric constraints and shape priors. Nevertheless, the problem is far from being solved. Monocular 3D
+detection methods still perform much worse than the LiDARbased methods due the poor 3D localization ability, which leaves
+an open challenge to the research community.
+
+### 3.1.1. Image-only monocular 3D object detection
+
+Inspired by the 2D detection approaches, a straightforward solution to monocular 3D object detection is to directly regress
+the 3D box parameters from images via a convolutional neural network. The direct-regression methods naturally borrow designs from the 2D detection network architectures, and can be
+trained in an end-to-end manner. These approaches can be divided into the single-stage/two-stage, or anchor-based/anchorfree methods
+
+![img](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note-7-30.png?raw=true)
+
+![img](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note-7-31.png?raw=true)
+
+
+<b> Single-stage anchor-based methods </b> 
+
+Anchor-based monocular detection approaches rely on a set of 2D-3D anchor boxes
+placed at each image pixel, and use a 2D convolutional neural
+network to regress object parameters from the anchors. 
+
+Specifically, for each pixel $[u, v]$ on the image plane, a set of 3D anchors
+$[w^a, h^a, l^a, θ^a]_{3D}$, 2D anchors $[w^a, h^a]_{2D}$, and depth anchors $d^a$
+are pre-defined. An image is passed through a convolutional network to predict the 2D box offsets $δ_{2D} = [δ_x, δ_y, δ_w, δ_h]_{2D}$ and
+the 3D box offsets $δ_{3D} = [δ_x, δ_y, δ_d, δ_w, δ_h, δ_l, δ_θ]_{3D}$ based on
+each anchor. Then, the 2D bounding boxes $b_{2D} = [x, y, w, h]_{2D}$ can be decoded as
+
+![img](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note-7-33.png?raw=true)
+
+and the 3D bounding boxes $b_{3D} = [x, y, z, l, w, h, θ]_{3D}$ can be
+decoded from the anchors and $δ_{3D}$:
+
+![img](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note-7-34.png?raw=true)
+
+where $[u^c, v^c]$ is the projected object center on the image plane.
+Finally, the projected center $[u^c, v^c]$ and its depth $d^c$
+are transformed into the 3D object center $[x, y, z]_{3D}$:
+
+![img](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note-7-35.png?raw=true)
+
+where $K$ and $T$ are the camera intrinsics and extrinsics
+
+M3D-RPN is a seminal paper that proposes the anchorbased framework, and many papers have tried to improve this
+framework, e.g. extending it into video-based 3D detection,
+introducing differential non-maximum suppression, designing an asymmetric attention module.
+
+<b> Single-stage anchor-free methods: </b> 
+
+Anchor-free monocular detection approaches predict the attributes of 3D objects from images without the aid of anchors. Specifically, an image is passed
+through a 2D convolutional neural network and then multiple
+heads are applied to predict the object attributes separately. The
+prediction heads generally include a category head to predict the
+object’s category, a keypoint head to predict the coarse object
+center $[u, v]$, an offset head to predict the center offset $[δ_x, δ_y]$
+based on $[u, v]$, a depth head to predict the depth offset $δ_d$, a size
+head to predict the object size $[w, h, l]$, and an orientation head
+to predict the observation angle $α$. The 3D object center $[x, y, z]$
+can be converted from the projected center $[u^c, v^c]$ and depth $d^c$:
+
+![img](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note-7-36.png?raw=true)
+
+where $σ$ is the sigmoid function. The yaw angle $θ$ of an object
+can be converted from the observation angle $α$ using
+
+![img](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note-7-37.png?raw=true)
+
+CenterNet first introduces the single-stage anchor-free
+framework for monocular 3D object detection. Many following papers work on improving this framework, including novel
+depth estimation schemes [166, 294, 369], an FCOS-like
+architecture, a new IoU-based loss function, keypoints, pair-wise relationships, camera extrinsics prediction, and view transforms.
+
+<b> Two-stage methods: </b> 
+
+Two-stage monocular detection approaches
+generally extend the conventional two-stage 2D detection architectures to 3D object detection. Specifically, they utilize a 2D
+detector in the first stage to generate 2D bounding boxes from
+an input image. Then in the second stage, the 2D boxes are lifted
+up to the 3D space by predicting the 3D object parameters from
+the 2D RoIs. ROI-10D extends the conventional Faster RCNN architecture with a novel head to predict the parameters of 3D objects in the second stage. A similar design paradigm
+has been adopted in many works with improvements like disentangling the 2D and 3D detection loss, predicting heading
+angles in the first stage, learning more accurate depth information.
+
+<b> Note: Potentials and challenges of the image-only methods: </b> 
+
+The image-only methods aim to directly regress the 3D
+box parameters from images via a modified 2D object detection
+framework. Since these methods take inspiration from the 2D
+detection methods, they can naturally benefit from the advances
+in 2D object detection and image-based network architectures.
+Most methods can be trained end-to-end without pre-training or
+post-processing, which is quite simple and efficient.
+A critical challenge of the image-only methods is to accurately predict depth $d^c$
+for each 3D object.
+This observation indicates that the depth error dominates the total errors and becomes the most critical factor hampering accurate monocular detection. Nevertheless, depth estimation from
+monocular images is an ill-posed problem, and the problem becomes severer with only box-level supervisory signals.
+
+### 3.1.2. Depth-assisted monocular 3D object detection
+
+Depth estimation is critical in monocular 3D object detection.
+To achieve more accurate monocular detection results, many papers resort to pre-training an auxiliary depth estimation network.
+Specifically, a monocular image is first passed through a pretrained depth estimator, e.g. MonoDepth or DORN, to
+generate a depth image. Then, there are mainly two categories
+of methods to deal with depth images and monocular images.
+The depth-image based methods fuse images and depth maps
+with a specialized neural network to generate depth-aware features that could enhance the detection performance. The pseudoLiDAR based methods convert a depth image into a pseudoLiDAR point cloud, and LiDAR-based detectors can then be applied to the point cloud to predict 3D objects. 
+
+![img](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note-7-38.png?raw=true)
+
+![img](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note-7-31.png?raw=true)
+
+
+<b> Depth-image based methods: </b> Most depth-image based methods leverage two backbone networks for RGB and depth images
+respectively. They obtain depth-aware image features by fusing
+the information from the two backbones with specialized operators. More accurate 3D bounding boxes can be learned from the
+depth-ware features and can be further refined with depth images. MultiFusion is a pioneering work that introduces the
+depth-image based detection framework. Following papers adopt
+similar design paradigms with improvements in network architectures, operators, and training strategies, e.g. a point-based attentional network, depth-guided convolutions, depth-conditioned message passing, disentangling appearance
+and localization features, and a novel depth pre-training
+framework.
+
+<b> Pseudo-LiDAR based methods: </b> Pseudo-LiDAR based methods
+transform a depth image into a pseudo-LiDAR point cloud, and
+LiDAR-based detectors can then be employed to detect 3D objects from the point cloud. Pseudo-LiDAR point cloud is a data
+representation, where they convert a
+depth map $D ∈ R^{H×W}$ into a pseudo point cloud $P ∈ R^{HW×3}.
+Specifically, for each pixel $[u, v]$ and its depth value d in a depth
+image, the corresponding 3D point coordinate $[x, y, z]$ in the
+camera coordinate system is computed as
+
+![img](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note-7-39.png?raw=true)
+
+where $[c_u, c_v]$ is the camera principal point, and $f_u$ and $f_v$ are
+the focal lengths along the horizontal and vertical axis respectively. Thus $P$ can be obtained by back-projecting each pixel in
+$D$ into the 3D space. $P$ is referred as the pseudo-LiDAR representation: it is essentially a 3D point cloud but is extracted
+from a depth image instead of a real LiDAR sensor. Finally,
+LiDAR-based 3D object detectors can be directly applied on
+the pseudo-LiDAR point cloud P to predict 3D objects. Many
+papers have worked on improving the pseudo-LiDAR detection
+framework, including augmenting pseudo point cloud with color
+information, introducing instance segmentation, designing a progressive coordinate transform scheme, improving pixel-wise depth estimation with separate foreground
+and background prediction, domain adaptation from real
+LiDAR point cloud, and a new physical sensor design.
+
+PatchNet challenges the conventional idea of leveraging the pseudo-LiDAR representation $P ∈ R^{HW×3}$
+for monocular 3D object detection. They conduct an in-depth investigation
+and provide an insightful observation that the power of pseudoLiDAR representation comes from the coordinate transformation
+instead of the point cloud representation. Hence, a coordinate
+map $M ∈ R^{H×W×3}$ where each pixel encodes a 3D coordinate can attain a comparable monocular detection result with the pseudo-LiDAR point cloud representation. This observation enables us to directly apply a 2D neural network on the coordinate
+map to predict 3D objects, eliminating the need of leveraging the
+time-consuming LiDAR-based detectors on point clouds.
+
+<b> Note: Potentials and challenges of the depth-assisted approaches: </b> The depth-assisted approaches pursue more accurate
+depth estimation by leveraging a pre-trained depth prediction
+network. Both the depth image representation and the pseudoLiDAR presentation could significantly boost the monocular detection performance. Nevertheless, compared to the image-only
+methods that only require 3D box annotations, pre-training a
+depth prediction network requires expensive ground truth depth
+maps, and it also hampers the end-to-end training of the whole
+framework. Furthermore, pre-trained depth estimation networks
+suffer from poor generalization ability. Pretrained depth maps
+are usually not well calibrated on the target dataset and typically the scale needs to be adapted to the target dataset. Thus
+there remains a non-negligible domain gap between the source
+domain leveraged for depth pre-training and the target domain
+for monocular detection. Given the fact that driving scenarios are
+normally diverse and complex, pre-training depth networks on a
+restricted domain may not work well in real-world applications.
+
+### 3.1.3. Prior-guided monocular 3D object detection
+
+Numerous approaches try to tackle the ill-posed monocular 3D
+object detection problem by leveraging the hidden prior knowledge of object shapes and scene geometry from images. The
+prior knowledge can be learned by introducing pre-trained subnetworks or auxiliary tasks, and they can provide extra information or constraints to help accurately localize 3D objects. The
+broadly adopted prior knowledge includes object shapes, geometry consistency, temporal constraints, and segmentation information.
+
+<b> Object shapes: </b> Many methods resort to shape reconstruction
+of 3D objects directly from images. The reconstructed shapes
+can be further leveraged to determine the locations and poses of the 3D objects. There are 5 types of reconstructed representations: computer-aided design (CAD) models, wireframe models,
+signed distance function (SDF), points, and voxels.
+
+Some papers learn morphable wireframe models to represent 3D objects. Other works leverage DeepSDF to learn implicit signed distance functions
+or low-dimensional shape parameters from CAD models, and
+they further propose a render-and-compare approach to learn the
+parameters of 3D objects. Some works utilize voxel
+patterns to represent 3D objects. Other papers resort
+to point cloud reconstruction from images and estimate the locations of 3D objects with 2D-3D correspondences.
+
+
+<b> Geometric consistency: </b> Given the extrinsics matrix $T ∈ SE(3)$
+that transforms a 3D coordinate in the object frame to the camera
+frame, and the camera intrinsics matrix K that project the 3D
+coordinate onto the image plane, the projection of a 3D point
+$[x, y, z]$ in the object frame into the image pixel coordinate $[u, v]$
+can be represented as
+
+![img](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note-7-40.png?raw=true)
+
+where $d$ is the depth of transformed 3D coordinate in the camera
+frame. Eqn. above provides a geometric relationship between 3D
+points and 2D image pixel coordinates, which can be leveraged
+in various ways to encourage consistency between the predicted
+3D objects and the 2D objects on images. There are mainly 5
+types of geometric constraints in monocular detection: 2D-3D
+boxes consistency, keypoints, object’s height-depth relationship,
+inter-objects relationship, and ground plane constraints.
+
+Some works propose to encourage the
+consistency between 2D and 3D boxes by minimizing reprojection errors. These methods introduce a post-processing step to
+optimize the 3D object parameters by gradually fitting the projected 3D boxes to 2D bounding boxes on images. There is also
+a branch of papers that predict the object keypoints from images, and the keypoints can be leveraged to calibrate the sizes of locations of 3D objects. Object’s height-depth
+relationship can also serve as a strong geometric prior. Specifically, given the physical height of an object $H$ in the 3D space,
+the visual height $h$ on images, and the corresponding depth of the
+object $d$, there exists a geometric constraint: $d = f · H/h$, where
+$f$ is the camera focal length. This constraint can be leveraged to obtain more accurate depth estimation and has been broadly applied in a lot of works. There are also some
+papers trying to model the inter-objects relationships
+by exploiting new geometric relations among objects. Other papers leverage the assumption that 3D objects
+are generally on the ground plane to better localize those objects.
+
+<b> Temporal constraints </b> Temporal association of 3D objects can
+be leveraged as strong prior knowledge. The temporal object
+relationships have been exploited as depth-ordering and
+multi-frame object fusion with a 3D Kalman filter.
+
+<b> Segmentation: </b> Image segmentation helps monocular 3D object
+detection mainly in two aspects. First, object segmentation masks
+are crucial for instance shape reconstruction in some works. Second, segmentation indicates whether an image pixel is inside a 3D object from the perspective view, and this information
+has been utilized to help localize 3D objects.
+
+<b> Note: Potentials and challenges of leveraging prior knowledge in monocular 3D detection: </b> With shape reconstruction,
+we could obtain more detailed object shape information from
+images, which is beneficial to 3D object detection. We can also
+attain more accurate detection results through the projection or
+render-and-compare loss. However, there exist two challenges
+for shape reconstruction applied in monocular 3D object detection. First, shape reconstruction normally requires an additional
+step of pre-training a reconstruction network, which hampers
+end-to-end training of the monocular detection pipeline. Second,
+object shapes are generally learned from CAD models instead of
+real-world instances, which imposes the challenge of generalizing the reconstructed objects to real-world scenarios.
+Geometric consistencies are broadly adopted and can help
+improve detection accuracy. Nevertheless, some methods formulate the geometric consistency as an optimization problem and
+optimize object parameters in post-processing, which is quite
+time-consuming and hampers end-to-end training.
+Image segmentation is useful information in monocular 3D
+detection. However, training segmentation networks requires expensive pixel annotations. Pre-training segmentation models on
+external datasets will suffer from the generalization problem.
+
+## 3.2. Stereo-based 3D object detection
+
+<b> Problem and Challenge: </b> Stereo-based 3D object detection aims
+to detect 3D objects from a pair of images. Compared to monocular images, paired stereo images provide additional geometric
+constraints that can be utilized to infer more accurate depth information. Hence, the stereo-based methods generally obtain a better detection performance than the monocular-based methods. Nevertheless, stereo cameras typically require very accurate
+calibration and synchronization, which are normally difficult to
+achieve in real applications.
+
+![img](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note-7-41.png?raw=true)
+
+![img](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note-7-43.png?raw=true)
+
+<b> Stereo matching and depth estimation: </b> A stereo camera can
+produce a pair of images, i.e. the left image $I_L$ and the right image $I_R$, in one shot. With the stereo matching techniques, a disparity map can be estimated from the paired stereo images leveraging multi-view geometry. Ideally, for each pixel
+on the left image $I_{L}(u, v)$, there exists a pixel on the right image
+$I_R(u, v + p)$ with the disparity value $p$ so that the two pixels
+picture the same 3D location. Finally, the disparity map can be
+transformed into a depth image with the following formula:
+
+![img](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note-7-42.png?raw=true)
+
+where $d$ is the depth value, $f$ is the focal length, and b is the
+baseline length of the stereo camera. The pixel-wise disparity
+constraints from stereo images enable more accurate depth estimation compared to monocular depth prediction.
+
+<b> 2D-detection based methods: </b> Conventional 2D object detection
+frameworks can be modified to resolve the stereo detection problem. Specifically, paired stereo images are passed through an
+image-based detector with Siamese backbone networks to generate left and right regions of interest (RoIs) for the left and right
+images respectively. Then in the second stage, the left and right
+RoIs are fused to estimate the parameters of 3D objects. Stereo
+R-CNN first proposes to extend 2D detection frameworks
+to stereo 3D detection. This design paradigm has been adopted
+in numerous papers. [Paper](https://arxiv.org/abs/1906.01193) proposes a novel stereo triangulation 
+learning sub-network at the second stage;
+learn instance-level disparity by object-centric stereo matching
+and instance segmentation; Ida-3d proposes adaptive instance disparity estimation; introduce single-stage stereo detection frameworks; propose an energy-based framework
+for stereo-based 3D object detection.
+
+<b> Pseudo-LiDAR based methods: </b> The disparity map predicted
+from stereo images can be transformed into the depth image and
+then converted into the pseudo-LiDAR point cloud. Hence, similar to the monocular detection methods, the pseudo-LiDAR representation can also be employed in stereo-based 3D object detection methods. Those methods try to improve the disparity estimation in stereo matching for more accurate depth prediction. Some paper introduces a depth cost volume in stereo matching networks; Some paper proposes an end-to-end stereo matching and detection framework; [116, 128] leverage semantic segmentation and
+predict disparity for foreground and background regions separately; Some paper proposes a Wasserstein loss for disparity estimation.
+
+<b> Volume-based methods: </b> There exists a category of methods that
+skip the pseudo-LiDAR representation and perform 3D object
+detection directly on 3D stereo volumes. DSGN proposes
+a 3D geometric volume derived from stereo matching networks
+and applies a grid-based 3D detector on the volume to detect 3D
+objects. Some paper improve DSGN by leveraging knowledge
+distillation and 3D feature volumes respectively
+
+<b> Note: Potentials and challenges of the stereo-based methods: </b> Compared to the monocular detection methods, the stereo-based methods can obtain more accurate depth and disparity estimation with
+stereo matching techniques, which brings a stronger object localization ability and significantly boosts the 3D object detection
+performance. Nevertheless, an auxiliary stereo matching network
+brings additional time and memory consumption. Compared to
+LiDAR-based 3D object detection, detection from stereo images
+can serve as a much cheaper solution for 3D perception in autonomous driving scenarios. However, there still exists a nonnegligible performance gap between the stereo-based and the
+LiDAR-based 3D object detection approaches.
+
+## 3.3.  Multi-view 3D object detection
+
+<b> Problem and Challenge: </b> Autonomous vehicles are generally
+equipped with multiple cameras to obtain complete environmental information from multiple viewpoints. Recently, multi-view
+3D object detection has evolved rapidly. Some multi-view 3D
+detection approaches try to construct a unified BEV space by
+projecting multi-view images into the bird’s-eye view, and then
+employ a BEV-based detector on top of the unified BEV feature map to detect 3D objects. The transformation from camera views to the bird’s-eye view is ambiguous without accurate
+depth information, so image pixels and their BEV locations are
+not perfectly aligned. How to build reliable transformations from
+camera views to the bird’s-eye view is a major challenge in these
+methods. Other methods resort to 3D object queries that are generated from the bird’s-eye view and Transformers where crossview attention is applied to object queries and multi-view image
+features. The major challenge is how to properly generate 3D
+object queries and design more effective attention mechanisms
+in Transformers.
+
+![img](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note-7-44.png?raw=true)
+
+<b> BEV-based multi-view 3D object detection: </b> LSS is a pioneering work that proposes a lift-splat-shoot paradigm to solve
+the problem of BEV perception from multi-view cameras. There
+are three steps in LSS. 
+
+- Lift: bin-based depth prediction is conducted on image pixels and multi-view image features are lifted to 3D frustums with depth bins. 
+
+- Splat: 3D frustums are splatted into a unified bird’s-eye view plane and image features are
+transformed into BEV features in an end-to-end manner. 
+
+- Shoot: downstream perception tasks are performed on top of the BEV
+feature map. This paradigm has been successfully adopted by
+many following works. 
+
+BEVDet improves LSS
+with a four-step multi-view detection pipeline, where the image
+view encoder encodes features from multi-view images, the view
+transformer transforms image features from camera views to the
+bird’s-eye view, the BEV encoder further encodes the BEV features, and the detection head is employed on top of the BEV
+features for 3D detection. The major bottleneck is
+depth prediction, as it is normally inaccurate and will result in
+inaccurate feature transforms from camera views to the bird’seye view. To obtain more accurate depth information, many papers resort to mining additional information from multi-view images and past frames, e.g. leverages explicit depth supervision, introduces surround-view temporal stereo, 
+uses dynamic temporal stereo, combines both short-term
+and long-term temporal stereo for depth prediction. 
+
+In addition,
+there are also some papers that completely abandon
+the design of depth bins and categorical depth prediction. They
+simply assume that the depth distribution along the ray is uniform, so the camera-to-BEV transformation can be conducted
+with higher efficiency.
+
+<b> Query-based multi-view 3D object detection: </b> In addition to
+the BEV-based approaches, there is also a category of methods
+where object queries are generated from the bird’s-eye view and
+interact with camera view features. Inspired by the advances in
+Transformers for object detection, DETR3D introduces a sparse set of 3D object queries, and each query corresponds to a 3D reference point. The 3D reference points can
+collect image features by projecting their 3D locations onto the
+multi-view image planes and then object queries interact with
+image features through Transformer layers. Finally, each object
+query will decode a 3D bounding box. Many following papers
+try to improve this design paradigm, such as introducing spatiallyaware cross-view attention and adding 3D positional embeddings on top of image features. BEVFormer introduces dense grid-based BEV queries and each query corresponds to a pillar that contains a set of 3D reference points.
+Spatial cross-attention is applied to object queries and sparse
+image features to obtain spatial information, and temporal selfattention is applied to object queries and past BEV queries to
+fuse temporal information.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
