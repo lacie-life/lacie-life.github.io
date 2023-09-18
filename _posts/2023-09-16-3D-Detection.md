@@ -1016,40 +1016,680 @@ Spatial cross-attention is applied to object queries and sparse
 image features to obtain spatial information, and temporal selfattention is applied to object queries and past BEV queries to
 fuse temporal information.
 
+# 4. Multi-Modal 3D Object Detection
+
+In this section, we introduce the multi-modal 3D object detection
+approaches that fuse multiple sensory inputs. According to the
+sensor types, the approaches can be divided into three categories: LiDAR-camera, radar, and map fusion-based methods.
+
+![img](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note-7-45.png?raw=true)
+
+## 4.1.  Multi-modal detection with LiDAR-camera fusion
+
+<b> Problem and Challenge: </b> Camera and LiDAR are two complementary sensor types for 3D object detection. Cameras provide
+color information from which rich semantic features can be extracted, while LiDAR sensors specialize in 3D localization and
+provide rich information about 3D structures. Many endeavors
+have been made to fuse the information from cameras and LiDARs for accurate 3D object detection. Since LiDAR-based detection methods perform much better than camera-based methods, the state-of-the-art approaches are mainly based on LiDARbased 3D object detectors and try to incorporate image information into different stages of a LiDAR detection pipeline. In view
+of the complexity of LiDAR-based and camera-based detection
+systems, combining the two modalities together inevitably brings
+additional computational overhead and inference time latency.
+Therefore, how to efficiently fuse the multi-modal information
+remains an open challenge. 
+
+### 4.1.1.  Early-fusion based 3D object detection
+
+Early-fusion based methods aim to incorporate the knowledge
+from images into point cloud before they are fed into a LiDAR-based detection pipeline. Hence the early-fusion frameworks are
+generally built in a sequential manner: 2D detection or segmentation networks are firstly employed to extract knowledge from
+images, and then the image knowledge is passed to point cloud,
+and finally the enhanced point cloud is fed to a LiDAR-based
+3D object detector. Based on the fusion types, the early-fusion
+methods can be divided into two categories: region-level knowledge fusion and point-level knowledge fusion.
+
+![img](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note-7-46.png?raw=true)
 
 
+<b> Region-level knowledge fusion </b> Region-level fusion methods
+aim to leverage knowledge from images to narrow down the object candidate regions in 3D point cloud. Specifically, an image is
+first passed through a 2D object detector to generate 2D bounding boxes, and then the 2D boxes are extruded into 3D viewing
+frustums. The 3D viewing frustums are applied on LiDAR point
+cloud to reduce the searching space. Finally, only the selected
+point cloud regions are fed into a LiDAR detector for 3D object detection. F-PointNet first proposes this fusion mechanism, and many endeavors have been made to improve the fusion
+framework. Some paper divides a viewing frustum into grid cells and
+applies a convolutional network on the grid cells for 3D detection; [RoarNet](https://arxiv.org/abs/1811.03818) proposes a novel geometric agreement search;
+exploits the pillar representation; [This](https://arxiv.org/abs/1803.00387) introduces a model fitting
+algorithm to find the object point cloud inside each frustum.
+
+<b> Point-level knowledge fusion: </b> Point-level fusion methods aim
+to augment input point cloud with image features. The augmented
+point cloud is then fed into a LiDAR detector to attain a better detection result. PointPainting is a seminal work that
+leverages image-based semantic segmentation to augment point
+clouds. Specifically, an image is passed through a segmentation
+network to obtain pixel-wise semantic labels, and then the semantic labels are attached to the 3D points by point-to-pixel
+projection. Finally, the points with semantic labels are fed into a
+LiDAR-based 3D object detector. This design paradigm has been followed by a lot of papers. Apart from semantic
+segmentation, there also exist some works trying to exploit other
+information from images, e.g. depth image completion.
+
+<b> Note: potentials and challenges of the early-fusion methods: </b> The early-fusion based methods focus on augmenting point
+clouds with image information before they are passed through
+a LiDAR 3D object detection pipeline. Most methods are compatible with a wide range of LiDAR-based 3D object detectors
+and can serve as a quite effective pre-processing step to boost
+detection performance. Nevertheless, the early-fusion methods
+generally perform multi-modal fusion and 3D object detection
+in a sequential manner, which brings additional inference latency. Given the fact that the fusion step generally requires a
+complicated 2D object detection or semantic segmentation network, the time cost brought by multi-modal fusion is normally
+non-negligible. Hence, how to perform multi-modal fusion efficiently at the early stage has become a critical challenge.
+
+### 4.1.2. Intermediate-fusion based 3D object detection
+
+Intermediate-fusion based methods try to fuse image and LiDAR
+features at the intermediate stages of a LiDAR-based 3D object
+detector, e.g. in backbone networks, at the proposal generation
+stage, or at the RoI refinement stage. These methods can also
+be classified according to the fusion stages. 
+
+![img](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note-7-47.png?raw=true)
+
+<b> Fusion in backbone networks: </b> Many endeavors have been made
+to progressively fuse image and LiDAR features in the backbone
+networks. In those methods, point-to-pixel correspondences are
+firstly established by LiDAR-to-camera transform, and then with
+the point-to-pixel correspondences, features from a LiDAR backbone can be fused with features from an image backbone through
+different fusion operators. The multi-modal fusion can be conducted in the intermediate layers of a grid-based detection backbone, with novel fusion operators such as continuous convolutions, hybrid voxel feature encoding,
+and Transformer. The multi-modal fusion can also
+be conducted only at the output feature maps of backbone networks, with fusion modules and operators including gated attention, unified object queries, BEV pooling, learnable alignments, point-to-ray fusion, Transformer,
+and other techniques. In addition to the fusion
+in grid-based backbones, there also exist some papers incorporating image information into the point-based detection backbones.
+
+<b> Fusion in proposal generation and RoI head: </b> There exists a
+category of works that conduct multi-modal feature fusion at the
+proposal generation and RoI refinement stage. In those methods,
+3D object proposals are first generated from a LiDAR detector,
+and then the 3D proposals are projected into multiple views, i.e.
+the image view and bird’s-eye view, to crop features from the
+image and LiDAR backbone respectively. Finally, the cropped
+image and LiDAR features are fused in an RoI head to predict
+parameters for each 3D object. MV3D and AVOD are
+pioneering works leveraging multi-view aggregation for multimodal detection. Other papers use the Transformer
+decoder as the RoI head for multi-modal feature fusion.
+
+<b> Note: potentials and challenges of the intermediate-fusion methods: </b> The intermediate methods encourage deeper integration of multi-modal representations and yield 3D boxes of higher
+quality. Nevertheless, camera and LiDAR features are intrinsically heterogeneous and come from different viewpoints, so there
+still exist some problems on the fusion mechanisms and view
+alignments. Hence, how to fuse the heterogeneous data effectively and how to deal with the feature aggregation from multiple
+views remain a challenge to the research community.
+
+### 4.1.3. Late-fusion based 3D object detection
+
+<b> Fusion at the box level: </b> Late-fusion based approaches operate
+on the outputs, i.e. 3D and 2D bounding boxes, from a LiDARbased 3D object detector and an image-based 2D object detector respectively. In those methods, object detection with
+camera and LiDAR sensor can be conducted in parallel, and the
+output 2D and 3D boxes are fused to yield more accurate 3D
+detection results. CLOCs introduces a sparse tensor that
+contains paired 2D-3D boxes and learns the final object confidence scores from this sparse tensor. CLOCs improved by
+introducing a light-weight 3D detector-cued image detector.
+
+![img](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note-7-48.png?raw=true)
 
 
+<b> Note: Potentials and challenges of the late-fusion methods: </b> The late-fusion based approaches focus on the instancelevel aggregation and perform multi-modal fusion only on the outputs of different modalities, which avoids complicated interactions on the intermediate features or on the input point cloud.
+Hence these methods are much more efficient compared to other
+approaches. However, without resorting to deep features from
+camera and LiDAR sensors, these methods fail to integrate rich
+semantic information of different modalities, which limits the
+potential of this category of methods.
+
+## 4.2. Multi-modal detection with radar signals
+
+<b> Problem and Challenge: </b> Radar is an important sensory type in
+driving systems. In contrast to LiDAR sensors, radar has four irreplaceable advantages in real-world applications: Radar is much
+cheaper than LiDAR sensors; Radar is less vulnerable to extreme
+weather conditions; Radar has a larger detection range; Radar
+provides additional velocity measurements. Nevertheless, compared to LiDAR sensors that generate dense point clouds, radar
+only provides sparse and noisy measurements. Hence, how to
+effectively handle the radar signals remains a critical challenge.
+
+<b> Radar-LiDAR fusion: </b> Many papers try to fuse the two modalities by introducing new fusion mechanisms to enable message
+passing between the radar and LiDAR signals, including voxelbased fusion, attention-based fusion, introducing a
+range-azimuth-doppler tensor\, leveraging graph neural networks, exploiting dynamic occupancy maps, and introducing 4D radar data.
+
+<b> Radar-camera fusion: </b> Radar-camera fusion is quite similar to
+LiDAR-camera fusion, as both radar and LiDAR data are 3D
+point representations. Most radar-camera approaches adapt the existing LiDAR-based detection architectures to
+handle sparse radar points and adopt similar fusion strategies as
+LiDAR-camera based methods.
+
+## 4.3. Multi-modal detection with high-definition maps
+
+<b> Problem and Challenge: </b> High-definition maps (HD maps) contain detailed road information such as road shape, road marking,
+traffic signs, barriers, etc. HD maps provide rich semantic information on surrounding environments and can be leveraged as a
+strong prior to assist 3D object detection. How to effectively incorporate map information into a 3D object detection framework
+has become an open challenge to the research community.
+
+<b> Multi-modal detection with map information: </b> High-definition
+maps can be readily transformed into a bird’s-eye view representation and fused with rasterized BEV point clouds or feature
+maps. The fusion can be conducted by simply concatenating the
+channels of a rasterized point cloud and an HD map from the bird’s-eye view, feeding LiDAR point cloud and HD map
+into separate backbones and fusing the output feature maps of
+the two modalities, or simply filtering out those predictions
+that do not fall into the relevant map regions. Other map
+types have also been explored, e.g. visibility map, vectorized map.
+
+# 5. Transformer-based 3D Object Detection
+
+![img](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note-7-51.png?raw=true)
+
+## 5.1. Transformer architectures for 3D object detection
+
+<b> Problem and Challenge: </b> While most 3D object detectors are
+based on convolutional architectures, recently Transformer-based
+3D detectors have shown great potential and dominated 3D object detection leaderboards. Compared to convolutional networks,
+the query-key-value design in Transformers enables more flexible interactions between different representations and the selfattention mechanism results in a larger receptive field than convolutions. However, fully-connected self-attention has quadratic
+time and space complexity w.r.t. the number of inputs, training
+Transformers can easily fall into sub-optimal results when the
+data size is small. Hence, it’s critical to define proper query-keyvalue triplets and design specialized attention mechanisms for
+Transformer-based 3D object detectors.
+
+<b> Transformer architectures: </b> The development of Transformer
+architectures in 3D object detection has experienced three stages:
+
+(1) Inspired by vanilla Transformer, new Transformer modules with special attention mechanisms are proposed to obtain
+more powerful features in 3D object detection. 
+
+(2) Inspired by
+DETR, query-based Transformer encoder-decoder designs
+are introduced to 3D object detectors. 
+
+(3) Inspired by ViT,
+patch-based inputs and architectures similar to Vision Transformers are introduced in 3D object detection.
+
+In the first stage, many papers try to introduce novel Transformer modules into conventional 3D detection pipelines. In these
+papers, the choices of query, key, and value are quite flexible and
+new attention mechanisms are proposed. Pointformer introduces Transformer modules to point backbones. It takes point
+features and coordinates as queries and applies self-attention to
+a group of point clouds. Voxel Transformer replaces convolutional voxel backbones with Transformer modules, where sparse and submanifold voxel attention are proposed and applied
+to voxels. CT3D proposes a novel Transformer-based detection head, where proposal-to-point attention and channel-wise
+attention are introduced.
+
+In the second stage, many papers propose DETR-like architectures for 3D object detection. They leverage a set of object
+queries and use those queries to interact with different features
+to predict 3D boxes. DETR3D introduces object queries
+and generates a 3D reference point for each query. They use reference points to aggregate multi-view image features as keys and
+values, and apply cross-attention between object queries and image features. Finally, each query can decode a 3D bounding box
+for detection. Many following works have adopted the design of
+object queries and reference points. BEVFormer generates
+dense queries from BEV grids. TransFusion produces object
+queries from initial detections and applies cross-attention to LiDAR and image features in a Transformer decoder. UVTR
+fuses object queries with image and LiDAR voxels in a Transformer decoder. FUTR3D fuses object queries with features
+from different sensors in a unified way.
+In the third stage, many papers try to apply the designs of
+Vision Transformers to 3D object detectors. Following [63, 168],
+they split inputs into patches and apply self-attention within each
+patch and across different patches. SST proposes a sparse
+Transformer, in which voxels in a local region are grouped into
+a patch and sparse regional attention is applied to the voxels in a
+patch, and then region shift is applied to change the grouping so
+new patches can be generated. SWFormer improves
+with multi-scale feature fusion and voxel diffusion.
+
+## 5.2. Transformer applications in 3D object detection
+
+Applications of Transformer-based 3D detectors. Transformer
+architectures have been broadly adopted in various types of 3D
+object detectors. For point-based 3D object detectors, a pointbased Transformer has been developed to replace the conventional PointNet backbone. For voxel-based 3D detectors, a
+lot of papers propose novel voxel-based Transformers to replace the conventional convolutional backbone. For
+point-voxel based 3D object detectors, a new Transformer-based
+detection head has been proposed for better proposal refinement. For monocular 3D object detectors, Transformers can
+be used to fuse image and depth features. For multi-view
+3D object detectors, Transformers are utilized to fuse multi-view
+image features for each query. For multi-modal 3D
+object detectors, many papers leverage Transformer
+architectures and special cross-attention mechanisms to fuse features of different modalities. For temporal 3D object detectors,
+Temporal-Channel Transformer is proposed to model temporal relationships across LiDAR frames.
+
+# 6. Temporal 3D Object Detection
+
+In this section, we introduce the temporal 3D object detection
+methods. Based on the data types, these methods can be divided
+into three categories: detection from LiDAR sequences, detection from streaming inputs, and detection from videos. 
+
+![img](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note-7-49.png?raw=true)
 
 
+## 6.1. 3D object detection from LiDAR sequences
+
+<b> Problem and Challenge: </b> While most methods focus on detection from a single-frame point cloud, there also exist many approaches leveraging multi-frame point clouds for more accurate
+3D object detection. These methods are trying to tackle the temporal detection problem by fusing multi-frame features via various temporal modeling tools, and they can also obtain more complete 3D shapes by merging multi-frame object points into a single frame. Temporal 3D object detection has exhibited great success in offline 3D auto-labeling pipelines. However, in onboard applications, these methods still suffer from memory and latency issues, as processing multiple frames inevitably brings additional time and memory costs, which can become severe when
+models are running on embedded devices.
+
+![img](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note-7-50.png?raw=true)
+
+<b> 3D object detection from sequential sweeps: </b> Most detection
+approaches using multi-frame point clouds resort to proposallevel temporal information aggregation. Namely, 3D object proposals are first generated independently from each frame of point
+cloud through a shared detector, and then various temporal modules are applied on the object proposals and the respective RoI
+features to aggregate the information of objects across different frames. The adopted temporal aggregation modules include
+temporal attention, ConvGRU, graph network,
+LSTM, and Transformer. Temporal 3D object detection is also applied in the 3D object auto-labeling pipelines. In addition to temporal detection from multi-frame point
+clouds, there are also some works leveraging sequential range images for 3D object detection.
+
+## 6.2. 3D object detection from streaming data
+
+<b> Problem and Challenge: </b> Point clouds collected by rotating LiDARs are intrinsically a streaming data source in which LiDAR
+packets are sequentially recorded in a sweep. It typically takes
+50-100 ms for a rotating LiDAR sensor to generate a 360◦
+complete LiDAR sweep, which means that by the time a point cloud
+is produced, it no longer accurately reflects the scene at the exact time. This poses a challenge to autonomous driving applications which generally require minimal reaction times to guarantee driving safety. Many endeavors have been made to directly
+detect 3D objects from the streaming data. These methods generally detect 3D objects on the active LiDAR packets immediately without waiting for the full sweep to be built. Streaming
+3D object detection is a more accurate and low-latency solution
+to vehicle perception compared to detection from full LiDAR
+sweeps.
+
+![img](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note-7-52.png?raw=true)
+
+<b> Streaming 3D object detection: </b> Similar to temporal detection
+from multi-frame point clouds, streaming detection methods can treat each LiDAR packet as an independent sample to detect 3D objects and apply temporal modules on the sequential
+packets to learn the inter-packets relationships. However, a LiDAR packet normally contains an incomplete point cloud and
+the information from a single packet is generally not sufficient
+for accurately detecting 3D objects. To this end, some papers
+try to provide more context information for detection in a single packet. The proposed techniques include a spatial memory
+bank and a multi-scale context padding scheme.
+
+## 6.3. 3D object detection from videos
+
+<b> Problem and Challenge: </b> Video is an important data type and
+can be easily obtained in autonomous driving applications. Compared to single-image based 3D object detection, video-based
+3D detection naturally benefits from the temporal relationships
+of sequential images. While numerous works focus on singleimage based 3D object detection, only a few papers investigate
+the problem of 3D object detection from videos, which leaves an
+open challenge to the research community.
+
+<b> Video-based 3D object detection: </b> Video-based detection approaches generally extend the image-based 3D object detectors
+by tracking and fusing the same objects across different frames.
+The proposed trackers include LSTM [100] and the 3D Kalman
+filter. In addition, there are some works leveraging both videos and multi-frame point clouds for more accurate
+3D object detection. Those methods propose 4D sensor-time fusion to learn features from both temporal and multi-modal data.
+
+# 7. Label-Efficient 3D Object Detection
+
+In this section, we introduce the methods of label-efficient 3D
+object detection. In previous sections, we generally assume the
+3D detectors are trained under full supervision on a specific data
+domain and with a sufficient amount of annotations. However,
+in real-world applications, the 3D object detection methods inevitably face the problems of poor generalizability and lacking
+annotations. To address these issues, label-efficient techniques
+can be employed in 3D object detection, including domain adaptation, weakly-supervised learning,
+semi-supervised learning, and self-supervised learning for 3D object detection.
+
+## 7.1. Domain adaptation for 3D object detection
+
+<b> Problem and Challenge: </b> Domain gaps are ubiquitous in the
+data collection process. Different sensor settings and placements,
+different geographical locations, and different weathers will result in completely different data domains. In most conditions,
+3D object detectors trained on a certain domain cannot perform
+well on other domains. Many techniques have been proposed to
+address the domain adaptation problem for 3D object detection,
+e.g. leveraging consistency between source and target domains,
+and self-training on target domains. Nevertheless, most methods
+only focus on solving one specific domain transfer problem. Designing a domain adaptation approach that can be generally applied in any domain transfer tasks in 3d object detection will be a
+promising research direction.
+
+![img](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note-7-53.png?raw=true)
+
+![img](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note-7-54.png?raw=true)
+
+<b> Cross-sensor domain adaptation: </b> Different datasets have different sensory settings, e.g. a 32-beam LiDAR sensor used in
+nuScenes versus a 64-beam LiDAR sensor in KITTI,
+and the data is also collected at different geographic locations,
+e.g. KITTI is collected in Germany while Waymo is
+collected in United States. These factors will lead to severe domain gaps between different datasets, and the detectors trained
+on a dataset generally exhibit quite poor performance when they
+are tested on other datasets. [This](https://arxiv.org/abs/2005.08139) is a notable work that observes
+the domain gaps between datasets, and they introduce a statistic normalization approach to handle the gaps. Many following
+works leverage self-training to resolve the domain adaptation
+problem. In those methods, a detector pre-trained on the source
+dataset will produce pseudo labels for the target dataset, and then
+the detector is re-trained on the target dataset with pseudo labels. These methods make improvements mainly on obtaining
+pseudo labels of higher quality, e.g. proposes a scale-anddetect strategy, introduces a memory bank, leverages
+the scene flow information, and exploits playbacks to enhance the quality of pseudo labels. In addition to the self-training
+approaches, there also exist some papers building alignments between source and target domains. The domain alignments can
+be established through a scale-aware and range-aware alignment
+strategy, multi-level consistency, and a contrastive
+co-training scheme.
+
+In addition to the domain gaps among datasets, different sensors also produce data of distinct characteristics. A 32-beam LiDAR produces much sparser point clouds compared to a 64-
+beam LiDAR, and images obtained from different cameras also have diverse sizes and intrinsics. [This](https://ieeexplore.ieee.org/document/8814047) introduces a multi-task
+learning scheme to tackle the domain gaps between different LiDAR sensors, and [this](https://arxiv.org/abs/2108.07142) proposes the position-invariant transform
+to address the domain gaps between different cameras.
+
+<b> Cross-weather domain adaptation: </b> Weather conditions have a
+huge impact on the quality of collected data. On rainy days, raindrops will change the surface property of objects so that fewer
+LiDAR beams can be reflected and detected, so point clouds collected on rainy days are much sparser than those obtained under
+dry weather. Besides fewer reflections, rain also causes false positive reflections from raindrops in mid-air. [This](https://arxiv.org/abs/2108.07142) addresses the
+cross-weather domain adaptation problem with a novel semantic
+point generation scheme.
+
+<b> Sim-to-real domain adaptation: </b> Simulated data has been broadly
+adopted in 3D object detection, as the collected real-world data
+cannot cover all driving scenarios. However, the synthetic data
+has quite different characteristics from the real-world data, which
+gives rise to a sim-to-real adaptation problem. Many approaches
+are proposed to resolve this problem, including GAN based
+training and introducing an adversarial discriminator
+to distinguish real and synthetic data.
+
+## 7.2. Weakly-supervised learning for 3D object detection
+
+<b> Problem and Challenge: </b> Existing 3D object detection methods
+highly rely on training with vast amounts of manually labeled 3D
+bounding boxes, but annotating those 3D boxes is quite laborious and expensive. Weakly-supervised learning can be a promising solution to this problem, in which weak supervisory signals,
+e.g. less expensive 2D annotations, are exploited to train the 3D
+object detection models. Weakly-supervised 3D object detection
+requires fewer human efforts for data annotation, but there still
+exists a non-negligible performance gap between the weaklysupervised and the fully-supervised methods.
+
+![img](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note-7-55.png?raw=true)
+
+<b> Weakly-supervised 3D object detection: </b> Weakly-supervised approaches leverage weak supervision instead of fully annotated
+3D bounding boxes to train 3D object detectors. The weak supervisions include 2D image bounding boxes, a pretrained image detector, BEV object centers and vehicle instances. Those methods generally design novel learning mechanisms to skip the 3D box supervision and learn to detect 3D objects by mining useful information from weak signals.
+
+## 7.3. Semi-supervised 3D object detection
+
+<b> Problem and Challenge: </b> In real-world applications, data annotation requires much more human effort than data collection.
+Typically a data acquisition vehicle can collect more than 100k
+frames of point clouds in a day, while a skilled human annotator can only annotate 100-1k frames per day. This will inevitably lead to a rapid accumulation of a large amount of unlabeled data. Hence how to mine useful information from largescale unlabeled data has become a critical challenge to both the
+research community and the industry. Semi-supervised learning, which exploits a small amount of labeled data and a huge
+amount of unlabeled data to jointly train a stronger model, is a
+promising direction. Combining 3D object detection with semisupervised learning can boost detection performance. 
+
+![img](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note-7-56.png?raw=true)
+
+<b> Semi-supervised 3D object detection: </b> There are mainly two
+categories of approaches in semi-supervised 3D object detection:
+pseudo-labeling and teacher-student learning. The pseudo labeling approaches [18, 284] first train a 3D object detector with the
+labeled data, and then use the 3D detector to produce pseudo
+labels for the unlabeled data. Finally, the 3D object detector is
+re-trained with the pseudo labels on the unlabeled domain. The
+teacher-student methods adapt the Mean Teacher
+training paradigm to 3D object detection. Specifically, a teacher
+detector is first trained on the labeled domain, and then the teacher
+detector guides the training of a student detector on the unlabeled
+domain by encouraging the output consistencies between the two
+detection models.
+
+## 7.4. Self-supervised 3D object detection
+
+<b> Problem and Challenge: </b> Self-supervised pre-training has become a powerful tool when there exists a large amount of unlabeled data and limited labeled data. In self-supervised learning, models are first pre-trained on large-scale unlabeled data
+and then fine-tuned on the labeled set to obtain a better performance. In autonomous driving scenarios, self-supervised pretraining for 3D object detection has not been widely explored.
+Existing methods are trying to adapt the self-supervised methods, e.g. contrastive learning, to the 3D object detection problem, but the rich semantic information in multi-modal data has
+not been well exploited. How to effectively handle the raw point
+clouds and images to pre-train an effective 3D object detector
+remains an open challenge.
+
+![img](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note-7-57.png?raw=true)
+
+<b> Self-supervised 3D object detection: </b> Self-supervised methods
+generally apply the contrastive learning techniques to
+3D object detection. Specifically, an input point cloud is first
+transformed into two views with augmentations, and then contrastive learning is employed to encourage the feature consistencies of the same 3D locations across the two views. Finally,
+the 3D detector pre-trained with contrastive learning is further
+fine-tuned on the labeled set to attain better performance. PointContrast first introduces the contrastive learning paradigm
+in 3D object detection, and the following papers improve this
+paradigm by leveraging the depth information and clustering. In addition to self-supervised learning for point
+cloud detectors, there are also some works trying to exploit both
+point clouds and images for self-supervised 3D detection, e.g. proposes an intra-modal and inter-modal contrastive learning scheme on the multi-modal inputs
+
+# 8. Analysis and Outlooks
+
+## 8.1. Research trends
+
+### 8.1.1. Trends of dataset selection
+
+Before 2018, most methods were evaluated on the KITTI dataset,
+and the evaluation metric they adopted is 2D average precision
+(AP2D), where they project the 3D bounding boxes into the image plane and compare them with the ground truth 2D boxes.
+From 2018 until now, more and more papers have adopted the 3D
+or BEV average precision (AP3D or APBEV ), which is a more
+direct metric to measure 3D detection quality. For the LiDARbased methods, the detection performances on KITTI quickly
+get converged over the years, e.g. AP3D of easy cases increases
+from 71.40% to 90.90%, and even AP3D of hard
+cases reaches 79.14%. Therefore, since 2019, more and
+more LiDAR-based approaches have turned to larger and more
+diverse datasets, such as the nuScenes dataset and the Waymo
+Open dataset. Large-scale datasets also provide more useful data
+types, e.g. raw range images provided by Waymo facilitate the
+development of range-based methods. For the camera-based detection methods, AP3D of monocular detection on KITTI increases from 1.32% to 23.22%, leaving huge room
+for improvement. Until now, only a few monocular methods have
+been evaluated on the Waymo dataset. For the multi-modal detection approaches, the methods before 2019 are mostly tested
+on the KITTI dataset, and after that most papers resort to the
+nuScenes dataset, as it provides more multi-modal data.
+
+### 8.1.2. Trends of inference time
+
+PointPillars has achieved remarkable inference speed with
+only 16ms latency, and its architecture has been adopted by many
+following works. However, even with the emergence of more powerful hardware, the inference speed didn’t exhibit a significant improvement over the years. This is mainly
+because most methods focus on performance improvement and
+pay less attention to efficient inference. Many papers have introduced new modules into the existing detection pipelines, which
+also brings additional time costs. For the pseudo-LiDAR based
+detection methods, the stereo-based methods, and most multimodal methods, the inference time is generally more than 100 ms, which cannot satisfy the real-time requirement and hampers
+the deployment in real-world applications.
+
+### 8.1.3. Trends of the LiDAR-based methods
+
+LiDAR-based 3D object detection has witnessed great advances
+in recent years. Among the LiDAR-based methods, the voxelbased and point-voxel based detection approaches attain superior performances.
+The pillar-based detection methods are extremely fast. The range-based and BEV-based approaches are also quite efficient. The point-based detectors
+can obtain a good performance, but their inference speeds are
+greatly influenced by the choices of sampling and operators.
+
+For point-based 3D object detectors, moderate AP has been
+increasing from 53.46% to 79.57% on the KITTI
+benchmark. The performance improvements are mainly owing
+to two factors: more robust point cloud samplers and more powerful point cloud operators. The development of point cloud samplers starts with Farthest Point Sampling (FPS), and
+many following point cloud detectors have been improving point
+cloud samplers based on FPS, including fusion-based FPS ,
+target-based FPS, FPS with coordinates refinement.
+A good point cloud sampler could produce candidate points that
+have better coverage of the whole scene, so it avoids missing
+detections when the point cloud is sparse, which helps improve
+the detection performance. Besides point cloud samplers, point
+cloud operators have also progressed rapidly, from the standard
+set abstraction to graph operators
+and Transformers. Point cloud operators are crucial for
+extracting powerful feature representations from point clouds.
+Hence powerful point cloud operators can help detectors better
+obtain semantic information about 3D objects and improve performance.
+
+For grid-based 3D object detectors, moderate AP has been
+increasing from 50.81% to 82.09% on the KITTI
+benchmark. The performance improvements are mainly driven
+by better backbone networks and detection heads. The development of backbone networks has experienced four stages: 
+
+(1)
+2D networks to process BEV images that are generated by point
+cloud projection [10, 335], 
+
+(2) 2D networks to process pillars
+that are generated by PointNet encoding, 
+
+(3) 3D sparse
+convolutional networks to process voxelized point clouds,
+
+(4) Transformer-based architectures [187, 70, 270]. The trend of
+backbone designs is to encode more 3D information from point
+clouds, which leads to more powerful BEV representations and
+better detection performance, but those early designs are still
+popular due to efficiency. Detection head designs have experienced the transition from anchor-based heads to centerbased heads, and the object localization ability has been
+improved with the development of detection heads. Other head
+designs such as IoU rectification and sequential head
+can further boost performance.
+
+For point-voxel based 3D object detectors, moderate AP has
+been increasing from 75.73% to 82.08% on the KITTI
+benchmark. The performance improvements come from more
+power operators and modules that
+can effectively fuse point and voxel features.
+
+For range-based 3D object detectors, L1 mAP has been increasing from 52.11% to 78.4% on the Waymo Open
+dataset. The performance improvements come from designs of
+specialized operators that can handle range images
+more effectively, as well as view transforms and multi-view aggregation.
 
 
+### 8.1.4. Trends of the camera-based methods
 
+Camera-based 3D object detection has shown rapid progress recently. Among the camera-based methods, the stereo-based detection methods generally outperform the monocular detection
+approaches by a large margin. This is mainly because depth and disparity estimated from stereo images are much more accurate than
+those estimated from monocular images, and accurate depth estimation is the most important factor in camera-based 3D object
+detection. Multi-camera 3D object detection has been progressing fast with the emergence of BEV perception and Transformers. State-of-the-art method attains 54.0% mAP and 61.9
+NDS on nuScenes, which has outperformed some prestigious
+LiDAR-based 3D object detectors.
 
+For monocular 3D object detectors, moderate AP has been
+increasing from 1.51% to 16.34% on the KITTI
+benchmark. The major challenge of monocular 3D object detection is how to obtain accurate 3D information from a single
+2D image, as localization errors dominate detection errors. The
+performance improvements are driven by more accurate depth
+prediction, which can be achieved by better network architecture designs, leveraging depth images
+or pseudo-LiDAR point clouds, introducing geometry constraints, and 3D object reconstruction.
 
+For stereo-based 3D object detectors, moderate AP has been
+increasing from 4.37% to 64.66% on the KITTI benchmark. The performance improvements mainly come from better
+network designs and data representations. Early works rely
+on stereo-based 2D detection networks to produce paired object bounding boxes and then predict object-centric stereo/depth
+information with a sub-network. However, those object-centric
+methods generally lack global disparity information which hampers accurate 3D detection in a scene. Later on, pseudo-LiDAR
+based approaches generate disparity maps from stereo images and then transform disparity maps into 3D pseudo-LiDAR
+point clouds that are finally passed to a LiDAR detector to perform 3D detection. The transformation from 2D disparity maps
+to 3D point clouds is crucial and can significantly boost 3D detection performance. Many following papers are based on the
+pseudo-LiDAR paradigm and improve it with stronger stereo
+matching network and end-to-end training of stereo matching and LiDAR detection. Recent methods transforms disparity maps into 3D volumes and apply grid-based detectors on the volumes, which results in better performance.
 
+For multi-view 3D object detection, mAP has been increasing from 41.2% to 54.0% on the nuScenes dataset.
+For BEV-based approaches, the performance improvements are
+mainly from better depth prediction. More accurate
+depth information results in more accurate camera-to-BEV transformation so detection performance can be improved. For querybased methods, the performance improvements come from better designs of 3D object queries, more powerful image features, and new attention mechanisms.
 
+### 8.1.5. Trends of the multi-modal methods
 
+The multi-modal methods generally exhibit a performance improvement over the single-modal baselines but at the cost of
+introducing additional inference time. For instance, the multimodal detector outperforms the LiDAR baseline by
+8.8% mAP on nuScenes, but the inference time of also increases to 542 ms compared to the baseline 70 ms. The problem
+can be more severe in the early-fusion based approaches, where
+the 2D networks and the 3D detection networks are connected
+in a sequential manner. Most multi-modal detection methods are
+designed and tested on the KITTI dataset, in which only a frontview image and the corresponding point cloud are utilized. Recently more and more methods are proposed and evaluated on
+the nuScenes dataset, in which multi-view images, point clouds,
+and high-definition maps are provided.
 
+For early-fusion based methods, moderate AP increases from
+70.39% to 76.51% on the KITTI benchmark, and
+mAP increases from 46.4% to 66.8% on nuScenes
+dataset. There are two crucial factors that contribute to the performance increase: knowledge fusion and data augmentation.
+From the results, we can observe that point-level knowledge fusion is generally more effective than region-level fusion. This is because region-level knowledge fusion
+simply reduces the detection range, while point-level knowledge
+fusion can provide fine-grained semantic information which is
+more beneficial in 3D detection. Besides, consistent data augmentations between point clouds and images can also significantly boost detection performance.
 
+For intermediate and late fusion based methods, moderate
+AP increases from 62.35% to 80.67% on the KITTI
+benchmark, and mAP increases from 52.7% to 69.2%
+on the nuScenes dataset. Most methods focus on three critical
+problems: where to fuse different data representations, how to
+fuse these representations, and how to build reliable alignments
+between points and image pixels. For the where-to-fuse problem,
+different approaches try to fuse image and LiDAR features at
+different places, e.g. 3D backbone networks, BEV feature maps,
+RoI heads, and outputs. From the results we can observe that
+fusion at any place can boost detection performance over singlemodality baselines, and fusion in the BEV space
+is more popular recently for its performance and efficiency. For
+the how-to-fuse problem, the development of fusion operators
+has experienced simple concatenation, continuous convolutions, attention, and Transformers, and fusion with Transformers exhibit prominent performance on all benchmarks. For the point-to-pixel alignment problem, most papers reply on fixed extrinsics and intrinsics to construct point-to-pixel correspondences. However, due to occlusion and calibration errors, those correspondences can be noisy
+and misalignment will harm performance. Recent works
+circumvent this problem by directly fusing camera and LiDAR
+BEV feature maps, which is more robust to noise.
 
+### 8.1.6. Systematic comparisons
 
+Considering all the input sensors and modalities, LiDAR-based
+detection is the best solution to the 3D object detection problem,
+in terms of both speed and accuracy. For instance, achieves 80.28% moderate AP3D and still runs at 30 FPS on KITTI.
+Multi-modal detection is built upon LiDAR-based detection, and
+can obtain a better detection performance compared to the LiDAR baselines, becoming state-of-the-art in terms of accuracy.
+Camera-based 3D object detection is a much cheaper and quite
+efficient solution in contrast to LiDAR and multi-modal detection. Nevertheless, the camera-based methods generally have a
+worse detection performance due to inaccurate depth predictions
+from images. The state-of-the-art monocular and stereo
+detection approach only obtain 16.34% and 64.66% moderate
+AP3D respectively on KITTI. Recent advances in multi-view 3D
+object detection are quite promising. The state-of-the-art
+achieves 54.0% mAP on nuScenes, which could perform on par
+with some classic LiDAR detectors. In conclusion, LiDARbased and multi-modal detectors are the best solutions considering speed and accuracy as the dominant factors, while camerabased detectors can be the best choice considering cost as the
+most important factor, and multi-view 3D detectors are becoming promising and may outperform LiDAR detectors in the future.
 
+## 8.2. Future outlooks
 
+### 8.2.1. Open-set 3D object detection
 
+Nearly all existing works are proposed and evaluated on close
+datasets, in which the data only covers limited driving scenarios
+and the annotations only include basic classes, e.g. cars, pedestrians, cyclists. Although those datasets can be large and diverse,
+they are still not sufficient for real-world applications, in which
+critical scenarios like traffic accidents and rare classes like unknown obstacles are important but not covered by the existing
+datasets. Therefore, existing 3D object detectors that are trained
+on the close sets have a limited capacity of dealing with those
+critical scenarios and cannot identify the unknown categories. To
+overcome the above limitations, designing 3D object detectors
+that can learn from the open world and recognize a wide range
+of object categories will be a promising research direction. [This](https://arxiv.org/pdf/2112.01135.pdf)
+is a good start for open-set 3D object detection and hopefully
+more methods will be proposed to tackle this problem.
 
+### 8.2.2. Detection with stronger interpretability
 
+Deep learning based 3D object detection models generally lack
+interpretability. Namely, some important questions on how the
+networks can identify 3D objects in point clouds, how occlusion and noise of 3D objects can affect the model outputs, and
+how much context information is needed for detecting a 3D object, have not been properly answered due to the black-box property of deep neural networks. On the other hand, understanding
+the behaviors of 3D detectors and answering these questions are
+quite important if we want to perform 3D object detection in a
+more robust manner and avoid those unexpected cases brought
+by black-box detectors. Therefore, the methods that can understand and interpret the existing 3D object detection models will
+be appealing in future research.
 
+### 8.2.3. Efficient hardware design for 3D object detection
 
+Most existing works focus on designing algorithms to tackle the
+3D object detection problem, and their models generally run on
+GPUs. Nevertheless, unlike image operators that are highly optimized for GPU devices, point clouds and voxels are sparse and
+irregular, and the commonly adopted 3D operators like set abstraction or 3D sparse convolutions are not well suited for GPUs.
+Hence those LiDAR object detectors cannot run as efficiently as
+the image detectors on the existing hardware devices. To handle
+this challenge, designing novel devices where the hardware architectures are optimized for 3D operators as well as the task of
+3D object detection will be an important research direction and
+will be beneficial for real-world deployment. [This](https://pointacc.mit.edu/) is a pioneering hardware work to accelerate point cloud processing, and we
+believe more and more papers will come in this field. In addition,
+new sensors, e.g. solid-state LiDARs, LiDARs with doppler, 4D
+radars, will also inspire the design of 3D object detectors.
 
+### 8.2.4. Detection in end-to-end self-driving systems
 
+Most existing works treat 3D object detection as an independent
+task and try to maximize the detection metrics such as average
+precision. Nevertheless, 3D object detection is closely correlated
+with other perception tasks as well as downstream tasks such as
+prediction and planning, so simply pursuing high average precision for 3D object detection may not be optimal when considering the autonomous driving system as a whole. Therefore,
+conducting 3D object detection and other tasks in an end-to-end
+manner, and learning 3D detectors from the feedback of planners, will be the future research trends of 3D object detection.
 
+# Conclusion
 
+![img](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note-7-58.png?raw=true)
 
+![img](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note-7-59.png?raw=true)
 
-
-
-
+![img](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note-7-60.png?raw=true)
 
 
 
