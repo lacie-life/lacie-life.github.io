@@ -14,7 +14,7 @@ render_with_liquid: false
 
 ## 1. Comparison with state-of-the-art methods
 
-![image](/assets/img/post_assest/paper-note-8-1.png)
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note-8-1.png?raw=true)
 
 In autonomous driving, the most commonly used 3D
 sensors are the LiDAR sensors, which generate 3D point
@@ -83,7 +83,7 @@ test board of KITTI by using only point clouds as input.
 
 ### 2.1. Bottom-up 3D proposal generation via point cloud segmentation
 
-![image](/assets/img/post_assest/paper-note-8-2.png)
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note-8-2.png?raw=true)
 
 Existing 2D object detection methods could be classified into one-stage and two-stage methods, where one-stage methods are generally faster but directly
 estimate object bounding boxes without refinement, while
@@ -135,7 +135,7 @@ by the 3D ground-truth boxes. The number of foreground
 points is generally much smaller than that of the background
 points for a large-scale outdoor scene. Thus we use the focal loss to handle the class imbalance problem as:
 
-![image](/assets/img/post_assest/paper-note-8-3.png)
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note-8-3.png?raw=true)
 
 During training point cloud segmentation, we keep the default settings $αt = 0.25$ and $γ = 2$ as the original paper.
 
@@ -152,7 +152,7 @@ in the LiDAR coordinate system, where $(x, y, z)$ is the object center location,
 object orientation from the bird’s view. To constrain the
 generated 3D box proposals, we propose bin-based regression losses for estimating 3D bounding boxes of objects.
 
-![image](/assets/img/post_assest/paper-note-8-4.png)
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note-8-4.png?raw=true)
 
 For estimating center location of an object, as shown in
 Fig. 3, we split the surrounding area of each foreground
@@ -186,7 +186,7 @@ and their corresponding point features from stage-1 according to the location of
 
 ### 2.3. Canonical 3D bounding box refinement
 
-![image](/assets/img/post_assest/paper-note-8-6.png)
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note-8-6.png?raw=true)
 
 <b> Canonical transformation: </b> To take advantages of our
 high-recall box proposals from stage-1 and to estimate only
