@@ -197,6 +197,8 @@ Model Quantization is a method of increasing computational efficiency by reducin
 
 In deep learning, FP32 (32-bit floating point) is mostly used when processing numbers. However, if numbers are expressed using lower bits without losing accuracy, computational efficiency will increase.
 
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/lightweight-10.png?raw=true)
+
 Quantization is a method of reducing the size of the model by expressing the weight value by lowering the bitband to FP16 (16-bit floating point) or INT8 (8-bit integer) rather than FP32.
 
 #### Advantages of Quantization
@@ -215,6 +217,109 @@ Recently, most deep learning frameworks such as Tensorflow and MXNet support qua
 #### Precautions for Quantization
 
 Nowadays, most deep learning frameworks support quantization, so there is no need to implement quantization directly. However, in theory, it would be good to know what to pay attention to, so I have summarized the information below.
+
+<b> 1. Dynamic Range and Precision / Resolution </b>
+
+One of the things to pay attention to when quantifying a model is the dynamic range (range of number expression), and the other is precision / resolution (how finely the number can be expressed within the range).
+
+In FP32, which uses 32 bits, the dynamic range is $± 3.4 x 10^{38}$ no see. also $4 . 2 x 10^9$. It can represent numbers.
+However, in INT8, the dynamic range is $[ − 1 2 8…1 2 7 ]$ ego,$2^n$ It can represent numbers.
+
+In this way, INT8 represents fewer numbers with less precision than FP32, which affects model performance.
+
+A method used to overcome the dynamic range of INT8 is to use a scale factor.
+
+For example, let's say you want to convert an FP32 model to INT8. If all layer weights are between -1 and 1, multiply the original weight value by 127, and if the weights are between -0.5 and 0.5, multiply by 255.[ − 127 … 127]It can be expressed as a number between.
+
+If the weight is a large number between -1270 and 1270, use 0.1 as the scale factor. [−127 … 127]It can be expressed as a number between.
+
+The method used to increase the resolution, which is the precision of numerical expression, is to move the entire value so that the middle value between the maximum and minimum value of the weight value of the layer is 0. This shift can be implemented by adding an interger value called the zero point.
+
+In this way, by using scale factor and zero point, intermediate values ​​can be expressed more accurately and precisely. However, it has the disadvantage of requiring additional memory space to store the scale factor and zero point.
+
+<b> 2. Overflows </b>
+
+Convolution or fully-connected layer accumulates the values ​​being calculated during calculation. If the number of bits used is reduced using quantization, numbers exceeding the dynamic range may occur during the median accumulation process.
+
+In case of multiplication between n-bit ints (integers with n bits), the maximum 2^n You will need bits. Therefore, to avoid overflow, a sufficient number of bits must be used to store the intermediate accumulated value.
+
+For example, in the case of a convolution layer, value accumulation after multiplication operation $c ⋅ k^2$ Perform once (c is the number of channels,k is the kernel size.) Therefore, to avoid overflow, $2n _ + log_{2}( c⋅k^2)$-bit must be used.
+
+#### Quantization techniques
+
+The content below has been summarized by referring only to the Dynamic/Static quantization section of Lei Mao's blog . In order to avoid excessive length, this article lacks a formal summary of quantization operations, but more detailed information is provided on [Lei Mao's blog](https://leimao.github.io/article/Neural-Networks-Quantization/), so please refer to it if you wish to study more deeply.
+
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/lightweight-9.png?raw=true)
+
+<b> 1. Post-Training Quantization </b>
+
+<b> Dynamic quantization </b>
+
+Dynamic quantization is a method in which weights are always quantized and activation is quantized during inference.
+Therefore, when activations are stored in memory, they are stored in floating-point form.
+
+When quantizing a value from floating to integer, a zero-point to correct the middle value of the weights to 0 to fit the range of values ​​and a scale factor to match the maximum number of bits using min/max values ​​are needed.
+
+As mentioned before, Dynamic quantization stores Activation as a Floating-point. Therefore, we do not know the scale factor and zero-point (bias) values ​​for quantizing activation when inference, and we have to dynamically calculate the scale factor and zero-point each time we inference.
+
+However, this dynamic quantization has the advantage of requiring no additional data for fine-turning or calibration and has less loss of accuracy.
+
+<b> Static quantization </b>
+
+Static quantization is a method of quantizing both weights and activations.
+
+Static quantization, unlike dynamic quantization, has the advantage of being fast in calculation because it does not need to calculate the scale factor and zero point of activation.
+
+Additionally, since Convolution, Activation, and Batch Normalization all use the same number of bits to express numbers, each layer can be fused. The fused layer facilitates parallel computation, thus increasing computation efficiency.
+
+In static quantization, fixed scale factors and zero-points may not fit the inferring data well. Therefore, calibration is performed to minimize accuracy loss.
+
+Unlabeled data is required for calibration. If you do not use Unlabeled Data, the scale factor and zero point will be inaccurate (they will not be corrected for the data to be inferred), and when inferred, the feature value will differ from the actual value, resulting in loss of accuracy.
+
+<b> 2. Quantization Aware Training </b>
+
+The methods outlined above are all Post-Training Quantization, that is, quantization methods for models that have completed training.
+
+Post-Training Quantization is a method of expressing floating-point numbers stored using 32 bits using lower bits. Therefore, there is loss of accuracy when storing numbers, and when restoring the original numbers from this model, there is a difference from the value before quantization. This difference causes performance degradation of the entire model.
+
+Quantization Aware Training is a method of modeling in advance the impact of quantization during inference during learning.
+
+Post-Training Quantization has the advantage of minimizing the performance degradation of the quantized model compared to quantizing a large model.
+
+#### 2.3. Light weight architecture
+
+Another way is to make the network itself lightweight.
+
+Networks released until 2016, such as AlexNet, VGGNet, and ResNet, all had dramatically improved performance, but there was a problem in that the amount of computation itself (the number of parameters) became too large.
+Accordingly, several structures have been studied to reduce the number of parameters in the network.
+
+Representative models that focus on reducing the number of parameters include SqueezeNet, MobileNet, and ShuffleNet.
+
+SqueezeNet proposed a structure called Fire Module and showed similar performance with 50 times fewer parameters than AlexNet.
+
+The Xception model proposed an efficient convolutional layer called Depthwise Separable Convolution.
+
+MobileNet proposed a lightweight structure that can be operated on mobile devices by appropriately utilizing the Depthwise Separable Convolutions structure, and the structure was further improved and released up to version 3.
+
+ShuffleNet shuffles the results of Depthwise Separable Convolutions to create a lightweight but high-performance network.
+
+Recently, networks found using the NAS (Neural Architecture Search) method are widely used. NAS is a method of directly finding the network structure in a designated search space (network depth, number of channels, shortcut usage location, etc.).
+MNasNet utilizes a network structure that is lightweight but shows good performance by including the search space and operating time of mobile devices.
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/lightweight-11.png?raw=true)
+
+This method of designing a lightweight network is a field that is continuously being researched and developed because it can solve the fundamental computational problem of the network. For more detailed information, we plan to organize it in detail based on each network's paper in the following article.
+
+#### 2.4. Knowledge Distillation
+
+Knowledge Distillation is a method of using a large, well-trained network to learn a smaller network to achieve performance comparable to the original network.
+
+In general, a large network is called a teacher model, and a small network is called a student model, and learning is usually done by combining several teacher models to learn one student model.
+
+When learning, the teacher model is utilized for learning by simultaneously reflecting the loss of the teacher model and the loss of the student model.
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/lightweight-12.png?raw=true)
 
 
 
