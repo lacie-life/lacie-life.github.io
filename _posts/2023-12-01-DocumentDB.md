@@ -3,7 +3,7 @@ title: Amazon DocumentDB
 # author:
 #   name: Life Zero
 #   link: https://github.com/lacie-life
-date:  2023-11-19 11:11:14 +0700
+date:  2023-12-01 11:11:14 +0700
 categories: [Devops]
 tags: [Tutorial]
 img_path: /assets/img/post_assest/pvo/
