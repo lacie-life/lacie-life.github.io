@@ -155,12 +155,217 @@ follows the settings in TransFusion and is defined as Equation
 - Multiview and no code public
 - Still complex and slow
 
+## RangeRCNN: Towards Fast and Accurate 3D Object Detection with Range Image Representation
+[ArXvi 2021]
+
+### Motivation
+
+Although we mostly regard the point cloud as the raw data
+format, the range image is the native representation of the
+rotating LIDAR sensor. It retains
+all original information without any loss. Beyond this, the
+dense and compact properties make it efficient to process.
+
+=> Extract features from the range image.
+
+Problem with range image:
+
+- The large scale variation makes it difficult to decide the anchor size in the range view.
+- The occlusion causes the bounding boxes to easily overlap with each other.
+
+### Contribution
+
+- Propose the RangeRCNN framework which takes
+the range image as the initial input to extract dense
+and lossless features for fast and accurate 3D object
+detection.
+
+- Design a 2D CNN utilizing dilated convolution to
+better adapt the flexible receptive field of the range
+image.
+
+- Propose the RV-PV-BEV module for transferring the
+feature from the range view to the bird’s eye view for
+easier anchor generation.
+
+- Propose an end-to-end two-stage pipeline that utilizes a region convolutional neural network (RCNN) for
+better height estimation. The whole network does not
+use 3D convolution or point-based convolution which
+makes it simple and efficient.
+
+### Method
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-1-8.png?raw=true)
+
+- Range Image Backbone
+
+range, coordinate, and intensity as the input channel (5 x h x w)
+
+KITTI: 5 x 48 x 512 (only label in front view)
+Waymo: 5 x 64 x 2650
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-1-9.png?raw=true)
 
 
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-1-10.png?raw=true)
+
+- RV-PV-BEV Module
+
+Range image it is
+difficult to assign anchors in the range image plane due to
+the large scale variation. The severe occlusion also makes
+it difficult to remove redundant bounding boxes in the NonMaximum Suppression (NMS) module
+
+=> Transfer the feature extracted from the range
+image to the bird’s eye image.
+
+For each point, we record its corresponding pixel coordinates in the range image plane, so we can obtain the
+pointwise feature by indexing the output feature of the range
+image backbone. Then, we project the pointwise feature to
+the BEV plane. For points corresponding with the same pixel
+in the BEV image, we use the average pooling operation
+to generate the representative feature for the pixel. Here the
+point view only serves as the bridge to transfer features from
+the range image to the BEV image. We do not use the pointbased convolution to extract features from points.
+
+- 3D RoI Pooling
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-1-11.png?raw=true)
+
+Based on the bird’s eye image, they generate 3D proposals
+using the region proposal network (RPN). However, neither
+the range image nor the bird’s eye image explicitly learns
+features along the height direction of the 3D bounding box,
+which causes their predictions to be relatively accurate in the
+BEV plane, but not in the 3D space. As a result, we want
+to explicitly utilize the 3D space information. They conduct
+a 3D RoI pooling based on the 3D proposals generated
+by RPN. The proposal is divided into a fixed number of
+grids. Different grids contain different parts of the object.
+As these grids have a clear spatial relationship, the height
+information is encoded among their relative positions. They
+directly vectorize these grids from three dimensions to one
+dimension sorted by their 3D positions.
+They apply several fully connected layers to the vectorized
+features and predict the refined bounding boxes and the
+corresponding confidences.
+
+- Loss Function
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-1-12.png?raw=true)
+
+### Results
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-1-13.png?raw=true)
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-1-14.png?raw=true)
 
 
+### Conclusion
+
+- New way extract feature from range image and use in BEV
+- Using 2D Backbone but still low because use encoder + decoder
+- Quite fast but still slow with PointPillar
+
+## RangeIoUDet: Range Image based Real-Time 3D Object Detector Optimized by Intersection over Union
+
+[CVPR 2021]
+
+### Motivation
+
+-  simple framework for easy deployment, fast inference time, and 2D convolution based
+model without extra customized operations.
+
+### Contribution
+
+- Propose a single-stage 3D detection model
+RangeIoUDet based on the range image, which is simple, effective, fast, and only uses 2D convolution.
+
+- Enhance pointwise features by supervising the
+point-based IoU, which makes the network better learn
+the implicit 3D information from the range image.
+
+- Propose the 3D Hybrid GIoU (HyGIoU) loss for
+supervising the 3D bounding box with higher location
+accuracy and better quality evaluation.
+
+### Method
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-1-15.png?raw=true)
+
+- Baseline Model of RangeIoUDet
+
+Similar with RangeRCNN
+
+- Pointwise Feature Optimized by LovaszSoftmax Loss
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-1-16.png?raw=true)
 
 
+The 2D FCN outputs the pixel-wise feature of the range
+image, which is further transferred to the point cloud to obtain the pointwise feature. Due to the 2D receptive field in
+the range image plane, points far away in the 3D space may
+obtain similar features if they are adjacent in the range image. The pointwise feature is directly passed to the following module without any extra supervision. We argue that
+the implicit 3D position information encoded in the range
+image is not fully exploited. We propose to supervise the
+pointwise feature to make the 2D FCN learn better.
+
+One simple idea is to directly apply a segmentation loss
+function to the pointwise feature, shown in Fig. 3(a). Directly supervising the pointwise feature of the point cloud
+is equivalent to supervise the pixel-wise feature of the range
+image, which does not further utilize the 3D position information of point clouds. In fact, this simple idea can not
+improve the detection accuracy. We analyze that the main
+problem is the lack of the 3D receptive field. However, utilizing the 3D receptive field needs to introduce the point
+based or voxel based convolution, which may slow down
+the inference speed and increase the difficulty of the deployment. Considering the above factors, we design the pointbased IoU module shown at the bottom right of Fig. 2.
+
+To make use of the 3D receptive field of point clouds, we
+search the local neighbors of each point using ball query and
+apply PointNet to extract local features (shown in Fig. 3(b)).
+We choose different radii for achieving multi-scale features.
+The multi-scale features are extracted in parallel and concatenated pointwisely. Finally, the features extracted in the 3D space is supervised by Lovasz-Softmax loss [1] to directly optimize the point-based IoU for better distinguishing
+the foreground and background. The local PointNet refines
+the pointwise feature which makes the final segmentation
+result better. Meanwhile, the better supervision promotes
+the 2D FCN to learn better through back-propagation. As a
+result, the pointwise feature passed to BEV becomes better
+even though the local PointNet is not directly applied to it.
+When designing this module, we adopt the parallel structure (Fig. 3(d)) instead of the cascade strcuture (Fig. 3(c)) to
+extract the multi-scale feature. The parallel structure allows
+the gradient to be faster and more easily backpropagated to
+the 2D FCN, which leads to the point-based IoU supervision
+to have a more direct impact on the pointwise feature. The
+deeper structure may improve the quality of the pointwise
+segmentation but degrade the detection performance.
+
+-  3D Bounding Box Optimized by 3D Hybrid GIoU Loss
+
+The performance of 3D object detection is affected
+by two factors: (1) the positioning accuracy of the 3D
+bounding box, which is determined by seven parameters
+(x, y, z, L, W, H, θ); (2) the confidence score of the box,
+which has a great influence on the quality evaluation. The
+positioning accuracy and quality of the predicted box are
+both highly related to its IoU with the corresponding ground
+truth, which motivates us to explore the value of the boxbased IoU in 3D detection. This section proposes a 3D Hybrid GIoU loss, including hybrid GIoU regression loss and
+3D IoU quality loss to improve the above two aspects.
+
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-1-17.png?raw=true)
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-1-18.png?raw=true)
+
+### Results
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-1-19.png?raw=true)
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-1-20.png?raw=true)
+
+### Conclusion
+
+- New Loss
+- Fast
+- No code public
 
 
 
