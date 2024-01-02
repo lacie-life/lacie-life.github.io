@@ -367,7 +367,158 @@ truth, which motivates us to explore the value of the boxbased IoU in 3D detecti
 - Fast
 - No code public
 
+## RangeDet: In Defense of Range View for LiDAR-based 3D Object Detection
 
+[ICCV 2021]
+
+### Motivation
+
+#### Advantages of range view
+-  Organizing the point cloud in range view misses no information
+
+-The compactness also enables fast neighborhood queries based on range image coordinates, while point
+view methods usually need a time-consuming ball query algorithm to get the neighbors. 
+
+- Moreover, the valid detection range of range-view-based detectors can be as far as
+the sensor’s availability, while we have to set a threshold for
+the detection range in BEV-based 3D detectors.
+
+####  The key to high-performance range-view-based detection
+
+- The challenge of detecting objects with sparse
+points in BEV is converted to the challenge of scale variation in the range image, which is never seriously considered
+in the range-view-based 3D detector.
+
+- The 2D range view is naturally compact, which
+makes it possible to adopt high resolution output without
+huge computational burden. However, how to utilize such
+characteristics to improve the performance of detectors is
+ignored by current range-image-based designs.
+
+-  Unlike in 2D image, though
+the convolution on range image is conducted on 2D pixel
+coordinates, while the output is in the 3D space. This point
+suggests an inferior design in the current range-view-based
+detectors: both the kernel weight and aggregation strategy
+of standard convolution ignore this inconsistency, which
+leads to severe geometric information loss even from the
+very beginning of the network.
+
+=> RangeDet
+
+### Contribution
+
+- Propose a pure range-view-based framework – RangeDet, which is a single-stage anchorfree detector designated to address the aforementioned challenges.
+
+- For the first challenge, they propose a simple yet effective <b> Range Conditioned Pyramid </b> to mitigate it. For the second challenge,
+they use <b> weighted Non-Maximum Suppression </b> to remedy the
+issue. For the third one, they propose <b> Meta-Kernel </b> to capture
+3D geometric information from 2D range view representation. 
+
+- Explore how
+to transfer common data augmentation techniques from 3D space to the range view.
+
+### Method
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-1-222.png?raw=true)
+
+#### Review of Range View Representation
+
+- For a LiDAR with m beams and n times measurement
+in one scan cycle, the returned values from one scan form a
+m × n matrix, called <b> range image </b>
+
+-  Each column
+of the range image shares an azimuth, and each row of the
+range image shares an inclination. They indicate the relative
+vertical and horizontal angle of a returned point w.r.t the
+LiDAR original point. The pixel value in the range image
+contains the range (depth) of the corresponding point, the
+magnitude of the returned laser pulse called intensity and
+other auxiliary information. 
+
+-  One pixel in the range image
+contains at least three geometric values: range $r$, azimuth $θ$,
+and inclination $φ$. These three values then define a spherical
+coordinate system.
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-1-21.png?raw=true)
+
+$$ x  = r cos(φ) cos(θ) $$
+$$ y  = r sin(φ) cos(θ) $$
+$$ z  = r sin(φ) $$
+
+where x, y, z denote the Cartesian coordinates of points.
+Note that range view is only valid for the scan from one
+viewpoint. It is not available for general point cloud since
+they may overlap for one pixel in the range image.
+
+#### Range Conditioned Pyramid
+
+- Similar with FPN
+
+-  The difference lies in how to assign each object to a different layer for training.
+
+- In the original FPN, the ground-truth bounding box
+is assigned based on its area in the 2D image. Nevertheless, simply adopting this assignment method ignores the
+difference between the 2D range image and 3D Cartesian
+space. A nearby passenger car may have similar area with
+a far away truck but their scan patterns are largely different.
+Therefore, we designate the objects with a similar range to
+be processed by the same layer instead of purely using the
+area in FPN. Thus we name our structure as Range Conditioned Pyramid (RCP).
+
+#### Meta-Kernel Convolution
+
+Compared with the RGB image, the depth information
+endows range images with a Cartesian coordinate system,
+however standard convolution is designed for 2D images on
+regular pixel coordinates. For each pixel within the convolution kernel, the weights only depend on the relative pixel
+coordinates, which can not fully exploit the geometric information from the Cartesian coordinates. In this paper, we
+design a new operator which learns dynamic weights from
+relative Cartesian coordinates or more meta-data, making
+the convolution more suitable to the range image.
+
+For better understanding, we first disassemble standard
+convolution into four components: sampling, weight acquisition, multiplication and aggregation.
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-1-23.png?raw=true)
+
+- Quite similar with pointnet
+
+#### Weighted Non-Maximum Suppression
+
+- From [this paper](https://arxiv.org/pdf/1505.01749.pdf)
+
+#### Data Augmentation in Range View
+
+Random global rotation, Random global flip and CopyPaste are three typical kinds of data augmentation for
+LiDAR-based 3D object detectors. Although they are
+straightforward in 3D space, it’s non-trivial to transfer them
+to RV while preserving the structure of RV.
+
+- Some changing for using with RV
+
+#### [IoU Prediction head](https://arxiv.org/pdf/2008.13367.pdf)
+#### Regression head
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-1-24.png?raw=true)
+
+### Results
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-1-25.png?raw=true)
+
+- 12fps in 2080Ti
+
+### Conclusion
+
+- New way for extract feature in range view with geometric information
+- Loss function
+- Pyramid Network
+- Slow
+- [Code](https://github.com/tusen-ai/RangeDet/tree/main)
+
+## RangePerception: Taming LiDAR Range View for Efficient and Accurate 3D Object Detection
 
 
 
