@@ -793,9 +793,100 @@ scale, and orientation. Finally, all proposals are filtered by
 - The instance-aware sampling relies on the semantic prediction
 of each point, which is susceptible to class imbalances distribution.
 
+## CVFNet: Real-time 3D Object Detection by Learning Cross View Features
+
+[IROS 2022]
+
+### Motivation
+
+- Effciently detecting
+objects in 3D LiDAR point clouds still remains challenging
+due to the irregular format and the sparsity of the point cloud.
+
+- The ball query operations for aggregating local features from neighboring points involved in
+PointNet++ are time-consuming.
+
+- view-based approaches
+usually suffer from the information loss during the projection
+from 3D points to 2D views, which is hard to be compensated
+during 3D detection. When multiple views are employed,
+directly concatenating features in proposal level as in MV3D can weaken the consistency among features. These
+shortcomings lead to inferior performance of the view-based
+methods than the voxel or point based counterparts.
+
+### Contribution
+
+- A novel real-time view-based one stage 3D object detector is proposed. It comprises only 2D convolutions and
+is able to learn consistent cross-view features through a
+progressive fusion manner.
+
+- A Point-Range fusion module PRNet is designed to
+effectively extract and fuse the 3D point and 2D range
+view features in a bilateral aggregation way.
+
+- A Slice Pillar transformation module is presented to
+transform 3D point features into 2D BEV features,
+which features less 3D geometric information loss during the dimension collapse.
 
 
+### Method
 
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-1-43.png?raw=true)
+
+-  Point-Range Fusion Module
+
+Range view is the native form of rotating LiDAR, featuring dense range images distributed in spherical coordinates where 2D convolutions can be applied effectively.
+Point view is of 3D coordinates that multi-layer perceptron
+(MLPs) can be used to extract features for each point. To
+extract and aggregate the features of these two views, we
+propose a Point-Range fusion module within which multistage bilateral fusion is carried out.
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-1-44.png?raw=true)
+
+
+- Slice Pillar Transformation
+
+Bird’s eye view(BEV) is a popular representation in 3D
+object detection as it features no occlusion or scale variation.
+There are two common ways to project the point cloud to
+BEV: voxelization and pillarization.
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-1-45.png?raw=true)
+
+- Sparse Pillar Head
+
+After the slice pillar transformation module and a series
+of convolution layers on BEV, we have the BEV feature
+map at hand. To estimate the proposals in each BEV grid,
+most existing methods use a dense prediction head. However,
+since most grids are empty, we introduce a sparse pillar
+head to suppress the useless proposals. The sparse pillar
+head consists of classifcation and regression head. Given
+a sparse BEV map, we frst defne nonempty grids as valid
+pillars and use 2D convolutions to extract features, which are
+then indexed to the pillar-wise features. Finally, classifcation
+head is used to predict the probability of a pillar’s class,
+and regression head is responsible for regressing 3D box
+parameters. The advantages of our sparse pillar head are
+two folds. Firstly, it balances the distribution of positive
+and negative samples by fltering out the empty grids which
+are otherwise counted as negative samples. Secondly, the
+computation cost is further reduced.
+
+- Loss Function
+
+...
+
+### Results
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-1-46.png?raw=true)
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-1-47.png?raw=true)
+
+### Conclusion
+
+- No code
+- Fast
 
 
 
