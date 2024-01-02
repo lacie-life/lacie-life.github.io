@@ -695,6 +695,116 @@ adopt a soft assignment instead of 0-1 hard assignment in
 
 - 20fps in 3090
 
+## Not All Points Are Equal: Learning Highly Efficient Point-based Detectors for 3D LiDAR Point Clouds
+
+[CVPR 2022]
+
+### Motivation
+
+- Not all points are equally important to the task of object detection.
+
+- Motivated by this, we aim to propose a task-oriented,
+instance-aware downsampling framework, to explicitly
+preserve foreground points while reducing the memory/computational cost. Specifically, two variants, namely
+class-aware and centroid-aware sampling strategies are
+proposed. In addition, we also present a contextual instance
+centroid perception, to fully exploit the meaningful context information around bounding boxes for instance center regression. Finally, we build our IA-SSD based on the
+bottom-up single-stage framework.
+
+### Contribution
+
+- Identify the sampling issue in existing point-based
+detectors, and proposed an efficient point-based 3D
+detector by introducing two learning-based instanceaware downsampling strategies.
+
+- e proposed IA-SSD is highly efficient and capable
+of detecting multi-class objects on LiDAR point clouds
+in a single pass. They also provided a detailed memory
+footprint vs. inference-speed analysis to further validate the superiority of the proposed method.
+
+- Extensive experiments on several large-scale datasets
+demonstrate the superior efficiency and accurate detection performance of the proposed method.
+
+### Method
+
+Different from dense prediction tasks such as 3D semantic segmentation, where point-wise prediction is required,
+<b> 3D object detection naturally focus on the small yet important foreground objects </b> (i.e., instances of interest including car, pedestrian, etc.). However, existing pointbased detectors usually adopt task-agnostic downsampling
+approaches such as random sampling or farthest point
+sampling in their framework. Albeit effective for
+memory/computational cost reduction, the most important
+foreground points are also diminished in progressive downsampling. Additionally, due to the large difference in size
+and geometrical shape of different objects, existing detectors usually train separate models with various carefully
+tuned hyperparameters for different types of objects. However, this inevitably affects the deployment of these models
+in practice.
+
+=> Can we train a single point-based model, which is efficient and
+capable of detecting multi-class objects in a single pass?
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-1-40.png?raw=true)
+
+#### Instance-aware Downsampling Strategy
+
+To preserve foreground points as much as
+possible, we turn to leverage the latent semantics of each
+point, since the learned point features may incorporate
+richer semantic information as the hierarchical aggregation
+operates in each layer. Following this idea, we propose the
+following two task-oriented sampling approaches by incorporating the foreground semantic priors into the network
+training pipelines.
+
+- <b> Class-aware Sampling: </b> This sampling strategy aims
+to learn semantics for each point, so as to achieve selective downsampling. To achieve this, we introduce extra
+branches to exploit the rich semantics in latent features.
+
+- <b> Centroid-aware Sampling: </b> Considering instance center
+estimation is the key for final object detection, we further
+propose a centroid-aware downsampling strategy to give
+higher weight to points closer to instance centroid. 
+
+#### Contextual Instance Centroid Perception
+
+- <b> Contextual Centroid Prediction: </b> Inspired by the success of context prediction in 2D images, we attempt
+to leverage the contextual cues around the bounding box for
+instance centroid prediction. 
+
+- <b> Centroid-based Instance Aggregation: </b> For shifted representative (centroid) points, we further utilize a PointNet++ module to learn a latent representation for each instance. Specifically, we transform the neighboring points
+to a local canonical coordinate system, then aggregate the
+point feature through shared MLPs and symmetric functions.
+
+- <b> Proposal Generation Head: </b> The aggregated centroid
+point features are then fed into proposal generation head to predict bounding boxes with classes. We encode the proposal as a multidimensional representation with location,
+scale, and orientation. Finally, all proposals are filtered by
+3D-NMS post-processing with a specific IoU threshold.
+
+####  End-to-End Learning
+
+...
+
+### Results
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-1-41.png?raw=true)
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-1-42.png?raw=true)
+
+### Conclusion
+
+- [Public code](https://github.com/yifanzhang713/IA-SSD)
+- Fast
+- The instance-aware sampling relies on the semantic prediction
+of each point, which is susceptible to class imbalances distribution.
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
