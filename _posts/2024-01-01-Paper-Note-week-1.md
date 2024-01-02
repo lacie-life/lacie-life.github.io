@@ -520,6 +520,97 @@ to RV while preserving the structure of RV.
 
 ## RangePerception: Taming LiDAR Range View for Efficient and Accurate 3D Object Detection
 
+[NeurIPS 2023]
+
+### Motivation
+
+- Two critical unslolved challengens in existing RV-Based detection methods: 
+
+- <b> Spatial Misalignment: </b> Existing RV-based detectors treat range images the same way as RGB images,
+by directly feeding them into 2D convolution backbones. This workflow neglects the nature that range
+images contain rich depth information, and even two range pixels are adjacent in range coordinate,
+their actual distance in 3D space could be more than 30 meters.
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-1-26.png?raw=true)
+
+As visualized in figure above, foreground
+pixels on the margins of vehicles and pedestrians are often far from their neighboring background
+pixels in 3D space. Directly processing such 3D-space-uncorrelated pixels with 2D convolution
+kernels can only produce noisy features, hindering geometric information extraction from the margins
+of foreground objects.
+
+- <b> Vision Corruption: </b> 
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-1-27.png?raw=true)
+
+ When objects of interest are located on the margins of range images, as shown
+in Fig. 1(c,f), their corresponding foreground range pixels are separately distributed around the left
+and right borders of the range image. Since CNNs have limited receptive fields, features around
+the left border cannot be shared with features around the right border and vice versa, when 2D
+convolution backbones are used as feature extractors. This phenomenon, called Vision Corruption,
+can significantly impact the detection accuracy of objects on the margins of range images. Previous
+RV-based detection methods have overlooked this issue and directly processed range images with 2D
+convolution backbones without compensating for the corrupted areas.
+
+### Contribution
+
+- <b> RangePerception Framework: </b> A novel high-performing 3D detection framework, named RangePerception, is introduced in this paper. 
+
+- <b> Range Aware Kernel: </b> As part of RangePerception’s feature extractor, Range Aware Kernel (RAK)
+is a trailblazing algorithm tailored to RV-based networks. RAK disentangles the range image space
+into multiple subspaces, and overcomes the Spatial Misalignment issue by enabling independent
+feature extraction from each subspace.
+
+- <b> Vision Restoration Module: </b> To resolve the Vision Corruption issue, Vision Restoration Module
+(VRM) is brought to light in this study. VRM extends the receptive field of the backbone network by
+restoring previously corrupted areas. VRM is particularly helpful to the detection of vehicles, as will
+be illustrated in the experiment section.
+
+### Method
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-1-28.png?raw=true)
+
+####  Range Aware Kernel
+
+As a key component of RangePerception’s feature extractor, Range Aware Kernel is an innovative
+algorithm specifically designed for RV-based networks. <b> RAK disentangles the range image space
+into multiple subspaces </b>, and overcomes the Spatial Misalignment issue by <b> enabling independent
+feature extraction from each subspace </b>.
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-1-29.png?raw=true)
+
+####  Vision Restoration Module
+
+As described in Sec. 2, each column in range image I corresponds to a shared azimuth $θ ∈ [0, 2π]$,
+indicating the spinning angle of LiDAR. Specifically, $θ = 0$ at left margin of range image and $θ = 2π$
+at right margin of range image. Due to the periodicity of LiDAR’s scanning cycle, azimuth values
+0 and 2π correspond to beginning and end of each scanning cycle, both pointing in the opposite direction of the ego vehicle. As illustrated in Fig. 4, objects located behind ego vehicle are often
+separated by ray with $θ = 0$, resulting in Vision Corruption phenomena elaborated in figure below.
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-1-30.png?raw=true)
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-1-31.png?raw=true)
+
+=> By predefining a restoration angle $δ$, VRM builds an extended spherical space with azimuth $θ ∈
+[−δ, 2π + δ]$. In this way, visual features originally corrupted by LiDAR’s sampling process are
+restored on both sides of range image I, significantly easing the feature extraction from the margins of
+I.
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-1-32.png?raw=true)
+
+### Results
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-1-33.png?raw=true)
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-1-34.png?raw=true)
+
+### Conclusion
+
+- No code
+- Nice idea
+
+
+
 
 
 
