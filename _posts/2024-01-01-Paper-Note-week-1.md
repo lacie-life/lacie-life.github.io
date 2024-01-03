@@ -792,6 +792,7 @@ scale, and orientation. Finally, all proposals are filtered by
 - Fast
 - The instance-aware sampling relies on the semantic prediction
 of each point, which is susceptible to class imbalances distribution.
+- 0.0443s/frame with 1 sample
 
 ## CVFNet: Real-time 3D Object Detection by Learning Cross View Features
 
@@ -888,12 +889,52 @@ computation cost is further reduced.
 - No code
 - Fast
 
+## RI-Fusion: 3D Object Detection Using Enhanced Point Features With Range-Image Fusion for Autonomous Driving
+
+[IEEE TRANSACTIONS ON INSTRUMENTATION AND MEASUREMENT 2022]
+
+### Motivation
+
+- Range image and RGB fusion 
+
+### Contribution
+
+- Propose a novel LiDAR and camera image fusion
+module termed RI-Fusion, in which the point cloud is
+converted to a range view to reduce the semantic gap
+between two modalities. This module is plug-and-play
+and can be easily accessed by existing LiDAR-based
+methods to enhance the performance.
+
+- Propose a range-image attention (RI-Attention) module, based on a self-attention mechanism, to achieve
+an effective fusion of range and RGB images. This
+makes full use of global features for the interaction
+between two heterogeneous modes and leads to remarkable improvements, especially for small objects such as
+pedestrians and cyclists.
 
 
+### Method
 
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-1-48.png?raw=true)
 
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-1-49.png?raw=true)
 
+### Results
 
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-1-50.png?raw=true)
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-1-51.png?raw=true)
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-1-52.png?raw=true)
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-1-53.png?raw=true)
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-1-54.png?raw=true)
+
+### Conclusion
+
+- Attention
+- Module
 
 
 
