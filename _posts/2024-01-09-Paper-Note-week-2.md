@@ -257,10 +257,132 @@ on a large number of expert trajectories.
 - Improve from OFT
 - Fast? (35Hz in Titan V)
 
+## [MonoLayout: Amodal scene layout from a single image](https://openaccess.thecvf.com/content_WACV_2020/papers/Mani_MonoLayout_Amodal_scene_layout_from_a_single_image_WACV_2020_paper.pdf)
 
+[WACV 2020]
 
+### Motivation
 
+- The novel and highly challenging task of estimating scene layout in bird’s eye view, given only a single color image.
 
+- Humans have a remarkable cognitive capability of perceiving amodal attributes of objects in an image. For example, upon looking at an image of a vehicle, humans can nominally infer the occluded parts, and also the potential geometry of the surroundings of the vehicle.
 
+### Contribution
 
+- Propose MonoLayout, a practically motivated deep architecture to estimate the amodal scene layout from just a single image.
+
+- Demonstrate that adversarial learning can be used to further enhance the quality of the estimated layouts, specifically when hallucinating large missing chunks of a scene.
+
+- Evaluate against several state-of-the-art approaches, and outperform all of them by a significant margin on a number of established benchmarks.
+
+- Show that MonoLayout can also be efficiently trained on datasets that do not contain lidar scans by leveraging recent successes in monocular depth estimation.
+
+### Method
+
+In this paper, we address the problem of amodal
+scene layout estimation from a single color image. Formally, given a color image I captured from an autonomous driving platform, we aim to predict a bird’s
+eye view layout of the static and dynamic elements of
+the scene. Concretely, we wish to estimate the following three quantities. 1
+
+- The set of all static scene points S (typically the road
+and the sidewalk) on the ground plane (within a rectangular range of length L and width W, in front of the
+camera), regardless of whether or not they are imaged
+by the camera.
+
+- The set of all dynamic scene points D on the ground
+plane (within the same rectangular range as above)
+occupied by vehicles, regardless of whether or not they
+are imaged by the camera.
+
+- For each point discerned in the above step as being
+occupied by a vehicle, an instance-specific labeling of
+which vehicle the point belongs to.
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-2-18.png?raw=true)
+
+### Results
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-2-19.png?raw=true)
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-2-20.png?raw=true)
+
+### Conclusion
+
+- First paper for layout creation
+- Fast? (32 FPS in 1080Ti)
+- No detection head
+
+## [HFT: Lifting Perspective Representations via Hybrid Feature Transformation](https://arxiv.org/pdf/2204.05068.pdf)
+
+[ICRA 2023]
+
+### Motivations
+
+- To capture accurate BEV semantic maps, popular methods in industry community rely on expensive sensors such as LiDAR and radar. These methods
+require time-consuming computation to process cloud point data. Given the limited resolution and lack of sufficient semantic information of sensors, we focus on
+performing the BEV semantic segmentation by a single monocular RGB image.
+
+### Contributions
+
+- Empirically discuss the vital differences between Camera model-Based Feature Transformation (CBFT) and Camera model-Free Feature Transformation (CFFT). To
+the best of our knowledge, we are the first to point out that both the geometric priors in CBFT and the global spatial correlation in CFFT are important
+for BEV semantic segmentation.
+
+- Propose a novel end-to-end learning framework, named HFT, to reap
+the benefits and avoid the drawbacks of CBFT and CFFT to construct an
+accurate BEV semantic map using only a monocular FV image.
+
+- HFT is evaluated on public benchmarks and achieves state-of-the-art performance with negligible computing budget, i.e., at least relative 13.3% and
+16.8% improvement than previous methods on the Argoverse and KITTI 3D
+Object datasets respectively.
+
+### Method
+
+- CBFT vs CFFT
+
+The differences between CBFT and CFFT are summarized as follows. CBFT
+exploits the geometric priors explicitly by incorporating the camera intrinsics
+into the view transformer module. Such approaches follow the IPM to project
+image features from FV to BEV. Reasonable semantic segmentation results from
+the camera coordinate system to the pixel coordinate system can be obtained
+on the premise that the optical axis of the camera is parallel to the ground.
+However, as for objects lying above the ground plane, CBFT is prone to result
+in inappropriate semantic maps. In other words, the flat-world assumption in
+IPM hinders segmentation performance in areas lying above the ground.
+
+The main component of CFFT is MLP or attention mechanism, which works
+well in capturing global correlation in a pixel-wise manner. Thus, CFFT benefits
+from global spatial correlation. However, CFFT fails to yield BEV semantic maps
+with clear shapes or edges. The mIoU curve demonstrates that CFFT converges slower than CBFT. The key factor gives raise to the performance gap between
+CBFT and CFFT is whether the feature transformation employs the geometric
+priors. The visualization result of CFFT reveals that lacking geometric priors
+leads to imprecisely estimating the layout geometry.
+
+- HFT
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-2-21.png?raw=true)
+
+We follow the principle of reaping the benefits of both CBFT and CFFT
+while avoiding their drawbacks. In proposed HFT network, three kinds of modules are conducted in succession: a shared image-view encoder, HFT module and
+a semantic decode head. The shared image-view encoder adopts a shared backbone to extract FPN-style features with multiple scales. HFT module takes the
+high-level FV features as input and independently conducts two feature transformation. Furthermore, HFT employs a mutual learning strategy to pushing
+both CBFT branch (Geometric Transformer) and CFFT branch (Global Transformer) to learn more appropriate representations from each other. Thereafter,
+the semantic decode head deals with the semantic segmentation task for both
+dynamic and static elements in BEV.
+
+### Results
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-2-22.png?raw=true)
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-2-23.png?raw=true)
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-2-24.png?raw=true)
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-2-25.png?raw=true)
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-2-26.png?raw=true)
+
+### Conclusion
+
+- Speed?
 
