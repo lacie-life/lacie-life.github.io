@@ -10,7 +10,7 @@ img_path: /assets/img/post_assest/pvo/
 render_with_liquid: false
 ---
 
-# Paper note [Week 2]
+# Paper note [Week 2]@
 
 ## [Simple-BEV: What Really Matters for Multi-Sensor BEV Perception?](https://arxiv.org/pdf/2206.07959.pdf)
 
