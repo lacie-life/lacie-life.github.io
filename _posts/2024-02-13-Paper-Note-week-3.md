@@ -343,3 +343,124 @@ transformation matrix of the camera. The point (x,y) on the BEV image coordinate
 
 - Fast
 
+## [The Right (Angled) Perspective: Improving the Understanding of Road Scenes Using Boosted Inverse Perspective Mapping](https://arxiv.org/pdf/1812.00913.pdf)
+
+(IV 2019)
+
+### Motivation
+
+-  Cameras are one of the most popular sensing modalities in the field, due
+to their low cost as well as the availability of well-established
+image processing techniques.
+
+- IPM problem: the geometric properties of objects in the distance are
+affected unnaturally by this non-homogeneous mapping.
+
+### Contribution
+
+- Introduce an Incremental Spatial Transformer GAN
+for generating boosted IPM in real time;
+
+- Explain how to create a dataset for training IPM
+methods on real-world images under different conditions; and
+
+- Demonstrate that our boosted IPM approach improves the detection of road markings as well as the semantic interpretation of road scenes in the presence
+of occlusions and/or extreme illumination.
+
+### Method
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-3-18.png?raw=true)
+
+#### 1. Boosted IPM using an incremental spatial transformer GAN
+
+- <b> Spatial ResNet Transformer </b>
+
+Since far-away real-world features are represented by a
+smaller pixel area as compared to identical close-by features, a direct consequence of applying a full perspective
+transformation to the input is increased unnatural blurring
+and stretching of the features at further distance. To counteract this effect, our model divides the full perspective
+transformation into a series of $N_{STRes}$ smaller incremental
+perspective transformations, each followed by a refinement
+of the transformed feature space using a ResNet block.
+
+The intuition behind this is that the slight blurring that occurs
+as a result of each perspective transformation is restored by
+the ResNet block that follows it, as conceptually visualized
+in Fig. 3. To maintain the ability to train our model endto-end, we apply these incremental transforms using Spatial
+Transformers.
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-3-19.png?raw=true)
+
+Intuitively, a Spatial Transformer is a mechanism, which
+can be integrated in a deep-learning pipeline, that warps an
+image using a parametrization (e.g. an affine or homography
+transformation matrix) conditioned on a specific input signal.
+Formally, each incremental spatial transformer is an end-toend differentiable sampler, represented in our case by two
+major components:
+
+- A convolutional network which receives an input I of
+size $H_I ∗ W_I ∗ C$, where $H_I$ , $W_I$ and $C$ represent
+the height, width, and number of channels of the input
+respectively, and outputs a parametrization $M_{loc}$ of a
+perspective transformation of size 3 ∗ 3, and;
+
+- A Grid Sampler which takes $I$ and $M_{loc}$ as inputs, creates a mapping matrix Mmap of size $H_O ∗W_O ∗ 2$, where
+$H_O$ and $W_O$ represent the height and width of the output $O$. Mmap maps homogeneous coordinates $[x, y, 1]^T$ to their new warped position given by $M_{loc} ∗ [x, y, 1]^T$.
+Finally, $M_{map}$ is used to construct $O$ in the following
+way: $O(x, y) = I(M_{map}(x, y, 1), M_{map}(x, y, 2))$.
+
+In practice, it is non-trivial to train a spatial transformer
+(and even less trivial; a sequence of spatial transformers)
+on inputs with a large degree of self-similarity, such as
+road scenes. <b> To stabilize the training procedure, for each
+incremental spatial transformer, we decompose $M_{loc} = M_{locref} ∗ M_{locpert}$ </b>, where $M_{locref}$ is initialized with an approximate parametrization of the desired incremental homography, and $M_{locpert}$ is the actual output of the convolutional
+network and represents a learned perturbation or refinement
+of $M_{locref}$.
+
+- <b> Losses </b>
+
+With a generator $G$, $k^{th}$ scale discriminator $D_k$, and $L_{GAN}(G, D_k)$ being the
+traditional GAN loss defined over $k = 3$ scales,
+the final objective thus becomes:
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-3-20.png?raw=true)
+
+
+with $l_D$ denoting the number of discriminator layers used in
+the discriminator loss, $l_P$ denoting the number of layers from
+VGG16 that are utilized in the perceptual loss, and $I_{input}$
+and $I_{label}$ being the input and label images, respectively. The
+weights $w_i = 2^{l−i}$
+are used to scale the importance of each
+layer used in the loss.
+
+#### 2. Creating training data for boosted IPM
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-3-21.png?raw=true)
+
+### Experiments
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-3-22.png?raw=true)
+
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-3-23.png?raw=true)
+
+Under certain conditions, the boosted IPM does not accurately depict all details of the bird’s-eye view of the scene.
+As we cannot enforce a pixel-wise loss during training, the shape of certain road markings is not
+accurately reflected (illustrated in Fig. 6). Improvement of
+the representation of these structural elements will be investigated in future work.
+Furthermore, the spatial transformer blocks assume that
+the road surface is more or less planar (and perpendicular
+to the z-axis of the vehicle). When this assumption is not
+satisfied, the network is unable to accurately reflect the
+top-down scene at further distance. This might be solved
+by providing/learning the rotation of the road surface with
+respect to the vehicle.
+
+### Conclusion
+
+- No code
+- Incremental Spatial Transformer GAN
+
+
+
