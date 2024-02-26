@@ -461,7 +461,7 @@ Depth + PointPillar Loss
 ![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-4-23.png?raw=true)
 
 
-![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-4-23.png?raw=true)
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-4-24.png?raw=true)
 
 ### Conclusion
 
@@ -469,8 +469,179 @@ Depth + PointPillar Loss
 - Use lidar for depth label
 - [Public code](https://github.com/TRAILab/CaDDN)
 
+## [Perspective Transformer Nets: Learning Single-View 3D Object Reconstruction without 3D Supervision](https://arxiv.org/pdf/1612.00814.pdf)
 
+(NeurIPS 2016)
 
+### Motivation
+
+-  Imagery observations of
+3D shapes are interleaved representations of intrinsic properties of the shape itself (e.g., geometry,
+material), as well as its extrinsic properties that depend on its interaction with the observer and the
+environment (e.g., orientation, position, and illumination). Physically principled shape understanding
+should be able to efficiently disentangle such interleaved factors.
+
+- This observation leads to insight that an end-to-end solution to this problem from the perspective
+of learning agents (neural networks) should involve the following properties:
+
+(1) the agent should
+understand the physical meaning of how a 2D observation is generated from the 3D shape. 
+
+(2) the
+agent should be conscious about the outcome of its interaction with the object; more specifically, by
+moving around the object, the agent should be able to correspond the observations to the viewpoint
+change. If such properties are embodied in a learning agent, it will be able to disentangle the shape
+from the extrinsic factors because these factors are trivial to understand in the 3D world.
+
+### Contribution
+
+- Show that neural networks are able to predict 3D shape from single-view without using
+the ground truth 3D volumetric data for training. This is made possible by introducing a 2D
+silhouette loss function based on perspective transformations.
+
+- Train a single network for multi-class 3D object volumetric reconstruction and show its
+generalization potential to unseen categories.
+
+- Compared to training with full azimuth angles, we demonstrate comparatively similar results
+when training with partial views
+
+### Method
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-4-25.png?raw=true)
+
+### Experiments
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-4-26.png?raw=true)
+
+### Conclusion
+
+- [Public code](https://github.com/xcyan/nips16_PTN)
+- Based on STN
+
+## [Perspective Transformation Layer](https://arxiv.org/pdf/2201.05706.pdf)
+
+### Motivation
+
+- Human vision is often insusceptible to viewpoint changes;
+for example, we can recognize an object regardless of the
+object’s presenting angle. In computer vision, realizing such
+an insusceptible model is of great interest because it can
+provide spatial robustness to a lot of application scenarios
+such as the classification and object detection.
+
+- Although convolutional neural networks (CNNs) have
+achieved state-of-the-art performance in many computer vision
+applications, due to the fragility of the neural networks
+under geometric distortions, appropriately responding
+to the geometric transformations within deep learning frameworks remains a key challenge.
+
+-  The local
+pooling layers (e.g. a 2 × 2 or 3 × 3 local max pooling) can
+only mitigate the impact of translations after many rounds of
+downsampling, and translation is just one simple instance of
+geometric transformation. 
+
+- Incorporating geometric transformations in deep learning
+has attracted increased attention in recent years.
+One most representative idea is to learn a transformation
+matrix (TM) by a CNN module.
+
+- The learning outcomes
+are limited to the affine transformations which are insufficient
+to fully model and reflect the geometric position changes
+between an observer and an object in a real three-dimensional
+(3D) world. Furthermore, current modules often output a
+single TM, which only learns one possible transform. But,
+it is necessary to analyze multiple viewpoints of objects for a
+robust computer vision model 
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-4-27.png?raw=true)
+
+### Contribution
+
+(i) The PT layer learns homography so that the
+perception of an object from different viewpoints in a 3D
+world can be reflected and trained in two-dimensional (2D)
+images. 
+
+(ii) One single PT layer can learn multiple TMs
+to provide multi-viewpoint analysis to the subsequent layers;
+furthermore, the number of TM for a PT layer is adjustable
+so that the learning capacity of each PT layer can be tuned.
+
+(iii) The proposed PT layer directly trains its TMs with
+gradient descent, therefore avoiding training any extra module
+parameters to obtain the TMs.
+
+### Method
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-4-28.png?raw=true)
+
+#### Homography Transformation Matrix
+
+This section discusses our core learning target: the homography TM. In computer vision, under an assumption of a pinhole
+camera model, any two images of the same planar surface
+in space are related by a homography. One major purpose in
+image homography is to compute a homography matrix (which
+estimates the parameters of the pinhole camera model). And
+once the homography matrix is obtained, we can apply it to (i)
+map planar surfaces in the 3D real world to the corresponding
+2D images; and (ii) transform between different perspectives
+or viewpoints of the same image.
+
+#### Transformation and Interpolation
+
+#### Back-propagation
+
+### Experiments
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-4-29.png?raw=true)
+
+### Conclusion
+
+- [Public code](https://github.com/kcnishan/Perspective_Transformation_Layer)
+
+## [Calibration-free BEV Representation for Infrastructure Perception](https://arxiv.org/pdf/2303.03583.pdf)
+
+### Motivation
+
+- Object detection on
+infrastructure side has two main challenges: (1) computing
+resource is limited, (2) cameras are installed in various
+postures (Figure 1.a), and accurate calibration parameters
+are hard to obtain or dynamically correct due to natural
+factors, like wind and snow.
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-4-30.png?raw=true)
+
+### Contribution
+
+- Point out the practical challenges of infrastructureside perception, and propose the Calibration-free BEV
+Representation network, CBR, to address various install
+postures and calibration noise.
+
+- The perspective view features are decoupled to front
+view and bird-eye view via MLPs without any calibration parameters, and orthogonal feature fusion is
+similarity-based without additional depth supervision.
+
+### Method
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-4-31.png?raw=true)
+
+#### Feature View Decoupling
+
+#### Similarity-based Cross-view Fusion
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-4-32.png?raw=true)
+
+### Experiments
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-4-33.png?raw=true)
+
+### Conclusion
+
+- No code
+- Fusion module
 
 
 
