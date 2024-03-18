@@ -143,7 +143,7 @@ objects.
 
 ### 3. YOLOv2: Better, Faster, and Stronger (CVPR 2017)
 
-#### Improvements:
+#### Improvements
 
 - <b> Batch normalization </b> on all convolutional layers improved convergence and acts as a regularizer to reduce
 overfitting.
@@ -188,7 +188,7 @@ make YOLOv2 robust to different input sizes, the authors trained the model rando
 
 ### 4. YOLOv3 (ArXiv 2018)
 
-#### Improvements:
+#### Improvements
 
 - <b> Bounding box prediction: </b> Like YOLOv2, the network predicts four coordinates for each bounding box $t_x, t_y, t_w$, and $t_h$; however, this time, YOLOv3 predicts an objectness score for each bounding box using logistic
 regression. This score is 1 for the anchor box with the highest overlap with the ground truth and 0 for the rest
@@ -252,7 +252,7 @@ that slightly increase the inference cost but significantly improve accuracy. Ex
 enlarging the receptive field, combining features, and post-processing 
 among others.
 
-#### Improvements:
+#### Improvements
 
 - <b> An Enhanced Architecture with Bag-of-Specials (BoS) Integration </b>
 
@@ -296,6 +296,276 @@ halfway through the training process ending with a slight reduction.
 #### YOLOv4 Architecture
 
 ![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-5-13.png?raw=true)
+
+### 6. YOLOv5 (Ultralytics 2020)
+
+#### Improvements
+
+-  Developed in Pytorch instead of Darknet.
+
+- YOLOv5 incorporates an Ultralytics algorithm called AutoAnchor. This pre-training tool checks and adjusts anchor boxes if they
+are ill-fitted for the dataset and training settings, such as image size. It first applies a k-means function to dataset labels
+to generate initial conditions for a Genetic Evolution (GE) algorithm. The GE algorithm then evolves these anchors
+over 1000 generations by default, using CIoU loss and Best Possible Recall as its fitness function.
+
+#### YOLOv5 Architecture
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-5-15.png?raw=true)
+
+YOLOv5 Architecture. The architecture uses a modified CSPDarknet53 backbone with a Stem, followed by
+convolutional layers that extract image features. A spatial pyramid pooling fast (SPPF) layer accelerates computation by
+pooling features into a fixed-size map. Each convolution has batch normalization and SiLU activation. The network’s
+neck uses SPPF and a modified CSP-PAN, while the head resembles YOLOv3. 
+
+### 7. Scaled-YOLOv4 and YOLOR
+
+#### 7.1. Scaled-YOLOv4 (CVPR 2021)
+
+Differently from YOLOv4, Scaled YOLOv4 was developed in Pytorch instead of Darknet. The main novelty was the introduction of scaling-up
+and scaling-down techniques. Scaling up means producing a model that increases accuracy at the expense of a lower
+speed; on the other hand, scaling down entails producing a model that increases speed sacrificing accuracy. In addition,
+scaled-down models need less computing power and can run on embedded systems.
+
+#### 7.2. YOLOR (ArXiv 2021)
+
+It stands for You Only Learn One Representation. In this paper, the authors followed a different approach; they developed a multi-task
+learning approach that aims to create a single model for various tasks (e.g., classification, detection, pose estimation) by
+learning a general representation and using sub-networks to create task-specific representations. With the insight that
+the traditional joint learning method often leads to suboptimal feature generation, YOLOR aims to overcome this by
+encoding the implicit knowledge of neural networks to be applied to multiple tasks, similar to how humans use past
+experiences to approach new problems. The results showed that introducing implicit knowledge into the neural network
+benefits all the tasks.
+
+### 8. YOLOX (ArXiv 2021)
+
+Main changes of YOLOX with respect to YOLOv3.
+
+#### Improvements
+
+- <b> Anchor-free: </b> Since YOLOv2, all subsequent YOLO versions were anchor-based detectors. YOLOX, inspired
+by anchor-free state-of-the-art object detectors such as CornerNet, CenterNet, and FCOS,
+returned to an anchor-free architecture simplifying the training and decoding process. The anchor-free
+increased the AP by 0.9 points concerning the YOLOv3 baseline.
+
+- <b> Multi positives: </b> To compensate for the large imbalances the lack of anchors produced, the authors use center
+sampling where they assigned the center 3 × 3 area as positives. This approach increased AP by 2.1
+points.
+
+- <b> Decoupled head: </b> YOLOX separates these two into two heads, one for classification tasks and the other for regression tasks improving the AP by 1.1 points and
+speeding up the model convergence.
+
+- <b> Advanced label assignment: </b> Proposed a simplified version called simOTA. This
+change increased AP by 2.3 points.
+
+- <b> Strong augmentations: </b> YOLOX uses MixUP and Mosaic augmentations. The authors found that
+ImageNet pretraining was no longer beneficial after using these augmentations. The strong augmentations
+increased AP by 2.4 points.
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-5-16.png?raw=true)
+
+### 9. YOLOv6 (ArXiv 2022)
+
+#### Improvements
+
+- <b> A new backbone based on RepVGG: </b> called EfficientRep that uses higher parallelism than previous
+YOLO backbones. For the neck, they use PAN enhanced with RepBlocks or CSPStackRep
+Blocks for the larger models. And following YOLOX, they developed an efficient decoupled head.
+
+- <b> Label assignment </b> using the Task alignment learning approach introduced in TOOD.
+
+- <b> New classification and regression losses: </b> They used a classification VariFocal loss and an SIoU/GIoU regression loss.
+
+- <b> A self-distillation </b> strategy for the regression and classification tasks.
+
+- <b> A quantization scheme </b> for detection using RepOptimizer and channel-wise distillation that helped
+to achieve a faster detector.
+
+#### YOLOv6 Architecture
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-5-17.png?raw=true)
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-5-18.png?raw=true)
+
+### 10. YOLOv7 (ArXiv 2022)
+
+#### Improvements
+
+The architecture changes of YOLOv7 are:
+
+- <b> Extended efficient layer aggregation network (E-ELAN): </b> ELAN is a strategy that allows a deep
+model to learn and converge more efficiently by controlling the shortest longest gradient path. YOLOv7
+proposed E-ELAN that works for models with unlimited stacked computational blocks. E-ELAN combines
+the features of different groups by shuffling and merging cardinality to enhance the network’s learning without
+destroying the original gradient path.
+
+- <b> Model scaling for concatenation-based models: </b> Scaling generates models of different sizes by adjusting
+some model attributes. The architecture of YOLOv7 is a concatenation-based architecture in which standard
+scaling techniques, such as depth scaling, cause a ratio change between the input channel and the output
+channel of a transition layer which, in turn, leads to a decrease in the hardware usage of the model. YOLOv7
+proposed a new strategy for scaling concatenation-based models in which the depth and width of the block are
+scaled with the same factor to maintain the optimal structure of the model.
+
+The bag-of-freebies used in YOLOv7 include:
+
+- <b> Planned re-parameterized convolution: </b> Like YOLOv6, the architecture of YOLOv7 is also inspired by
+re-parameterized convolutions (RepConv). However, they found that the identity connection in RepConv destroys the residual in ResNet and the concatenation in DenseNet. For this reason, they removed
+the identity connection and called it RepConvN.
+
+- <b> Coarse label assignment for auxiliary head and fine label assignment for the lead head. </b> The lead head is
+responsible for the final output, while the auxiliary head assists with the training.
+
+- <b> Batch normalization in conv-bn-activation. </b> This integrates the mean and variance of batch normalization
+into the bias and weight of the convolutional layer at the inference stage.
+
+- <b> Implicit knowledge </b> inspired in YOLOR.
+
+- <b> Exponential moving average </b> as the final inference model.
+
+#### YOLOv7 Architecture
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-5-19.png?raw=true)
+
+### 11. DAMO-YOLO (ArXiv 2022)
+
+#### Improvements
+
+- <b> A Neural architecture search (NAS). </b> They used a method called MAE-NAS [111] developed by Alibaba to
+find an efficient architecture automatically.
+
+- <b> A large neck. </b> Inspired by GiraffeDet, CSPNet, and ELAN, the authors designed a neck that
+can work in real-time called Efficient-RepGFPN.
+
+- <b> A small head. </b> The authors found that a large neck and a small neck yield better performance, and they only
+left one linear layer for classification and one for regression. They called this approach ZeroHead.
+
+- <b> AlignedOTA label assignment. </b> Dynamic label assignment methods, such as OTA and TOOD, have
+gained popularity due to their significant improvements over static methods. However, the misalignment
+between classification and regression remains a problem, partly because of the imbalance between classification
+and regression losses. To address this issue, their AlignOTA method introduces focal loss into the
+classification cost and uses the IoU of prediction and ground truth box as the soft label, enabling the selection
+of aligned samples for each target and solving the problem from a global perspective.
+
+- <b> Knowledge distillation. </b> Their proposed strategy consists of two stages: the teacher guiding the student in
+the first stage and the student fine-tuning independently in the second stage. Additionally, they incorporate
+two enhancements in the distillation approach: the Align Module, which adapts student features to the same
+resolution as the teacher’s, and Channel-wise Dynamic Temperature, which normalizes teacher and student
+features to reduce the impact of real value differences.
+
+### 12. YOLOv8 (Ultralytics 2023)
+
+#### Improvements
+
+- YOLOv8 uses a similar backbone as YOLOv5 with some
+changes on the CSPLayer, now called the C2f module. The C2f module (cross-stage partial bottleneck with two
+convolutions) combines high-level features with contextual information to improve detection accuracy.
+
+- YOLOv8 uses an anchor-free model with a decoupled head to independently process objectness, classification, and
+regression tasks. This design allows each branch to focus on its task and improves the model’s overall accuracy. In the
+output layer of YOLOv8, they used the sigmoid function as the activation function for the objectness score, representing
+the probability that the bounding box contains an object. It uses the softmax function for the class probabilities,
+representing the objects’ probabilities belonging to each possible class.
+
+- YOLOv8 uses CIoU and DFL loss functions for bounding box loss and binary cross-entropy for classification
+loss. These losses have improved object detection performance, particularly when dealing with smaller objects.
+
+- YOLOv8 also provides a semantic segmentation model called YOLOv8-Seg model. The backbone is a CSPDarknet53
+feature extractor, followed by a C2f module instead of the traditional YOLO neck architecture. The C2f module is
+followed by two segmentation heads, which learn to predict the semantic segmentation masks for the input image.
+The model has similar detection heads to YOLOv8, consisting of five detection modules and a prediction layer. The
+YOLOv8-Seg model has achieved state-of-the-art results on various object detection and semantic segmentation
+benchmarks while maintaining high speed and efficiency.
+
+#### YOLOv8 Architecture
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-5-20.png?raw=true)
+
+### 13. PP-YOLO, PP-YOLOv2, and PP-YOLOE (PaddlePaddle based - ArXiv 2020)
+
+... Nothing
+
+### 14.  YOLO-NAS (2023)
+
+YOLO-NAS is designed to detect small objects, improve localization
+accuracy, and enhance the performance-per-compute ratio, making it suitable for real-time edge-device applications. In
+addition, its open-source architecture is available for research use.
+
+#### Improvements
+
+- <b> Quantization aware modules </b> called QSP and QCI that combine re-parameterization for 8-bit quantization
+to minimize the accuracy loss during post-training quantization.
+
+- <b> Automatic architecture design </b> using AutoNAC, Deci’s proprietary NAS technology.
+
+- <b> Hybrid quantization method </b> to selectively quantize certain parts of a model to balance latency and accuracy
+instead of standard quantization, where all the layers are affected.
+
+- <b> A pre-training regimen with automatically labeled data, self-distillation, and large datasets. </b>
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-5-21.png?raw=true)
+
+### 15. YOLO with Transformers
+
+#### 15.1. YOLOS (NeurIPS 2021)
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-5-22.png?raw=true)
+
+#### 15.2. ViT-YOLO (ICCVW 2021)
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-5-23.png?raw=true)
+
+#### 15.3. MSFT-YOLO (MDPI Sensors 2022)
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-5-24.png?raw=true)
+
+#### 15.4. NRT-YOLO (MDPI Sensors 2022)
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-5-25.png?raw=true)
+
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-5-26.png?raw=true)
+
+#### 15.5. YOLO-SD (Remote Sensing 2022)
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-5-27.png?raw=true)
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-5-28.png?raw=true)
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-5-29.png?raw=true)
+
+### 16. Summary
+
+- <b> Anchors: </b> The original YOLO model was relatively simple and did not employ anchors, while the state-of-theart relied on two-stage detectors with anchors. YOLOv2 incorporated anchors, leading to improvements in
+bounding box prediction accuracy. This trend persisted for five years until YOLOX introduced an anchor-less
+approach that achieved state-of-the-art results. Since then, subsequent YOLO versions have abandoned the use
+of anchors.
+
+- <b> Framework: </b> Initially, YOLO was developed using the Darknet framework, with subsequent versions following
+suit. However, when Ultralytics ported YOLOv3 to PyTorch, the remaining YOLO versions were developed
+using PyTorch, leading to a surge in enhancements. Another deep learning language utilized is PaddlePaddle,
+an open-source framework initially developed by Baidu.
+
+- <b> Backbone: </b> The backbone architectures of YOLO models have undergone significant changes over time.
+Starting with the Darknet architecture, which comprised simple convolutional and max pooling layers, later
+models incorporated cross-stage partial connections (CSP) in YOLOv4, reparameterization in YOLOv6 and
+YOLOv7, and neural architecture search in DAMO-YOLO and YOLO-NAS.
+
+- <b> Performance: </b> While the performance of YOLO models has improved over time, it is worth noting that they
+often prioritize balancing speed and accuracy rather than solely focusing on accuracy. This tradeoff is essential
+to the YOLO framework, allowing for real-time object detection across various applications.
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-5-30.png?raw=true)
+
+## [YOLOv9: Learning What You Want to Learn Using Programmable Gradient Information](https://arxiv.org/pdf/2402.13616.pdf)
+
+(ArXiv 2024)
+
+
+
+
+
+
+
+
 
 
 
