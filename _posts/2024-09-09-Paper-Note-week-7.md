@@ -45,11 +45,45 @@ The simulator could be extended to incorporate depth information so that the age
 
 ### Motivation
 
+Focusing our discussion on Vision-and-Language Navigation (VLN), the existence and common usage of the nav-graph imply the following assumptions:
+
+- Known topology.
+- Oracle navigation.
+- Perfect localization.
+
+=> Taken together, these assumptions make current settings poor reflections of the
+real world both in terms of control (ignoring actuation, navigation, and localization error) and visual stimuli (lacking the poor framing and long observationsequences agents will encounter). In essence, the problem is reduced to that of visually-guided graph search. As such, closing the loop by transferring these trained agents to physical robotic platforms has not been examined.
+
+=> Vision-and-Language Navigation in Continuous Environments. In this work, we focus in on the Vision-and-Language Navigation (VLN) task and lift these implicit assumptions by instantiating it in continuous 3D environments.
+
+
 
 ### Contribution
 
+- Lift the VLN task to continuous 3D environments – removing many unrealistic
+assumptions imposed by the nav-graph-based representation.
+- Develop model architectures for the VLN-CE task and evaluate a suite of
+single-input ablations to assess the biases and baselines of the setting.
+- Investigate how a number of popular techniques in VLN transfer to this more
+challenging long-horizon setting – identifying significant gaps in performance.
 
 ### Method
+
+#### VLN in Continuous Environments (VLN-CE)
+
+<i> Given a natural language navigation instruction, an agent must navigate
+from a start position to the described goal in a continuous 3D environment by
+executing a sequence of low-level actions based on egocentric perception alone. </i>
+
+#### VLN-CE Dataset
+
+In total, the VLN-CE dataset consists of 4475 trajectories converted from R2R
+train and validation splits. For each trajectory, we provide the multiple R2R
+instructions and a pre-computed shortest path following the waypoints via lowlevel actions.
+
+#### Instruction-guided Navigation Models in VLN-CE
+
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/paper-note/week-7-1.png?raw=true)
 
 
 ### Experiments
@@ -57,8 +91,15 @@ The simulator could be extended to incorporate depth information so that the age
 
 ### Conclusion
 
+In this work, we explore the problem of following navigation instructions in
+continuous environments with low-level actions – lifting many of the unrealistic
+assumptions in prior nav-graph-based settings. Our work lays the groundwork
+for future research into reducing the gap between simulation and reality for
+VLN agents. Crucially, setting our VLN-CE task in continuous environments
+(rather than a nav-graph) provides the community a testbed where integrative
+experiments studying the interface of high- and low-level control are possible.
 
-## [ETPNav: Evolving Topological Planning for Vision-Language Navigation in Continuous Environments](10.1109/TPAMI.2024.3386695)
+## [ETPNav: Evolving Topological Planning for Vision-Language Navigation in Continuous Environments](https://ieeexplore.ieee.org/document/10495141)
 
 ### Motivation
 
