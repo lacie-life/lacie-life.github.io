@@ -113,11 +113,233 @@ computer to pre-process data.
 
 Now, we discuss some basics pre-processing steps.
 
+![image](https://github.com/lacie-life/lacie-life.github.io/blob/main/assets/img/post_assest/nlp/part-1-2.png?raw=true)
+
+The various text preprocessing steps are:
+
+- Tokenization
+- Lower casing
+- Stop words removal
+- Stemming
+- Lemmatization
+- Part-of-Speech Tagging
+
+#### Tokenization
+
+Splitting the text into individual words or subwords
+(tokens). This step is fundamental in text
+preprocessing as it helps in understanding the
+basic structure of the text data.
+
+Example:
+
+- Input: "Hello, world! How are you?"
+- Tokens: ["Hello", ",", "world", "!", "How", "are", "you", "?"]
 
 
+```python
+import nltk
 
+nltk.download('punkt')
 
+from nltk.tokenize import word_tokenize
 
+text = "Hello, how are you today?"
+tokens = word_tokenize(text)
+print(tokens)
 
+text = text.lower()
+print(text)
+```
 
+#### Lowercasing
 
+Lowercasing is a text preprocessing step where all
+letters in the text are converted to lowercase. This
+step is implemented so that the algorithm does
+not treat the same words differently in different
+situations.
+
+Example:
+
+- Before Lowercasing: "This Is An Example."
+- After Lowercasing: "this is an example."
+
+#### Removing Punctuation and Special Characters
+
+Punctuation removal is a text preprocessing step
+where you remove all punctuation marks (such as
+periods, commas, exclamation marks, emojis etc.)
+from the text to simplify it and focus on the words
+themselves.
+
+Example:
+
+- Before Removal: "Hello, world!"
+- After Removal: "Hello world"
+
+```python
+import re
+
+text = "hello, this is \ an& jsjejcjls.amshdgksjs"
+
+text = re.sub(r'[^\w\s]', '', text)
+print(text)
+```
+
+#### Removing Stopwords
+
+Stopwords are words that don’t contribute to the
+meaning of a sentence. So, they can be removed
+without causing any change in the meaning of the
+sentence. The NLTK library has a set of stopwords and
+we can use these to remove stopwords from our text
+and return a list of word tokens. Removing these can
+help focus on the important words.
+
+Example:
+
+- Before Removal: "This is an example of text
+preprocessing."
+- After Removal: "example text preprocessing"
+
+```python
+# prompt: Removing Stopwords example
+
+from nltk.corpus import stopwords
+nltk.download('stopwords')
+
+text = "This is an example sentence demonstrating stopword removal."
+
+tokens = word_tokenize(text)
+
+stop_words = set(stopwords.words('english'))
+
+filtered_tokens = [w for w in tokens if not w.lower() in stop_words]
+
+print(filtered_tokens)
+```
+
+#### Stemming
+
+Stemming is a process of reducing words to their
+word stem, base, or root form. It's a way of
+normalizing words so variations on a word are
+treated the same.
+
+Stemming involves removing suffixes from words
+to obtain their base
+
+Example:
+
+- Before Stemming: "running", "runs", "ran"
+- After Stemming: "run", "run", "ran"
+
+Stemming is a simpler and faster technique. It uses
+a set of rules or algorithms to remove suffixes and
+obtain the base form of a word. However,
+stemming can sometimes produce a base form
+that is not valid, in which case it can also lead to
+ambiguity.
+
+Porter stemming algorithm is one of the most
+common stemming algorithms which is basically
+designed to remove and replace well-known
+suffixes of English words.
+
+Stemming is preferred when the meaning of the
+word is not important for analysis. for example:
+Spam Detection
+
+```python
+from nltk.stem import PorterStemmer
+
+nltk.download('punkt')
+
+stemmer = PorterStemmer()
+
+text = "running runs ran"
+
+tokens = word_tokenize(text)
+
+stemmed_tokens = [stemmer.stem(w) for w in tokens]
+
+print(stemmed_tokens)
+```
+
+#### Lemmatization
+
+Lemmatization, similar to stemming, reduces words to their
+base form. Unlike stemming, lemmatization considers the context and converts the word to
+its meaningful base form, which is
+a valid word in the language.
+
+Lemmatization involves converting
+words to their morphological base
+form.
+
+Lemmatization is a more refined technique that uses
+vocabulary and morphological analysis to determine the
+base form of a word.
+
+Lemmatization is slower and more complex than stemming.
+It produces a valid base form that can be found in a
+dictionary, making it more accurate than stemming.
+
+Popular lemmatizer called WordNet lemmatizer.
+
+```python
+
+import nltk
+nltk.download('wordnet')
+from nltk.stem import WordNetLemmatizer
+
+lemmatizer = WordNetLemmatizer()
+
+text = "running runs ran"
+tokens = word_tokenize(text)
+
+lemmatized_tokens = [lemmatizer.lemmatize(w) for w in tokens]
+
+print(lemmatized_tokens)
+```
+
+#### Part-of-Speech Tagging
+
+Part-of-Speech (POS) tagging is a fundamental task
+in Natural Language Processing (NLP) that involves
+assigning a grammatical category (such as noun,
+verb, adjective, etc.) to each word in a sentence.
+
+The goal is to understand the syntactic structure of
+a sentence and identify the grammatical roles of
+individual words.
+
+POS tagging provides essential information for
+various NLP applications, including text analysis,
+machine translation, and information retrieval.
+
+POS tags are short codes representing specific parts of
+speech. Common POS tags include:
+- Noun (NN)
+- Verb (VB)
+- Adjective (JJ)
+- Adverb (RB)
+- Pronoun (PRP)
+- Preposition (IN)
+- Conjunction (CC)
+- Determiner (DT)
+- Interjection (UH)
+
+```python
+import nltk
+
+nltk.download('averaged_perceptron_tagger')
+
+text = "The quick brown fox jumps over the lazy dog."
+tokens = word_tokenize(text)
+
+pos_tags = nltk.pos_tag(tokens)
+
+print(pos_tags)
+```
