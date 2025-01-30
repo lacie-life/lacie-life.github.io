@@ -275,4 +275,80 @@ This is defined as probability and not as a concrete action to introduce randomn
 
 Another useful notion is that if our policy is fixed and not changing during training (i.e., when the policy always returns the same actions for the same states), then our MDP becomes a MRP, as we can reduce the transition and reward matrices with a policy’s probabilities and get rid of the action dimensions.
 
+## The anatomy of the agent python implemetation
+
+There are several fundamental concepts in RL:
+
+- <b> The agent : </b> A thing, or person, that takes an active role. In
+practice, the agent is some piece of code that implements some
+policy. Basically, this policy decides what action is needed at
+every time step, given our observations.
+
+- <b> The environment : </b> Everything that is external to the agent and
+has the responsibility of providing observations and giving
+rewards. The environment changes its state based on the
+agent’s actions.
+
+Let’s explore how both can be implemented in Python for a simple
+situation. We will define an environment that will give the agent
+random rewards for a limited number of steps, regardless of the
+agent’s actions. This scenario is not very useful in the real world,
+but it will allow us to focus on specific methods in both the
+environment and agent classes.
+
+```python
+import random
+from typing import List
+
+
+class Environment: # Environment 
+    def __init__(self):
+        self.steps_left = 10
+
+    def get_observation(self) -> List[float]: # Return  the current environment’s observation to the agent
+        return [0.0, 0.0, 0.0]
+
+    def get_actions(self) -> List[int]: # Allows the agent to query the set of actions it can execute
+        return [0, 1]
+
+    def is_done(self) -> bool: # Signals the end of the episode to the agent
+        return self.steps_left == 0
+
+    def action(self, action: int) -> float: # Handles an agent’s action and returns the reward for this action
+        if self.is_done():
+            raise Exception("Game is over")
+        self.steps_left -= 1
+        return random.random()
+
+
+class Agent: # Agent
+    def __init__(self):
+        self.total_reward = 0.0
+
+    def step(self, env: Environment):
+        current_obs = env.get_observation() # Observe the environment
+        actions = env.get_actions() # Make a decision about the action to take based on the observations
+        reward = env.action(random.choice(actions)) # Submit the action to the environment
+        self.total_reward += reward # Get the reward for the current step
+
+
+if __name__ == "__main__":
+    env = Environment()
+    agent = Agent()
+
+    while not env.is_done():
+        agent.step(env)
+
+    print("Total reward got: %.4f" % agent.total_reward)
+```
+
+The simplicity of the preceding code illustrates the important basic
+concepts of the RL model. The environment could be an extremely
+complicated physics model, and an agent could easily be a large
+neural network that implements the latest RL algorithm, but
+the basic paern will stay the same – at every step, the agent will
+take some observations from the environment, do its calculations,
+and select the action to take. The result of this action will be a
+reward and a new observation.
+
 
