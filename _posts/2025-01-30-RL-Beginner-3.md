@@ -37,11 +37,11 @@ pytest
 
 ### Gym and Gymnasium
 
-The Python library called Gym was developed by [OpenAI](www.openai.com). The first version was released in 2017 and since
+The Python library called Gym was developed by [OpenAI](https://openai.com/). The first version was released in 2017 and since
 then, lots of environments were developed or adopted to this
 original API, which became a de facto standard for RL.
 In 2021, the team that developed OpenAI Gym moved the
-development to [Gymnasium]( github.com/Farama-Foundation/Gymnasium) – the fork of the original Gym library.
+development to [Gymnasium](https://github.com/Farama-Foundation/Gymnasium) – the fork of the original Gym library.
 Gymnasium provides the same API and is supposed to be a “dropin replacement” for Gym (you can write import gymnasium as gym
 and most likely your code will work).
 
